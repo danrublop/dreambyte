@@ -1,0 +1,13 @@
+export default function Scene() {
+  const frame = useCurrentFrame();
+  const o1 = interpolate(frame, [0, 30], [0, 1]);
+  const o2 = interpolate(frame, [30, 60], [0, 1]);
+  return (
+    <AbsoluteFill style={{ background: '#111', justifyContent: 'center', alignItems: 'center' }}>
+      <div style={{ fontSize: 48, opacity: o1, color: '#fff' }}>How Solana Works</div>
+      <div style={{ fontSize: 28, opacity: o2, color: '#aaa', marginTop: 20 }}>
+        most chains: ~15 transactions / second
+      </div>
+    </AbsoluteFill>
+  );
+}

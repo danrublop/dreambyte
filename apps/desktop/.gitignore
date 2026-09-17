@@ -1,0 +1,92 @@
+# Dependencies
+node_modules
+
+# Next.js
+.next
+# Static export of the desktop renderer (npm run build:renderer)
+out/
+
+# Runtime-generated media (never committed).
+public/generated/
+# Sandbox-mode placeholder assets (runtime output; persisted copies live in uploads).
+public/generated/sandbox/
+
+# Production
+dist
+
+# electron-builder output (installer DMG/exe, never committed)
+/release/
+
+# Env
+.env
+.env.local
+.env.*.local
+.env.*
+!.env.example
+!.env.local.example
+
+# Generated files
+public/scenes/*.html
+public/uploads/*
+# TTS runtime outputs — runtime artifacts, same class as public/scenes/*.html
+public/audio/tts-*
+public/audio/test-tts-*
+# Publish output (src/electron/ipc/publish.ts writes here in dev)
+public/published/
+# Bundled SFX binaries (manifest.json stays tracked; run npm run sfx-library:fetch to fill)
+public/sfx-library/**/*.mp3
+public/sfx-library/**/*.wav
+!public/sfx-library/**/zzfx-*.wav
+!public/sfx-library/**/soloud-*.wav
+!public/sfx-library/**/react-sounds-*.*
+public/sfx-library/**/*.ogg
+public/sfx-library/**/*.m4a
+!public/sfx-library/**/cc0-*.*
+!public/sfx-library/manifest.json
+!public/uploads/.gitkeep
+
+# Reference repos
+/reference/
+
+# Misc
+.DS_Store
+*.pem
+npm-debug.log*
+*.log
+
+# Claude local runtime state
+.claude/scheduled_tasks.lock
+
+# Local SQLite dev DB (ephemeral per-developer state)
+dev.db
+dev.db-journal
+dev.db-shm
+dev.db-wal
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+# Electron main/preload bundle (npm run build:electron regenerates it)
+dist-electron/
+
+# gstack tool scratch
+.gstack/
+*.tsbuildinfo
+
+# Motion-design live-eval run artifacts
+evals/motion-design/.live-output/
+evals/motion-design/live-result.json
+
+# benchmark harness throwaway DB (evals/benchmark)
+bench.db
+bench.db-wal
+bench.db-shm
+
+# Runtime marker written by the decay sweep (a bare date); not source.
+.dreambyte-last-decay
+
+# Next.js regenerates this on dev/build
+next-env.d.ts
+
+# Editor-personal settings
+.vscode/

@@ -1,0 +1,11 @@
+# Marlin-2B sidecar (premium video understanding, NVIDIA/CUDA only).
+# Not bundled into the app: install into the Python that Dreambyte runs
+# (python3 on PATH, or the interpreter named by DREAMBYTE_PYTHON):
+#   python3 -m pip install -r requirements.txt
+# The model (~4GB) downloads to the Hugging Face cache on first use.
+transformers>=5.7.0
+torch>=2.11
+torchcodec
+qwen-vl-utils
+av
+pillow

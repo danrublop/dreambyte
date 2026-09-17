@@ -1,0 +1,225 @@
+#!/usr/bin/env node
+// Motion DSL preset codegen (W1).
+//
+// Reads a hand-curated catalog distilled from animate.css + motion-canvas
+// + mojs and emits `src/lib/motion-dsl/presets.generated.ts`. The output is
+// checked in. CI runs this script and fails if the generated file
+// drifts from the catalog — keeps the agent prompt honest about what
+// presets actually exist.
+//
+// Why hand-curated, not "fetch animate.css at build time":
+//  - Determinism: a published preset can never change shape under us.
+//  - Auditability: licensing + supply-chain concerns are zero — these
+//    are MIT-derived definitions encoded as plain data.
+//  - Cross-renderer translation requires per-preset semantics that
+//    don't survive a CSS-keyframes scrape (e.g. layout-aware flag).
+//
+// Usage:
+//   node scripts/build/build-motion-presets.mjs           # write file
+//   node scripts/build/build-motion-presets.mjs --check   # exit 1 if drift
+
+import fs from 'node:fs/promises'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const REPO_ROOT = path.resolve(__dirname, '..', '..')
+const OUT_FILE = path.join(REPO_ROOT, 'src', 'lib', 'motion-dsl', 'presets.generated.ts')
+
+// ── Catalog ──────────────────────────────────────────────────────────────
+//
+// One entry per preset. Keyframes are normalized progress (0..1) with
+// optional transform fields. Translation is in pixels, scale is a
+// multiplier, rotation is degrees.
+//
+// Adding a preset: append here, run script, run tests. The agent prompt
+// reads from the generated file at runtime — no separate registration.
+
+const ENTRANCE = [
+  // Fade family (translation distances tuned for 1080p; renderer scales by layer bounds)
+  { id: 'fadeIn', keyframes: [{ at: 0, opacity: 0 }, { at: 1, opacity: 1 }], description: 'Plain fade-in' },
+  { id: 'fadeInUp', keyframes: [{ at: 0, opacity: 0, ty: 60 }, { at: 1, opacity: 1, ty: 0 }], description: 'Fade in while sliding up from below' },
+  { id: 'fadeInDown', keyframes: [{ at: 0, opacity: 0, ty: -60 }, { at: 1, opacity: 1, ty: 0 }], description: 'Fade in while sliding down from above' },
+  { id: 'fadeInLeft', keyframes: [{ at: 0, opacity: 0, tx: -60 }, { at: 1, opacity: 1, tx: 0 }], description: 'Fade in while sliding right from the left' },
+  { id: 'fadeInRight', keyframes: [{ at: 0, opacity: 0, tx: 60 }, { at: 1, opacity: 1, tx: 0 }], description: 'Fade in while sliding left from the right' },
+  { id: 'fadeInUpBig', keyframes: [{ at: 0, opacity: 0, ty: 200 }, { at: 1, opacity: 1, ty: 0 }], description: 'Bigger fade-in slide-up — more dramatic' },
+  { id: 'fadeInDownBig', keyframes: [{ at: 0, opacity: 0, ty: -200 }, { at: 1, opacity: 1, ty: 0 }], description: 'Bigger fade-in slide-down' },
+  { id: 'fadeInLeftBig', keyframes: [{ at: 0, opacity: 0, tx: -200 }, { at: 1, opacity: 1, tx: 0 }], description: 'Bigger fade-in slide-from-left' },
+  { id: 'fadeInRightBig', keyframes: [{ at: 0, opacity: 0, tx: 200 }, { at: 1, opacity: 1, tx: 0 }], description: 'Bigger fade-in slide-from-right' },
+
+  // Slide family (no opacity blend — pure motion)
+  { id: 'slideInUp', keyframes: [{ at: 0, ty: 200 }, { at: 1, ty: 0 }], description: 'Slide in from below — no fade' },
+  { id: 'slideInDown', keyframes: [{ at: 0, ty: -200 }, { at: 1, ty: 0 }], description: 'Slide in from above — no fade' },
+  { id: 'slideInLeft', keyframes: [{ at: 0, tx: -200 }, { at: 1, tx: 0 }], description: 'Slide in from the left — no fade' },
+  { id: 'slideInRight', keyframes: [{ at: 0, tx: 200 }, { at: 1, tx: 0 }], description: 'Slide in from the right — no fade' },
+
+  // Zoom family
+  { id: 'zoomIn', keyframes: [{ at: 0, opacity: 0, sx: 0.3, sy: 0.3 }, { at: 1, opacity: 1, sx: 1, sy: 1 }], description: 'Scale up from 30% with fade' },
+  { id: 'zoomInUp', keyframes: [{ at: 0, opacity: 0, sx: 0.1, sy: 0.1, ty: 1000 }, { at: 0.6, opacity: 1, sx: 0.475, sy: 0.475, ty: -60 }, { at: 1, opacity: 1, sx: 1, sy: 1, ty: 0 }], description: 'Zoom up — scales while sliding from below' },
+  { id: 'zoomInDown', keyframes: [{ at: 0, opacity: 0, sx: 0.1, sy: 0.1, ty: -1000 }, { at: 0.6, opacity: 1, sx: 0.475, sy: 0.475, ty: 60 }, { at: 1, opacity: 1, sx: 1, sy: 1, ty: 0 }], description: 'Zoom down — scales while sliding from above' },
+  { id: 'zoomInLeft', keyframes: [{ at: 0, opacity: 0, sx: 0.1, sy: 0.1, tx: -1000 }, { at: 0.6, opacity: 1, sx: 0.475, sy: 0.475, tx: 10 }, { at: 1, opacity: 1, sx: 1, sy: 1, tx: 0 }], description: 'Zoom in from the left' },
+  { id: 'zoomInRight', keyframes: [{ at: 0, opacity: 0, sx: 0.1, sy: 0.1, tx: 1000 }, { at: 0.6, opacity: 1, sx: 0.475, sy: 0.475, tx: -10 }, { at: 1, opacity: 1, sx: 1, sy: 1, tx: 0 }], description: 'Zoom in from the right' },
+
+  // Rotate family
+  { id: 'rotateIn', keyframes: [{ at: 0, opacity: 0, rot: -200 }, { at: 1, opacity: 1, rot: 0 }], description: 'Rotates in 200 degrees while fading' },
+  { id: 'rotateInDownLeft', keyframes: [{ at: 0, opacity: 0, rot: -45, tx: -100, ty: -50 }, { at: 1, opacity: 1, rot: 0, tx: 0, ty: 0 }], description: 'Rotates down-left into place' },
+  { id: 'rotateInUpRight', keyframes: [{ at: 0, opacity: 0, rot: -90, tx: 100, ty: 50 }, { at: 1, opacity: 1, rot: 0, tx: 0, ty: 0 }], description: 'Rotates up-right into place' },
+
+  // Bounce family — multi-keyframe overshoot
+  { id: 'bounceIn', keyframes: [{ at: 0, opacity: 0, sx: 0.3, sy: 0.3 }, { at: 0.2, sx: 1.1, sy: 1.1 }, { at: 0.4, sx: 0.9, sy: 0.9 }, { at: 0.6, opacity: 1, sx: 1.03, sy: 1.03 }, { at: 0.8, sx: 0.97, sy: 0.97 }, { at: 1, opacity: 1, sx: 1, sy: 1 }], description: 'Spring-style bounce-in with overshoot' },
+  { id: 'bounceInUp', keyframes: [{ at: 0, opacity: 0, ty: 3000 }, { at: 0.6, opacity: 1, ty: -20 }, { at: 0.75, ty: 10 }, { at: 0.9, ty: -5 }, { at: 1, opacity: 1, ty: 0 }], description: 'Bounces up into place' },
+  { id: 'bounceInDown', keyframes: [{ at: 0, opacity: 0, ty: -3000 }, { at: 0.6, opacity: 1, ty: 25 }, { at: 0.75, ty: -10 }, { at: 0.9, ty: 5 }, { at: 1, opacity: 1, ty: 0 }], description: 'Bounces down into place' },
+
+  // Special — layout-aware (LightSpeed, Hinge, JackInTheBox, Roll)
+  { id: 'jackInTheBox', keyframes: [{ at: 0, opacity: 0, sx: 0.1, sy: 0.1, rot: 30 }, { at: 0.5, rot: -10 }, { at: 0.7, rot: 3 }, { at: 1, opacity: 1, sx: 1, sy: 1, rot: 0 }], description: 'Springy reveal that twists into place', layoutAware: true },
+  { id: 'lightSpeedInLeft', keyframes: [{ at: 0, opacity: 0, tx: -200, rot: -30 }, { at: 0.6, opacity: 1, rot: 20 }, { at: 0.8, rot: -5 }, { at: 1, opacity: 1, tx: 0, rot: 0 }], description: 'Skews in from the left like light-speed motion', layoutAware: true },
+  { id: 'lightSpeedInRight', keyframes: [{ at: 0, opacity: 0, tx: 200, rot: 30 }, { at: 0.6, opacity: 1, rot: -20 }, { at: 0.8, rot: 5 }, { at: 1, opacity: 1, tx: 0, rot: 0 }], description: 'Skews in from the right like light-speed motion', layoutAware: true },
+  { id: 'rollIn', keyframes: [{ at: 0, opacity: 0, tx: -200, rot: -120 }, { at: 1, opacity: 1, tx: 0, rot: 0 }], description: 'Rolls in from the left while rotating', layoutAware: true },
+]
+
+const EXIT = [
+  { id: 'fadeOut', keyframes: [{ at: 0, opacity: 1 }, { at: 1, opacity: 0 }], description: 'Plain fade-out' },
+  { id: 'fadeOutUp', keyframes: [{ at: 0, opacity: 1, ty: 0 }, { at: 1, opacity: 0, ty: -60 }], description: 'Fade out while sliding up' },
+  { id: 'fadeOutDown', keyframes: [{ at: 0, opacity: 1, ty: 0 }, { at: 1, opacity: 0, ty: 60 }], description: 'Fade out while sliding down' },
+  { id: 'fadeOutLeft', keyframes: [{ at: 0, opacity: 1, tx: 0 }, { at: 1, opacity: 0, tx: -60 }], description: 'Fade out while sliding left' },
+  { id: 'fadeOutRight', keyframes: [{ at: 0, opacity: 1, tx: 0 }, { at: 1, opacity: 0, tx: 60 }], description: 'Fade out while sliding right' },
+  { id: 'slideOutUp', keyframes: [{ at: 0, ty: 0 }, { at: 1, ty: -200 }], description: 'Slide out up — no fade' },
+  { id: 'slideOutDown', keyframes: [{ at: 0, ty: 0 }, { at: 1, ty: 200 }], description: 'Slide out down — no fade' },
+  { id: 'slideOutLeft', keyframes: [{ at: 0, tx: 0 }, { at: 1, tx: -200 }], description: 'Slide out left — no fade' },
+  { id: 'slideOutRight', keyframes: [{ at: 0, tx: 0 }, { at: 1, tx: 200 }], description: 'Slide out right — no fade' },
+  { id: 'zoomOut', keyframes: [{ at: 0, opacity: 1, sx: 1, sy: 1 }, { at: 0.5, opacity: 0, sx: 0.3, sy: 0.3 }, { at: 1, opacity: 0 }], description: 'Scale down to 30% while fading' },
+  { id: 'rotateOut', keyframes: [{ at: 0, opacity: 1, rot: 0 }, { at: 1, opacity: 0, rot: 200 }], description: 'Rotates 200 degrees while fading out' },
+  { id: 'bounceOut', keyframes: [{ at: 0, opacity: 1, sx: 1, sy: 1 }, { at: 0.2, sx: 0.9, sy: 0.9 }, { at: 0.5, opacity: 1, sx: 1.1, sy: 1.1 }, { at: 0.55, sx: 1.1, sy: 1.1 }, { at: 1, opacity: 0, sx: 0.3, sy: 0.3 }], description: 'Bounces while collapsing to nothing' },
+  { id: 'hinge', keyframes: [{ at: 0, opacity: 1, rot: 0, ty: 0 }, { at: 0.2, rot: 80 }, { at: 0.4, rot: 60 }, { at: 0.6, rot: 80 }, { at: 0.8, opacity: 1, rot: 60, ty: 0 }, { at: 1, opacity: 0, rot: 60, ty: 700 }], description: 'Swings on a hinge then drops off-screen', layoutAware: true },
+  { id: 'rollOut', keyframes: [{ at: 0, opacity: 1, tx: 0, rot: 0 }, { at: 1, opacity: 0, tx: 200, rot: 120 }], description: 'Rolls out to the right while rotating', layoutAware: true },
+]
+
+const EMPHASIS = [
+  { id: 'pulse', keyframes: [{ at: 0, sx: 1, sy: 1 }, { at: 0.5, sx: 1.05, sy: 1.05 }, { at: 1, sx: 1, sy: 1 }], description: 'Subtle scale pulse — call attention without distraction' },
+  { id: 'shake', keyframes: [{ at: 0, tx: 0 }, { at: 0.1, tx: -10 }, { at: 0.2, tx: 10 }, { at: 0.3, tx: -10 }, { at: 0.4, tx: 10 }, { at: 0.5, tx: -10 }, { at: 0.6, tx: 10 }, { at: 0.7, tx: -10 }, { at: 0.8, tx: 10 }, { at: 0.9, tx: -10 }, { at: 1, tx: 0 }], description: 'Side-to-side shake — error / warning emphasis' },
+  { id: 'shakeY', keyframes: [{ at: 0, ty: 0 }, { at: 0.1, ty: -10 }, { at: 0.2, ty: 10 }, { at: 0.3, ty: -10 }, { at: 0.4, ty: 10 }, { at: 0.5, ty: -10 }, { at: 0.6, ty: 10 }, { at: 0.7, ty: -10 }, { at: 0.8, ty: 10 }, { at: 0.9, ty: -10 }, { at: 1, ty: 0 }], description: 'Vertical shake — emphasis variant' },
+  { id: 'swing', keyframes: [{ at: 0, rot: 0 }, { at: 0.2, rot: 15 }, { at: 0.4, rot: -10 }, { at: 0.6, rot: 5 }, { at: 0.8, rot: -5 }, { at: 1, rot: 0 }], description: 'Rocks back and forth like a pendulum' },
+  { id: 'tada', keyframes: [{ at: 0, sx: 1, sy: 1, rot: 0 }, { at: 0.1, sx: 0.9, sy: 0.9, rot: -3 }, { at: 0.2, sx: 0.9, sy: 0.9, rot: -3 }, { at: 0.3, sx: 1.1, sy: 1.1, rot: 3 }, { at: 0.4, sx: 1.1, sy: 1.1, rot: -3 }, { at: 0.5, sx: 1.1, sy: 1.1, rot: 3 }, { at: 0.6, sx: 1.1, sy: 1.1, rot: -3 }, { at: 0.7, sx: 1.1, sy: 1.1, rot: 3 }, { at: 0.8, sx: 1.1, sy: 1.1, rot: -3 }, { at: 0.9, sx: 1.1, sy: 1.1, rot: 3 }, { at: 1, sx: 1, sy: 1, rot: 0 }], description: 'Celebration wiggle — scale up then twist back and forth' },
+  { id: 'rubberBand', keyframes: [{ at: 0, sx: 1, sy: 1 }, { at: 0.3, sx: 1.25, sy: 0.75 }, { at: 0.4, sx: 0.75, sy: 1.25 }, { at: 0.5, sx: 1.15, sy: 0.85 }, { at: 0.65, sx: 0.95, sy: 1.05 }, { at: 0.75, sx: 1.05, sy: 0.95 }, { at: 1, sx: 1, sy: 1 }], description: 'Stretch + squash like rubber' },
+  { id: 'jello', keyframes: [{ at: 0, rot: 0 }, { at: 0.111, rot: 0 }, { at: 0.222, rot: -12.5 }, { at: 0.333, rot: 6.25 }, { at: 0.444, rot: -3.125 }, { at: 0.555, rot: 1.5625 }, { at: 0.666, rot: -0.78125 }, { at: 0.777, rot: 0.390625 }, { at: 0.888, rot: -0.1953125 }, { at: 1, rot: 0 }], description: 'Wobbles like jello — diminishing skew' },
+  { id: 'wobble', keyframes: [{ at: 0, tx: 0, rot: 0 }, { at: 0.15, tx: -25, rot: -5 }, { at: 0.3, tx: 20, rot: 3 }, { at: 0.45, tx: -15, rot: -3 }, { at: 0.6, tx: 10, rot: 2 }, { at: 0.75, tx: -5, rot: -1 }, { at: 1, tx: 0, rot: 0 }], description: 'Oscillates side to side with diminishing amplitude' },
+  { id: 'bounce', keyframes: [{ at: 0, ty: 0 }, { at: 0.2, ty: 0 }, { at: 0.4, ty: -30 }, { at: 0.43, ty: -30 }, { at: 0.53, ty: 0 }, { at: 0.7, ty: -15 }, { at: 0.8, ty: 0 }, { at: 0.9, ty: -4 }, { at: 1, ty: 0 }], description: 'Bouncing ball — vertical hops with damping' },
+  { id: 'heartBeat', keyframes: [{ at: 0, sx: 1, sy: 1 }, { at: 0.14, sx: 1.3, sy: 1.3 }, { at: 0.28, sx: 1, sy: 1 }, { at: 0.42, sx: 1.3, sy: 1.3 }, { at: 0.7, sx: 1, sy: 1 }, { at: 1, sx: 1, sy: 1 }], description: 'Two-beat heart-rhythm pulse' },
+  { id: 'flash', keyframes: [{ at: 0, opacity: 1 }, { at: 0.25, opacity: 0 }, { at: 0.5, opacity: 1 }, { at: 0.75, opacity: 0 }, { at: 1, opacity: 1 }], description: 'Strobe flash — opacity blink' },
+]
+
+const AMBIENT = [
+  { id: 'drift', keyframes: [{ at: 0, tx: 0, ty: 0 }, { at: 0.5, tx: 8, ty: -4 }, { at: 1, tx: 0, ty: 0 }], description: 'Slow continuous drift — looped background motion', defaultDurationFrames: 240 },
+  { id: 'breathe', keyframes: [{ at: 0, sx: 1, sy: 1 }, { at: 0.5, sx: 1.04, sy: 1.04 }, { at: 1, sx: 1, sy: 1 }], description: 'Gentle scale breathing — looped', defaultDurationFrames: 180 },
+  { id: 'ambientPulse', keyframes: [{ at: 0, opacity: 0.85 }, { at: 0.5, opacity: 1 }, { at: 1, opacity: 0.85 }], description: 'Subtle opacity pulse — looped', defaultDurationFrames: 120 },
+]
+
+// ── Catalog assembly ─────────────────────────────────────────────────────
+
+const ALL_CATEGORIES = [
+  { category: 'entrance', items: ENTRANCE, defaultDurationFrames: 18, defaultEasing: 'power2.out', defaultRenderers: ['react', 'motion', 'lottie', 'three', 'canvas2d'] },
+  { category: 'exit', items: EXIT, defaultDurationFrames: 18, defaultEasing: 'power2.in', defaultRenderers: ['react', 'motion', 'lottie', 'three', 'canvas2d'] },
+  { category: 'emphasis', items: EMPHASIS, defaultDurationFrames: 24, defaultEasing: 'power1.inOut', defaultRenderers: ['react', 'motion', 'lottie', 'three', 'canvas2d'] },
+  { category: 'ambient', items: AMBIENT, defaultDurationFrames: 180, defaultEasing: 'ease-in-out', defaultRenderers: ['react', 'motion', 'three', 'canvas2d'] },
+]
+
+function buildPresets() {
+  const out = []
+  for (const cat of ALL_CATEGORIES) {
+    for (const item of cat.items) {
+      const layoutAware = Boolean(item.layoutAware)
+      const textDecomposition = Boolean(item.textDecomposition)
+      // Layout-aware presets fall back to a transform shell on non-React
+      // renderers — the compiler emits a div wrapper around the layer.
+      const compatibleRenderers = layoutAware ? ['react', 'motion'] : cat.defaultRenderers
+      out.push({
+        id: item.id,
+        category: cat.category,
+        description: item.description,
+        defaultDurationFrames: item.defaultDurationFrames ?? cat.defaultDurationFrames,
+        defaultEasing: item.defaultEasing ?? cat.defaultEasing,
+        compatibleRenderers,
+        flags: { layoutAware, textDecomposition },
+        keyframes: item.keyframes,
+      })
+    }
+  }
+  // Stable ordering — alphabetical within category, categories in fixed order.
+  out.sort((a, b) => {
+    const cats = ['entrance', 'exit', 'emphasis', 'ambient']
+    const ca = cats.indexOf(a.category)
+    const cb = cats.indexOf(b.category)
+    if (ca !== cb) return ca - cb
+    return a.id.localeCompare(b.id)
+  })
+  // Detect duplicate ids — would silently overwrite at runtime.
+  const seen = new Set()
+  for (const p of out) {
+    if (seen.has(p.id)) throw new Error(`Duplicate preset id: ${p.id}`)
+    seen.add(p.id)
+  }
+  return out
+}
+
+function emit(presets) {
+  const header = `// AUTO-GENERATED by scripts/build-motion-presets.mjs.
+// Do not edit directly — change the catalog in the script and re-run.
+// CI runs the script with --check; drift fails the build.
+
+import type { MotionPreset, RendererKind } from './types'
+
+const ALL_RENDERERS: ReadonlyArray<RendererKind> = ['react', 'motion', 'lottie', 'three', 'canvas2d']
+
+`
+  const body = `export const MOTION_PRESETS: ReadonlyArray<MotionPreset> = ${JSON.stringify(presets, null, 2)} as const
+
+export const MOTION_PRESET_IDS: ReadonlyArray<string> = MOTION_PRESETS.map((p) => p.id)
+
+export function getMotionPreset(id: string): MotionPreset | null {
+  return MOTION_PRESETS.find((p) => p.id === id) ?? null
+}
+
+export function listMotionPresets(filter?: { category?: MotionPreset['category']; renderer?: RendererKind }): ReadonlyArray<MotionPreset> {
+  if (!filter) return MOTION_PRESETS
+  return MOTION_PRESETS.filter((p) => {
+    if (filter.category && p.category !== filter.category) return false
+    if (filter.renderer && !p.compatibleRenderers.includes(filter.renderer)) return false
+    return true
+  })
+}
+`
+  // Touch ALL_RENDERERS so it isn't dead — used in case future entries
+  // want to reference it. Leaving the import live also documents intent.
+  return header + 'void ALL_RENDERERS\n\n' + body
+}
+
+async function main() {
+  const presets = buildPresets()
+  const generated = emit(presets)
+
+  const checkOnly = process.argv.includes('--check')
+
+  if (checkOnly) {
+    let existing = ''
+    try {
+      existing = await fs.readFile(OUT_FILE, 'utf-8')
+    } catch {
+      console.error(`presets.generated.ts is missing — run: node scripts/build/build-motion-presets.mjs`)
+      process.exit(1)
+    }
+    if (existing !== generated) {
+      console.error(`presets.generated.ts is stale — re-run: node scripts/build/build-motion-presets.mjs`)
+      process.exit(1)
+    }
+    console.log(`OK — ${presets.length} presets, no drift.`)
+    return
+  }
+
+  await fs.writeFile(OUT_FILE, generated)
+  console.log(`Wrote ${presets.length} presets to ${path.relative(REPO_ROOT, OUT_FILE)}`)
+}
+
+main().catch((err) => {
+  console.error(err)
+  process.exit(1)
+})

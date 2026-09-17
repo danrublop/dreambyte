@@ -1,0 +1,11 @@
+{
+  "//": "Eval-only tsconfig: extends root but stubs Next's 'server-only' build guard so run.ts can drive the real agent under plain tsx (the way vitest.config.ts aliases it). baseUrl pins @/* to src/.",
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "../..",
+    "paths": {
+      "@/*": ["./src/*"],
+      "server-only": ["src/lib/test-stubs/server-only.ts"]
+    }
+  }
+}

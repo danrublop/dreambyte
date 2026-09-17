@@ -1,0 +1,14 @@
+-- 0027: messages.run_id — the IPC runId that produced (or is producing) this
+-- message row (S6).
+--
+-- Hand-trimmed additive delta (matching the 0011-0024 convention): the
+-- drizzle/sqlite meta snapshot is stale, so `db:generate` would emit a full
+-- "create everything" baseline that fails on a populated DB.
+--
+-- Persisted on each streaming write + the run-start placeholder so orphan
+-- detection can be PRECISE: a 'streaming' row whose run_id is not among the
+-- live activeRunIds() is an orphan regardless of other in-flight runs. Legacy
+-- rows (run_id NULL) keep the conservative any-active-run grace. Nullable; the
+-- final persist may set it but does not require it. ADD COLUMN is allowed by
+-- SQLite.
+ALTER TABLE `messages` ADD COLUMN `run_id` text;

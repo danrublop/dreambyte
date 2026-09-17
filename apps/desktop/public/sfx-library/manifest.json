@@ -1,0 +1,4924 @@
+{
+  "version": 1,
+  "generatedAt": "2026-04-10T01:55:43.315Z",
+  "categories": [
+    {
+      "id": "ui",
+      "label": "UI & clicks",
+      "sounds": [
+        {
+          "id": "zzfx-ui-tick",
+          "name": "Soft tick",
+          "file": "ui/zzfx-ui-tick.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.1,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-ui-click",
+          "name": "Click",
+          "file": "ui/zzfx-ui-click.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.07199546485260772,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-ui-toggle",
+          "name": "Toggle",
+          "file": "ui/zzfx-ui-toggle.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.14498866213151929,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-ui-beep-hi",
+          "name": "Beep high",
+          "file": "ui/zzfx-ui-beep-hi.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.12099773242630385,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-ui-beep-lo",
+          "name": "Beep low",
+          "file": "ui/zzfx-ui-beep-lo.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.1819954648526077,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-ui-chime",
+          "name": "Chime",
+          "file": "ui/zzfx-ui-chime.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.35,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-ui-swipe",
+          "name": "Swipe",
+          "file": "ui/zzfx-ui-swipe.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.28,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-ui-success",
+          "name": "Success",
+          "file": "ui/zzfx-ui-success.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.31,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-ui-deny",
+          "name": "Denied",
+          "file": "ui/zzfx-ui-deny.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.51,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-ui-hover",
+          "name": "Hover",
+          "file": "ui/zzfx-ui-hover.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.08798185941043084,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-ui-tap",
+          "name": "Tap",
+          "file": "ui/zzfx-ui-tap.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.06798185941043083,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-ui-send",
+          "name": "Send / submit",
+          "file": "ui/zzfx-ui-send.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.20798185941043085,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-ui-open",
+          "name": "Panel open",
+          "file": "ui/zzfx-ui-open.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.38,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-ui-close",
+          "name": "Panel close",
+          "file": "ui/zzfx-ui-close.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.3,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-ui-menu",
+          "name": "Menu fold",
+          "file": "ui/zzfx-ui-menu.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.2649886621315193,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-ui-type",
+          "name": "Type key",
+          "file": "ui/zzfx-ui-type.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.04897959183673469,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-ui-bright",
+          "name": "Bright ping",
+          "file": "ui/zzfx-ui-bright.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.17399092970521543,
+          "librarySource": "zzfx"
+        }
+      ]
+    },
+    {
+      "id": "impacts",
+      "label": "Impacts & hits",
+      "sounds": [
+        {
+          "id": "zzfx-impact-punch",
+          "name": "Punch",
+          "file": "impacts/zzfx-impact-punch.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.4,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-impact-thud",
+          "name": "Thud",
+          "file": "impacts/zzfx-impact-thud.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.48,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-impact-slam",
+          "name": "Slam",
+          "file": "impacts/zzfx-impact-slam.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.5749886621315192,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-impact-metal",
+          "name": "Metal hit",
+          "file": "impacts/zzfx-impact-metal.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.24,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-impact-glass",
+          "name": "Glass tap",
+          "file": "impacts/zzfx-impact-glass.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.20099773242630387,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-impact-body",
+          "name": "Body fall",
+          "file": "impacts/zzfx-impact-body.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.58,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-impact-sword",
+          "name": "Sword clang",
+          "file": "impacts/zzfx-impact-sword.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.3019954648526077,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-impact-wood",
+          "name": "Wood knock",
+          "file": "impacts/zzfx-impact-wood.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.38,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-impact-rubber",
+          "name": "Rubber slap",
+          "file": "impacts/zzfx-impact-rubber.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.52,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-impact-gravel",
+          "name": "Gravel hit",
+          "file": "impacts/zzfx-impact-gravel.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.39,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-impact-sand",
+          "name": "Sand thump",
+          "file": "impacts/zzfx-impact-sand.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.5,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-impact-ice",
+          "name": "Ice crack",
+          "file": "impacts/zzfx-impact-ice.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.22598639455782313,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-impact-bubble",
+          "name": "Wet slap",
+          "file": "impacts/zzfx-impact-bubble.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.49,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-impact-ceramic",
+          "name": "Ceramic clink",
+          "file": "impacts/zzfx-impact-ceramic.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.17598639455782314,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-impact-chain",
+          "name": "Chain rattle",
+          "file": "impacts/zzfx-impact-chain.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.32798185941043084,
+          "librarySource": "zzfx"
+        }
+      ]
+    },
+    {
+      "id": "explosions",
+      "label": "Explosions",
+      "sounds": [
+        {
+          "id": "zzfx-ex-small",
+          "name": "Small blast",
+          "file": "explosions/zzfx-ex-small.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.77,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-ex-med",
+          "name": "Medium blast",
+          "file": "explosions/zzfx-ex-med.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 1.03,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-ex-noise",
+          "name": "Noisy burst",
+          "file": "explosions/zzfx-ex-noise.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.77,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-ex-crunch",
+          "name": "Crunch boom",
+          "file": "explosions/zzfx-ex-crunch.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.6149886621315193,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-ex-electric",
+          "name": "Electric pop",
+          "file": "explosions/zzfx-ex-electric.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.28199546485260774,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-ex-underwater",
+          "name": "Muffled boom",
+          "file": "explosions/zzfx-ex-underwater.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 1.14,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-ex-spark",
+          "name": "Spark burst",
+          "file": "explosions/zzfx-ex-spark.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.18099773242630385,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-ex-tail",
+          "name": "Long tail boom",
+          "file": "explosions/zzfx-ex-tail.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 1.39,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-ex-compact",
+          "name": "Compact burst",
+          "file": "explosions/zzfx-ex-compact.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.3079818594104308,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-ex-sizzle",
+          "name": "Sizzle burst",
+          "file": "explosions/zzfx-ex-sizzle.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.53,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-ex-ring",
+          "name": "Shock ring",
+          "file": "explosions/zzfx-ex-ring.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.75,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-ex-flare",
+          "name": "Flare pop",
+          "file": "explosions/zzfx-ex-flare.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.25299319727891156,
+          "librarySource": "zzfx"
+        }
+      ]
+    },
+    {
+      "id": "pickups",
+      "label": "Pickups & rewards",
+      "sounds": [
+        {
+          "id": "zzfx-coin",
+          "name": "Coin",
+          "file": "pickups/zzfx-coin.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.2,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-powerup",
+          "name": "Power-up",
+          "file": "pickups/zzfx-powerup.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.3,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-heart",
+          "name": "Heart / life",
+          "file": "pickups/zzfx-heart.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.26,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-star",
+          "name": "Star sparkle",
+          "file": "pickups/zzfx-star.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.23498866213151928,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-level-up",
+          "name": "Level up",
+          "file": "pickups/zzfx-level-up.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.46,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-gem",
+          "name": "Gem",
+          "file": "pickups/zzfx-gem.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.23299319727891157,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-key",
+          "name": "Key / unlock",
+          "file": "pickups/zzfx-key.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.24798185941043083,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-multi",
+          "name": "Combo ping",
+          "file": "pickups/zzfx-multi.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.17399092970521543,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-treasure",
+          "name": "Treasure chest",
+          "file": "pickups/zzfx-treasure.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.52,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-orb",
+          "name": "Orb collect",
+          "file": "pickups/zzfx-orb.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.2559863945578231,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-ring-collect",
+          "name": "Ring collect",
+          "file": "pickups/zzfx-ring-collect.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.1989795918367347,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-bonus",
+          "name": "Bonus wave",
+          "file": "pickups/zzfx-bonus.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.45,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-streak",
+          "name": "Streak tick",
+          "file": "pickups/zzfx-streak.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.11199546485260771,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-magic-flourish",
+          "name": "Magic flourish",
+          "file": "pickups/zzfx-magic-flourish.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.6,
+          "librarySource": "zzfx"
+        }
+      ]
+    },
+    {
+      "id": "alarms",
+      "label": "Alarms & alerts",
+      "sounds": [
+        {
+          "id": "zzfx-alarm-fast",
+          "name": "Fast beep",
+          "file": "alarms/zzfx-alarm-fast.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.10498866213151928,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-alarm-slow",
+          "name": "Slow alarm",
+          "file": "alarms/zzfx-alarm-slow.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.52,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-buzzer",
+          "name": "Buzzer",
+          "file": "alarms/zzfx-buzzer.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.61,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-wrong",
+          "name": "Wrong / error",
+          "file": "alarms/zzfx-wrong.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.45,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-alarm-urgent",
+          "name": "Urgent pulse",
+          "file": "alarms/zzfx-alarm-urgent.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.13399092970521542,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-chime-soft",
+          "name": "Soft chime",
+          "file": "alarms/zzfx-chime-soft.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.47,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-attention",
+          "name": "Attention ding",
+          "file": "alarms/zzfx-attention.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.28,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-countdown",
+          "name": "Countdown tick",
+          "file": "alarms/zzfx-countdown.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.12798185941043083,
+          "librarySource": "zzfx"
+        }
+      ]
+    },
+    {
+      "id": "sci-fi",
+      "label": "Sci‑fi",
+      "sounds": [
+        {
+          "id": "zzfx-laser",
+          "name": "Laser shot",
+          "file": "sci-fi/zzfx-laser.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.18099773242630385,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-laser-big",
+          "name": "Heavy laser",
+          "file": "sci-fi/zzfx-laser-big.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.44,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-warp",
+          "name": "Warp",
+          "file": "sci-fi/zzfx-warp.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.85,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-scanner",
+          "name": "Scanner",
+          "file": "sci-fi/zzfx-scanner.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.2919954648526077,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-alien",
+          "name": "Alien ping",
+          "file": "sci-fi/zzfx-alien.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.54,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-teleport",
+          "name": "Teleport",
+          "file": "sci-fi/zzfx-teleport.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.86,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-shield",
+          "name": "Shield hum",
+          "file": "sci-fi/zzfx-shield.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.93,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-charge",
+          "name": "Charge up",
+          "file": "sci-fi/zzfx-charge.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 1.22,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-hologram",
+          "name": "Hologram flicker",
+          "file": "sci-fi/zzfx-hologram.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.14199546485260772,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-drone-pass",
+          "name": "Fly-by drone",
+          "file": "sci-fi/zzfx-drone-pass.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.86,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-servo",
+          "name": "Servo motor",
+          "file": "sci-fi/zzfx-servo.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.69,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-plasma",
+          "name": "Plasma hiss",
+          "file": "sci-fi/zzfx-plasma.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.59,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-cpu-beep",
+          "name": "CPU beep",
+          "file": "sci-fi/zzfx-cpu-beep.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.09698412698412698,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-datagram",
+          "name": "Data blip",
+          "file": "sci-fi/zzfx-datagram.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.08299319727891157,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-airlock",
+          "name": "Airlock seal",
+          "file": "sci-fi/zzfx-airlock.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.78,
+          "librarySource": "zzfx"
+        }
+      ]
+    },
+    {
+      "id": "cartoon",
+      "label": "Cartoon",
+      "sounds": [
+        {
+          "id": "zzfx-boing",
+          "name": "Boing",
+          "file": "cartoon/zzfx-boing.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.62,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-pop",
+          "name": "Pop",
+          "file": "cartoon/zzfx-pop.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.15498866213151927,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-slide",
+          "name": "Slide whistle",
+          "file": "cartoon/zzfx-slide.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.73,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-squish",
+          "name": "Squish",
+          "file": "cartoon/zzfx-squish.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.59,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-bonk",
+          "name": "Bonk",
+          "file": "cartoon/zzfx-bonk.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.32798185941043084,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-stretch",
+          "name": "Stretch",
+          "file": "cartoon/zzfx-stretch.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.85,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-whee",
+          "name": "Whee up",
+          "file": "cartoon/zzfx-whee.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.72,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-zip",
+          "name": "Zip",
+          "file": "cartoon/zzfx-zip.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.25,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-crunch-soft",
+          "name": "Soft crunch",
+          "file": "cartoon/zzfx-crunch-soft.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.52,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-spring",
+          "name": "Spring",
+          "file": "cartoon/zzfx-spring.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.49498866213151926,
+          "librarySource": "zzfx"
+        }
+      ]
+    },
+    {
+      "id": "percussion",
+      "label": "Drums & rhythm",
+      "sounds": [
+        {
+          "id": "zzfx-drum",
+          "name": "Drum hit",
+          "file": "percussion/zzfx-drum.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.16,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-kick",
+          "name": "Kick",
+          "file": "percussion/zzfx-kick.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.2749886621315193,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-snare",
+          "name": "Snare-ish",
+          "file": "percussion/zzfx-snare.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.17199546485260772,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-hat",
+          "name": "Hi-hat",
+          "file": "percussion/zzfx-hat.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.06099773242630385,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-tom",
+          "name": "Tom",
+          "file": "percussion/zzfx-tom.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.38798185941043084,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-clap",
+          "name": "Clap",
+          "file": "percussion/zzfx-clap.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.20199546485260772,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-rim",
+          "name": "Rim shot",
+          "file": "percussion/zzfx-rim.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.13598639455782313,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-ride",
+          "name": "Ride bell",
+          "file": "percussion/zzfx-ride.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.2629931972789116,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-shaker",
+          "name": "Shaker",
+          "file": "percussion/zzfx-shaker.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.35,
+          "librarySource": "zzfx"
+        }
+      ]
+    },
+    {
+      "id": "transitions",
+      "label": "Transitions",
+      "sounds": [
+        {
+          "id": "zzfx-whoosh",
+          "name": "Whoosh",
+          "file": "transitions/zzfx-whoosh.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.78,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-sweep-up",
+          "name": "Sweep up",
+          "file": "transitions/zzfx-sweep-up.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.75,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-riser",
+          "name": "Riser",
+          "file": "transitions/zzfx-riser.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 1.2,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-downer",
+          "name": "Downer",
+          "file": "transitions/zzfx-downer.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.85,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-tape-stop",
+          "name": "Tape stop",
+          "file": "transitions/zzfx-tape-stop.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.62,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-reverse-suck",
+          "name": "Reverse suck",
+          "file": "transitions/zzfx-reverse-suck.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.8,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-glitch-in",
+          "name": "Glitch in",
+          "file": "transitions/zzfx-glitch-in.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.29,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-glitch-out",
+          "name": "Glitch out",
+          "file": "transitions/zzfx-glitch-out.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.37,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-soft-in",
+          "name": "Soft fade in",
+          "file": "transitions/zzfx-soft-in.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.9,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-hard-cut",
+          "name": "Hard cut",
+          "file": "transitions/zzfx-hard-cut.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.10099773242630386,
+          "librarySource": "zzfx"
+        }
+      ]
+    },
+    {
+      "id": "sfxr",
+      "label": "Retro game",
+      "sounds": [
+        {
+          "id": "zzfx-sfxr-jump",
+          "name": "Jump",
+          "file": "sfxr/zzfx-sfxr-jump.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.22,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-sfxr-shoot",
+          "name": "Shoot / pew",
+          "file": "sfxr/zzfx-sfxr-shoot.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.12099773242630385,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-sfxr-hurt",
+          "name": "Hurt",
+          "file": "sfxr/zzfx-sfxr-hurt.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.34,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-sfxr-bling",
+          "name": "Pickup bling",
+          "file": "sfxr/zzfx-sfxr-bling.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.16498866213151928,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-sfxr-tiny-pop",
+          "name": "Tiny pop",
+          "file": "sfxr/zzfx-sfxr-tiny-pop.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.11199546485260771,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-sfxr-stab",
+          "name": "Synth stab",
+          "file": "sfxr/zzfx-sfxr-stab.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.43,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-sfxr-noise",
+          "name": "Noise burst",
+          "file": "sfxr/zzfx-sfxr-noise.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.46,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-sfxr-tone",
+          "name": "Simple tone",
+          "file": "sfxr/zzfx-sfxr-tone.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.5,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-sfxr-wobble",
+          "name": "Wobble",
+          "file": "sfxr/zzfx-sfxr-wobble.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.58,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-sfxr-slide",
+          "name": "Pitch slide",
+          "file": "sfxr/zzfx-sfxr-slide.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.75,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-sfxr-zap",
+          "name": "Zap",
+          "file": "sfxr/zzfx-sfxr-zap.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.13099773242630386,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-sfxr-thump",
+          "name": "Land thump",
+          "file": "sfxr/zzfx-sfxr-thump.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.33798185941043085,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-sfxr-8bit-run",
+          "name": "8-bit run",
+          "file": "sfxr/zzfx-sfxr-8bit-run.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.07698412698412699,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-sfxr-game-start",
+          "name": "Game start",
+          "file": "sfxr/zzfx-sfxr-game-start.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.62,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-sfxr-powerdown",
+          "name": "Power down",
+          "file": "sfxr/zzfx-sfxr-powerdown.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.79,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-sfxr-laser-charge",
+          "name": "Laser charge",
+          "file": "sfxr/zzfx-sfxr-laser-charge.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 1.03,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-sfxr-mutate",
+          "name": "Mutate",
+          "file": "sfxr/zzfx-sfxr-mutate.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.56,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-sfxr-lift",
+          "name": "Lift / spring up",
+          "file": "sfxr/zzfx-sfxr-lift.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.5,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-sfxr-coin-slot",
+          "name": "Coin slot",
+          "file": "sfxr/zzfx-sfxr-coin-slot.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.22598639455782313,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-sfxr-enemy-die",
+          "name": "Enemy poof",
+          "file": "sfxr/zzfx-sfxr-enemy-die.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.4649886621315193,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-sfxr-bubble",
+          "name": "Bubble pop",
+          "file": "sfxr/zzfx-sfxr-bubble.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.17399092970521543,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-sfxr-motor",
+          "name": "Motor loop-ish",
+          "file": "sfxr/zzfx-sfxr-motor.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.86,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-sfxr-blip-up",
+          "name": "Blip up",
+          "file": "sfxr/zzfx-sfxr-blip-up.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.28,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-sfxr-blip-down",
+          "name": "Blip down",
+          "file": "sfxr/zzfx-sfxr-blip-down.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.28,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-sfxr-double-jump",
+          "name": "Double jump",
+          "file": "sfxr/zzfx-sfxr-double-jump.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.19498866213151927,
+          "librarySource": "zzfx"
+        }
+      ]
+    },
+    {
+      "id": "ambient",
+      "label": "Ambient & drones",
+      "sounds": [
+        {
+          "id": "zzfx-amb-wind",
+          "name": "Soft wind",
+          "file": "ambient/zzfx-amb-wind.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 1.65,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-amb-pad",
+          "name": "Warm pad",
+          "file": "ambient/zzfx-amb-pad.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 1.65,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-amb-space",
+          "name": "Space drone",
+          "file": "ambient/zzfx-amb-space.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 2.1,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-amb-rumble",
+          "name": "Low rumble",
+          "file": "ambient/zzfx-amb-rumble.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 1.28,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-amb-crystal",
+          "name": "Crystal bed",
+          "file": "ambient/zzfx-amb-crystal.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 1.2,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-amb-pulse",
+          "name": "Slow pulse",
+          "file": "ambient/zzfx-amb-pulse.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 1.5,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-amb-horror",
+          "name": "Tense drone",
+          "file": "ambient/zzfx-amb-horror.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 1.62,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-amb-rain",
+          "name": "Rain texture",
+          "file": "ambient/zzfx-amb-rain.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.7,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-amb-dark",
+          "name": "Dark hum",
+          "file": "ambient/zzfx-amb-dark.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 1.85,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-amb-choir",
+          "name": "Airy pad",
+          "file": "ambient/zzfx-amb-choir.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 1.57,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-amb-glass",
+          "name": "Glass tone bed",
+          "file": "ambient/zzfx-amb-glass.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 1.35,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-amb-machine",
+          "name": "Machine room",
+          "file": "ambient/zzfx-amb-machine.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 1.45,
+          "librarySource": "zzfx"
+        }
+      ]
+    },
+    {
+      "id": "misc",
+      "label": "Classic ZzFX demos",
+      "sounds": [
+        {
+          "id": "zzfx-game-over",
+          "name": "Game over",
+          "file": "misc/zzfx-game-over.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.94,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-piano",
+          "name": "Piano pluck",
+          "file": "misc/zzfx-piano.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.21020408163265306,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-blip",
+          "name": "Blip",
+          "file": "misc/zzfx-blip.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.1219954648526077,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-notify",
+          "name": "Notification",
+          "file": "misc/zzfx-notify.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.27,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-sparkle-short",
+          "name": "Sparkle",
+          "file": "misc/zzfx-sparkle-short.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.16798185941043084,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-digital-glitch",
+          "name": "Digital glitch",
+          "file": "misc/zzfx-digital-glitch.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.24798185941043083,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-confirm-deep",
+          "name": "Confirm deep",
+          "file": "misc/zzfx-confirm-deep.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.54,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-cancel-soft",
+          "name": "Cancel soft",
+          "file": "misc/zzfx-cancel-soft.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.57,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-timer-done",
+          "name": "Timer done",
+          "file": "misc/zzfx-timer-done.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.39,
+          "librarySource": "zzfx"
+        },
+        {
+          "id": "zzfx-typing",
+          "name": "Typing burst",
+          "file": "misc/zzfx-typing.wav",
+          "license": "MIT (ZzFX)",
+          "duration": 0.06199546485260771,
+          "librarySource": "zzfx"
+        }
+      ]
+    },
+    {
+      "id": "foley",
+      "label": "Foley & materials (real recordings)",
+      "sounds": [
+        {
+          "id": "cc0-bell-01",
+          "name": "Bell 01",
+          "file": "foley/cc0-bell-01.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 1.3,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-bell-02",
+          "name": "Bell 02",
+          "file": "foley/cc0-bell-02.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.531,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-bell-03",
+          "name": "Bell 03",
+          "file": "foley/cc0-bell-03.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 1.783,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-dishes-01",
+          "name": "Dishes 01",
+          "file": "foley/cc0-dishes-01.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.794,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-dishes-02",
+          "name": "Dishes 02",
+          "file": "foley/cc0-dishes-02.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.612,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-dishes-03",
+          "name": "Dishes 03",
+          "file": "foley/cc0-dishes-03.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.729,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-dishes-04",
+          "name": "Dishes 04",
+          "file": "foley/cc0-dishes-04.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.612,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-door-01",
+          "name": "Door 01",
+          "file": "foley/cc0-door-01.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 2.78,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-door-02",
+          "name": "Door 02",
+          "file": "foley/cc0-door-02.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 2.643,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-door-close-01",
+          "name": "Door close 01",
+          "file": "foley/cc0-door-close-01.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.497,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-door-close-02",
+          "name": "Door close 02",
+          "file": "foley/cc0-door-close-02.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.859,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-door-close-03",
+          "name": "Door close 03",
+          "file": "foley/cc0-door-close-03.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.424,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-door-close-04",
+          "name": "Door close 04",
+          "file": "foley/cc0-door-close-04.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.537,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-door-open",
+          "name": "Door open",
+          "file": "foley/cc0-door-open.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.452,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-explosion",
+          "name": "Explosion",
+          "file": "foley/cc0-explosion.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.562,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-glass-01",
+          "name": "Glass 01",
+          "file": "foley/cc0-glass-01.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.39,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-glass-02",
+          "name": "Glass 02",
+          "file": "foley/cc0-glass-02.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.366,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-glass-03",
+          "name": "Glass 03",
+          "file": "foley/cc0-glass-03.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.414,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-glass-04",
+          "name": "Glass 04",
+          "file": "foley/cc0-glass-04.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.956,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-glass-05",
+          "name": "Glass 05",
+          "file": "foley/cc0-glass-05.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 1.032,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-gong-01",
+          "name": "Gong 01",
+          "file": "foley/cc0-gong-01.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 1.424,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-gong-02",
+          "name": "Gong 02",
+          "file": "foley/cc0-gong-02.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 1.193,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-hit-01",
+          "name": "Hit 01",
+          "file": "foley/cc0-hit-01.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.265,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-hit-02",
+          "name": "Hit 02",
+          "file": "foley/cc0-hit-02.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.327,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-hit-03",
+          "name": "Hit 03",
+          "file": "foley/cc0-hit-03.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.426,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-hit-04",
+          "name": "Hit 04",
+          "file": "foley/cc0-hit-04.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.451,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-key-open-01",
+          "name": "Key open 01",
+          "file": "foley/cc0-key-open-01.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.432,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-key-open-02",
+          "name": "Key open 02",
+          "file": "foley/cc0-key-open-02.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.337,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-machine-01",
+          "name": "Machine 01",
+          "file": "foley/cc0-machine-01.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.554,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-machine-02",
+          "name": "Machine 02",
+          "file": "foley/cc0-machine-02.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.526,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-machine-03",
+          "name": "Machine 03",
+          "file": "foley/cc0-machine-03.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.462,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-metal-01",
+          "name": "Metal 01",
+          "file": "foley/cc0-metal-01.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.607,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-metal-02",
+          "name": "Metal 02",
+          "file": "foley/cc0-metal-02.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.287,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-metal-03",
+          "name": "Metal 03",
+          "file": "foley/cc0-metal-03.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.35,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-metal-04",
+          "name": "Metal 04",
+          "file": "foley/cc0-metal-04.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 1.003,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-metal-05",
+          "name": "Metal 05",
+          "file": "foley/cc0-metal-05.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.837,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-metal-06",
+          "name": "Metal 06",
+          "file": "foley/cc0-metal-06.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.679,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-metal-07",
+          "name": "Metal 07",
+          "file": "foley/cc0-metal-07.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.736,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-metal-08",
+          "name": "Metal 08",
+          "file": "foley/cc0-metal-08.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.834,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-metal-09",
+          "name": "Metal 09",
+          "file": "foley/cc0-metal-09.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.667,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-metal-10",
+          "name": "Metal 10",
+          "file": "foley/cc0-metal-10.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.727,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-metal-11",
+          "name": "Metal 11",
+          "file": "foley/cc0-metal-11.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.415,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-metal-12",
+          "name": "Metal 12",
+          "file": "foley/cc0-metal-12.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 1.232,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-microwave-door-close",
+          "name": "Microwave door close",
+          "file": "foley/cc0-microwave-door-close.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.725,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-microwave-door-open",
+          "name": "Microwave door open",
+          "file": "foley/cc0-microwave-door-open.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.747,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-noise-01",
+          "name": "Noise 01",
+          "file": "foley/cc0-noise-01.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.412,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-noise-02",
+          "name": "Noise 02",
+          "file": "foley/cc0-noise-02.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.508,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-other-01",
+          "name": "Other 01",
+          "file": "foley/cc0-other-01.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.805,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-other-02",
+          "name": "Other 02",
+          "file": "foley/cc0-other-02.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.306,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-other-03",
+          "name": "Other 03",
+          "file": "foley/cc0-other-03.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.523,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-other-04",
+          "name": "Other 04",
+          "file": "foley/cc0-other-04.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.306,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-other-05",
+          "name": "Other 05",
+          "file": "foley/cc0-other-05.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.437,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-other-06",
+          "name": "Other 06",
+          "file": "foley/cc0-other-06.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.234,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-other-07",
+          "name": "Other 07",
+          "file": "foley/cc0-other-07.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.507,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-paper-01",
+          "name": "Paper 01",
+          "file": "foley/cc0-paper-01.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.421,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-paper-02",
+          "name": "Paper 02",
+          "file": "foley/cc0-paper-02.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.548,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-paper-03",
+          "name": "Paper 03",
+          "file": "foley/cc0-paper-03.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.55,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-paper-04",
+          "name": "Paper 04",
+          "file": "foley/cc0-paper-04.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.609,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-plop-01",
+          "name": "Plop 01",
+          "file": "foley/cc0-plop-01.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.3,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-plop-02",
+          "name": "Plop 02",
+          "file": "foley/cc0-plop-02.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.359,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-pot-01",
+          "name": "Pot 01",
+          "file": "foley/cc0-pot-01.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.406,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-pot-02",
+          "name": "Pot 02",
+          "file": "foley/cc0-pot-02.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.629,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-shot-01",
+          "name": "Shot 01",
+          "file": "foley/cc0-shot-01.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.752,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-shot-02",
+          "name": "Shot 02",
+          "file": "foley/cc0-shot-02.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.325,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-slam-01",
+          "name": "Slam 01",
+          "file": "foley/cc0-slam-01.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.474,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-slam-02",
+          "name": "Slam 02",
+          "file": "foley/cc0-slam-02.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.637,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-slam-03",
+          "name": "Slam 03",
+          "file": "foley/cc0-slam-03.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.563,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-slam-04",
+          "name": "Slam 04",
+          "file": "foley/cc0-slam-04.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.302,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-slam-05",
+          "name": "Slam 05",
+          "file": "foley/cc0-slam-05.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.359,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-slam-06",
+          "name": "Slam 06",
+          "file": "foley/cc0-slam-06.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.447,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-slam-07",
+          "name": "Slam 07",
+          "file": "foley/cc0-slam-07.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.672,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-splash-01",
+          "name": "Splash 01",
+          "file": "foley/cc0-splash-01.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.739,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-splash-02",
+          "name": "Splash 02",
+          "file": "foley/cc0-splash-02.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.649,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-spring-01",
+          "name": "Spring 01",
+          "file": "foley/cc0-spring-01.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 1.301,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-spring-02",
+          "name": "Spring 02",
+          "file": "foley/cc0-spring-02.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 1.314,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-spring-03",
+          "name": "Spring 03",
+          "file": "foley/cc0-spring-03.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.497,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-spring-04",
+          "name": "Spring 04",
+          "file": "foley/cc0-spring-04.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.555,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-spring-05",
+          "name": "Spring 05",
+          "file": "foley/cc0-spring-05.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.651,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-spring-06",
+          "name": "Spring 06",
+          "file": "foley/cc0-spring-06.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.91,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-spring-07",
+          "name": "Spring 07",
+          "file": "foley/cc0-spring-07.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.596,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-spring-08",
+          "name": "Spring 08",
+          "file": "foley/cc0-spring-08.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.703,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-spring-09",
+          "name": "Spring 09",
+          "file": "foley/cc0-spring-09.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.606,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-switch-01",
+          "name": "Switch 01",
+          "file": "foley/cc0-switch-01.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.231,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-switch-02",
+          "name": "Switch 02",
+          "file": "foley/cc0-switch-02.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.457,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-toilet-01",
+          "name": "Toilet 01",
+          "file": "foley/cc0-toilet-01.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 7.016,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-toilet-02",
+          "name": "Toilet 02",
+          "file": "foley/cc0-toilet-02.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 4.125,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-tools-01",
+          "name": "Tools 01",
+          "file": "foley/cc0-tools-01.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.51,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-tools-02",
+          "name": "Tools 02",
+          "file": "foley/cc0-tools-02.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.555,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-tools-03",
+          "name": "Tools 03",
+          "file": "foley/cc0-tools-03.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.63,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-tools-04",
+          "name": "Tools 04",
+          "file": "foley/cc0-tools-04.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.528,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-tools-05",
+          "name": "Tools 05",
+          "file": "foley/cc0-tools-05.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.569,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-weird-01",
+          "name": "Weird 01",
+          "file": "foley/cc0-weird-01.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.231,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-weird-02",
+          "name": "Weird 02",
+          "file": "foley/cc0-weird-02.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.71,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-weird-03",
+          "name": "Weird 03",
+          "file": "foley/cc0-weird-03.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.548,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-weird-04",
+          "name": "Weird 04",
+          "file": "foley/cc0-weird-04.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 1.075,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-weird-05",
+          "name": "Weird 05",
+          "file": "foley/cc0-weird-05.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.687,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-wooded-box-open",
+          "name": "Wooded box open",
+          "file": "foley/cc0-wooded-box-open.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.374,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-wooden-01",
+          "name": "Wooden 01",
+          "file": "foley/cc0-wooden-01.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.374,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-wooden-02",
+          "name": "Wooden 02",
+          "file": "foley/cc0-wooden-02.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.4,
+          "librarySource": "cc0"
+        },
+        {
+          "id": "cc0-wooden-03",
+          "name": "Wooden 03",
+          "file": "foley/cc0-wooden-03.ogg",
+          "license": "CC0 (OpenGameArt — 100 CC0 SFX)",
+          "duration": 0.426,
+          "librarySource": "cc0"
+        }
+      ]
+    },
+    {
+      "id": "footsteps-impacts",
+      "label": "Footsteps & impacts (Kenney CC0)",
+      "sounds": [
+        {
+          "id": "kenney-footsteps-impacts-footstep-carpet-000",
+          "name": "Footstep carpet 000",
+          "file": "kenney/kenney-footsteps-impacts-footstep-carpet-000.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.145,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-footstep-carpet-001",
+          "name": "Footstep carpet 001",
+          "file": "kenney/kenney-footsteps-impacts-footstep-carpet-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.145,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-footstep-carpet-002",
+          "name": "Footstep carpet 002",
+          "file": "kenney/kenney-footsteps-impacts-footstep-carpet-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.145,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-footstep-carpet-003",
+          "name": "Footstep carpet 003",
+          "file": "kenney/kenney-footsteps-impacts-footstep-carpet-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.145,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-footstep-carpet-004",
+          "name": "Footstep carpet 004",
+          "file": "kenney/kenney-footsteps-impacts-footstep-carpet-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.145,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-footstep-concrete-000",
+          "name": "Footstep concrete 000",
+          "file": "kenney/kenney-footsteps-impacts-footstep-concrete-000.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.106,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-footstep-concrete-001",
+          "name": "Footstep concrete 001",
+          "file": "kenney/kenney-footsteps-impacts-footstep-concrete-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.108,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-footstep-concrete-002",
+          "name": "Footstep concrete 002",
+          "file": "kenney/kenney-footsteps-impacts-footstep-concrete-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.113,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-footstep-concrete-003",
+          "name": "Footstep concrete 003",
+          "file": "kenney/kenney-footsteps-impacts-footstep-concrete-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.11,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-footstep-concrete-004",
+          "name": "Footstep concrete 004",
+          "file": "kenney/kenney-footsteps-impacts-footstep-concrete-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.114,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-footstep-grass-000",
+          "name": "Footstep grass 000",
+          "file": "kenney/kenney-footsteps-impacts-footstep-grass-000.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.778,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-footstep-grass-001",
+          "name": "Footstep grass 001",
+          "file": "kenney/kenney-footsteps-impacts-footstep-grass-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.674,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-footstep-grass-002",
+          "name": "Footstep grass 002",
+          "file": "kenney/kenney-footsteps-impacts-footstep-grass-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.692,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-footstep-grass-003",
+          "name": "Footstep grass 003",
+          "file": "kenney/kenney-footsteps-impacts-footstep-grass-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.669,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-footstep-grass-004",
+          "name": "Footstep grass 004",
+          "file": "kenney/kenney-footsteps-impacts-footstep-grass-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.59,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-footstep-snow-000",
+          "name": "Footstep snow 000",
+          "file": "kenney/kenney-footsteps-impacts-footstep-snow-000.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.374,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-footstep-snow-001",
+          "name": "Footstep snow 001",
+          "file": "kenney/kenney-footsteps-impacts-footstep-snow-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.374,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-footstep-snow-002",
+          "name": "Footstep snow 002",
+          "file": "kenney/kenney-footsteps-impacts-footstep-snow-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.374,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-footstep-snow-003",
+          "name": "Footstep snow 003",
+          "file": "kenney/kenney-footsteps-impacts-footstep-snow-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.374,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-footstep-snow-004",
+          "name": "Footstep snow 004",
+          "file": "kenney/kenney-footsteps-impacts-footstep-snow-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.374,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-footstep-wood-000",
+          "name": "Footstep wood 000",
+          "file": "kenney/kenney-footsteps-impacts-footstep-wood-000.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.25,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-footstep-wood-001",
+          "name": "Footstep wood 001",
+          "file": "kenney/kenney-footsteps-impacts-footstep-wood-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.252,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-footstep-wood-002",
+          "name": "Footstep wood 002",
+          "file": "kenney/kenney-footsteps-impacts-footstep-wood-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.251,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-footstep-wood-003",
+          "name": "Footstep wood 003",
+          "file": "kenney/kenney-footsteps-impacts-footstep-wood-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.252,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-footstep-wood-004",
+          "name": "Footstep wood 004",
+          "file": "kenney/kenney-footsteps-impacts-footstep-wood-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.248,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactbell-heavy-000",
+          "name": "Impactbell heavy 000",
+          "file": "kenney/kenney-footsteps-impacts-impactbell-heavy-000.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 1.48,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactbell-heavy-001",
+          "name": "Impactbell heavy 001",
+          "file": "kenney/kenney-footsteps-impacts-impactbell-heavy-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 1.741,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactbell-heavy-002",
+          "name": "Impactbell heavy 002",
+          "file": "kenney/kenney-footsteps-impacts-impactbell-heavy-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.697,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactbell-heavy-003",
+          "name": "Impactbell heavy 003",
+          "file": "kenney/kenney-footsteps-impacts-impactbell-heavy-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.654,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactbell-heavy-004",
+          "name": "Impactbell heavy 004",
+          "file": "kenney/kenney-footsteps-impacts-impactbell-heavy-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.301,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactgeneric-light-000",
+          "name": "Impactgeneric light 000",
+          "file": "kenney/kenney-footsteps-impacts-impactgeneric-light-000.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.139,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactgeneric-light-001",
+          "name": "Impactgeneric light 001",
+          "file": "kenney/kenney-footsteps-impacts-impactgeneric-light-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.118,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactgeneric-light-002",
+          "name": "Impactgeneric light 002",
+          "file": "kenney/kenney-footsteps-impacts-impactgeneric-light-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.14,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactgeneric-light-003",
+          "name": "Impactgeneric light 003",
+          "file": "kenney/kenney-footsteps-impacts-impactgeneric-light-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.138,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactgeneric-light-004",
+          "name": "Impactgeneric light 004",
+          "file": "kenney/kenney-footsteps-impacts-impactgeneric-light-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.14,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactglass-heavy-000",
+          "name": "Impactglass heavy 000",
+          "file": "kenney/kenney-footsteps-impacts-impactglass-heavy-000.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.241,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactglass-heavy-001",
+          "name": "Impactglass heavy 001",
+          "file": "kenney/kenney-footsteps-impacts-impactglass-heavy-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.429,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactglass-heavy-002",
+          "name": "Impactglass heavy 002",
+          "file": "kenney/kenney-footsteps-impacts-impactglass-heavy-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.247,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactglass-heavy-003",
+          "name": "Impactglass heavy 003",
+          "file": "kenney/kenney-footsteps-impacts-impactglass-heavy-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.172,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactglass-heavy-004",
+          "name": "Impactglass heavy 004",
+          "file": "kenney/kenney-footsteps-impacts-impactglass-heavy-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.399,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactglass-light-000",
+          "name": "Impactglass light 000",
+          "file": "kenney/kenney-footsteps-impacts-impactglass-light-000.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.21,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactglass-light-001",
+          "name": "Impactglass light 001",
+          "file": "kenney/kenney-footsteps-impacts-impactglass-light-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.21,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactglass-light-002",
+          "name": "Impactglass light 002",
+          "file": "kenney/kenney-footsteps-impacts-impactglass-light-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.21,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactglass-light-003",
+          "name": "Impactglass light 003",
+          "file": "kenney/kenney-footsteps-impacts-impactglass-light-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.21,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactglass-light-004",
+          "name": "Impactglass light 004",
+          "file": "kenney/kenney-footsteps-impacts-impactglass-light-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.21,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactglass-medium-000",
+          "name": "Impactglass medium 000",
+          "file": "kenney/kenney-footsteps-impacts-impactglass-medium-000.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.543,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactglass-medium-001",
+          "name": "Impactglass medium 001",
+          "file": "kenney/kenney-footsteps-impacts-impactglass-medium-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.543,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactglass-medium-002",
+          "name": "Impactglass medium 002",
+          "file": "kenney/kenney-footsteps-impacts-impactglass-medium-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.543,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactglass-medium-003",
+          "name": "Impactglass medium 003",
+          "file": "kenney/kenney-footsteps-impacts-impactglass-medium-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.543,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactglass-medium-004",
+          "name": "Impactglass medium 004",
+          "file": "kenney/kenney-footsteps-impacts-impactglass-medium-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.543,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactmetal-heavy-000",
+          "name": "Impactmetal heavy 000",
+          "file": "kenney/kenney-footsteps-impacts-impactmetal-heavy-000.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.168,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactmetal-heavy-001",
+          "name": "Impactmetal heavy 001",
+          "file": "kenney/kenney-footsteps-impacts-impactmetal-heavy-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.359,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactmetal-heavy-002",
+          "name": "Impactmetal heavy 002",
+          "file": "kenney/kenney-footsteps-impacts-impactmetal-heavy-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.117,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactmetal-heavy-003",
+          "name": "Impactmetal heavy 003",
+          "file": "kenney/kenney-footsteps-impacts-impactmetal-heavy-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.207,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactmetal-heavy-004",
+          "name": "Impactmetal heavy 004",
+          "file": "kenney/kenney-footsteps-impacts-impactmetal-heavy-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.134,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactmetal-light-000",
+          "name": "Impactmetal light 000",
+          "file": "kenney/kenney-footsteps-impacts-impactmetal-light-000.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.351,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactmetal-light-001",
+          "name": "Impactmetal light 001",
+          "file": "kenney/kenney-footsteps-impacts-impactmetal-light-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.252,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactmetal-light-002",
+          "name": "Impactmetal light 002",
+          "file": "kenney/kenney-footsteps-impacts-impactmetal-light-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.236,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactmetal-light-003",
+          "name": "Impactmetal light 003",
+          "file": "kenney/kenney-footsteps-impacts-impactmetal-light-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.482,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactmetal-light-004",
+          "name": "Impactmetal light 004",
+          "file": "kenney/kenney-footsteps-impacts-impactmetal-light-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.213,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactmetal-medium-000",
+          "name": "Impactmetal medium 000",
+          "file": "kenney/kenney-footsteps-impacts-impactmetal-medium-000.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.272,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactmetal-medium-001",
+          "name": "Impactmetal medium 001",
+          "file": "kenney/kenney-footsteps-impacts-impactmetal-medium-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.143,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactmetal-medium-002",
+          "name": "Impactmetal medium 002",
+          "file": "kenney/kenney-footsteps-impacts-impactmetal-medium-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.119,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactmetal-medium-003",
+          "name": "Impactmetal medium 003",
+          "file": "kenney/kenney-footsteps-impacts-impactmetal-medium-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.254,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactmetal-medium-004",
+          "name": "Impactmetal medium 004",
+          "file": "kenney/kenney-footsteps-impacts-impactmetal-medium-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.109,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactmining-000",
+          "name": "Impactmining 000",
+          "file": "kenney/kenney-footsteps-impacts-impactmining-000.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.937,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactmining-001",
+          "name": "Impactmining 001",
+          "file": "kenney/kenney-footsteps-impacts-impactmining-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.869,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactmining-002",
+          "name": "Impactmining 002",
+          "file": "kenney/kenney-footsteps-impacts-impactmining-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.805,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactmining-003",
+          "name": "Impactmining 003",
+          "file": "kenney/kenney-footsteps-impacts-impactmining-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.992,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactmining-004",
+          "name": "Impactmining 004",
+          "file": "kenney/kenney-footsteps-impacts-impactmining-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.83,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactplank-medium-000",
+          "name": "Impactplank medium 000",
+          "file": "kenney/kenney-footsteps-impacts-impactplank-medium-000.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.779,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactplank-medium-001",
+          "name": "Impactplank medium 001",
+          "file": "kenney/kenney-footsteps-impacts-impactplank-medium-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.779,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactplank-medium-002",
+          "name": "Impactplank medium 002",
+          "file": "kenney/kenney-footsteps-impacts-impactplank-medium-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.779,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactplank-medium-003",
+          "name": "Impactplank medium 003",
+          "file": "kenney/kenney-footsteps-impacts-impactplank-medium-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.779,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactplank-medium-004",
+          "name": "Impactplank medium 004",
+          "file": "kenney/kenney-footsteps-impacts-impactplank-medium-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.779,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactplate-heavy-000",
+          "name": "Impactplate heavy 000",
+          "file": "kenney/kenney-footsteps-impacts-impactplate-heavy-000.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.489,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactplate-heavy-001",
+          "name": "Impactplate heavy 001",
+          "file": "kenney/kenney-footsteps-impacts-impactplate-heavy-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.352,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactplate-heavy-002",
+          "name": "Impactplate heavy 002",
+          "file": "kenney/kenney-footsteps-impacts-impactplate-heavy-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.494,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactplate-heavy-003",
+          "name": "Impactplate heavy 003",
+          "file": "kenney/kenney-footsteps-impacts-impactplate-heavy-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.347,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactplate-heavy-004",
+          "name": "Impactplate heavy 004",
+          "file": "kenney/kenney-footsteps-impacts-impactplate-heavy-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.559,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactplate-light-000",
+          "name": "Impactplate light 000",
+          "file": "kenney/kenney-footsteps-impacts-impactplate-light-000.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.542,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactplate-light-001",
+          "name": "Impactplate light 001",
+          "file": "kenney/kenney-footsteps-impacts-impactplate-light-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.655,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactplate-light-002",
+          "name": "Impactplate light 002",
+          "file": "kenney/kenney-footsteps-impacts-impactplate-light-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.489,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactplate-light-003",
+          "name": "Impactplate light 003",
+          "file": "kenney/kenney-footsteps-impacts-impactplate-light-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.528,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactplate-light-004",
+          "name": "Impactplate light 004",
+          "file": "kenney/kenney-footsteps-impacts-impactplate-light-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.657,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactplate-medium-000",
+          "name": "Impactplate medium 000",
+          "file": "kenney/kenney-footsteps-impacts-impactplate-medium-000.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.609,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactplate-medium-001",
+          "name": "Impactplate medium 001",
+          "file": "kenney/kenney-footsteps-impacts-impactplate-medium-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.616,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactplate-medium-002",
+          "name": "Impactplate medium 002",
+          "file": "kenney/kenney-footsteps-impacts-impactplate-medium-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.515,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactplate-medium-003",
+          "name": "Impactplate medium 003",
+          "file": "kenney/kenney-footsteps-impacts-impactplate-medium-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.654,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactplate-medium-004",
+          "name": "Impactplate medium 004",
+          "file": "kenney/kenney-footsteps-impacts-impactplate-medium-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.534,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactpunch-heavy-000",
+          "name": "Impactpunch heavy 000",
+          "file": "kenney/kenney-footsteps-impacts-impactpunch-heavy-000.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.649,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactpunch-heavy-001",
+          "name": "Impactpunch heavy 001",
+          "file": "kenney/kenney-footsteps-impacts-impactpunch-heavy-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.536,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactpunch-heavy-002",
+          "name": "Impactpunch heavy 002",
+          "file": "kenney/kenney-footsteps-impacts-impactpunch-heavy-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.457,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactpunch-heavy-003",
+          "name": "Impactpunch heavy 003",
+          "file": "kenney/kenney-footsteps-impacts-impactpunch-heavy-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.474,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactpunch-heavy-004",
+          "name": "Impactpunch heavy 004",
+          "file": "kenney/kenney-footsteps-impacts-impactpunch-heavy-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.536,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactpunch-medium-000",
+          "name": "Impactpunch medium 000",
+          "file": "kenney/kenney-footsteps-impacts-impactpunch-medium-000.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.431,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactpunch-medium-001",
+          "name": "Impactpunch medium 001",
+          "file": "kenney/kenney-footsteps-impacts-impactpunch-medium-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.405,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactpunch-medium-002",
+          "name": "Impactpunch medium 002",
+          "file": "kenney/kenney-footsteps-impacts-impactpunch-medium-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.541,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactpunch-medium-003",
+          "name": "Impactpunch medium 003",
+          "file": "kenney/kenney-footsteps-impacts-impactpunch-medium-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.455,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactpunch-medium-004",
+          "name": "Impactpunch medium 004",
+          "file": "kenney/kenney-footsteps-impacts-impactpunch-medium-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.543,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactsoft-heavy-000",
+          "name": "Impactsoft heavy 000",
+          "file": "kenney/kenney-footsteps-impacts-impactsoft-heavy-000.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.505,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactsoft-heavy-001",
+          "name": "Impactsoft heavy 001",
+          "file": "kenney/kenney-footsteps-impacts-impactsoft-heavy-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.572,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactsoft-heavy-002",
+          "name": "Impactsoft heavy 002",
+          "file": "kenney/kenney-footsteps-impacts-impactsoft-heavy-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.572,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactsoft-heavy-003",
+          "name": "Impactsoft heavy 003",
+          "file": "kenney/kenney-footsteps-impacts-impactsoft-heavy-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.544,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactsoft-heavy-004",
+          "name": "Impactsoft heavy 004",
+          "file": "kenney/kenney-footsteps-impacts-impactsoft-heavy-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.501,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactsoft-medium-000",
+          "name": "Impactsoft medium 000",
+          "file": "kenney/kenney-footsteps-impacts-impactsoft-medium-000.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.118,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactsoft-medium-001",
+          "name": "Impactsoft medium 001",
+          "file": "kenney/kenney-footsteps-impacts-impactsoft-medium-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.183,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactsoft-medium-002",
+          "name": "Impactsoft medium 002",
+          "file": "kenney/kenney-footsteps-impacts-impactsoft-medium-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.135,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactsoft-medium-003",
+          "name": "Impactsoft medium 003",
+          "file": "kenney/kenney-footsteps-impacts-impactsoft-medium-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.14,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactsoft-medium-004",
+          "name": "Impactsoft medium 004",
+          "file": "kenney/kenney-footsteps-impacts-impactsoft-medium-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.147,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impacttin-medium-000",
+          "name": "Impacttin medium 000",
+          "file": "kenney/kenney-footsteps-impacts-impacttin-medium-000.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.159,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impacttin-medium-001",
+          "name": "Impacttin medium 001",
+          "file": "kenney/kenney-footsteps-impacts-impacttin-medium-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.174,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impacttin-medium-002",
+          "name": "Impacttin medium 002",
+          "file": "kenney/kenney-footsteps-impacts-impacttin-medium-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.134,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impacttin-medium-003",
+          "name": "Impacttin medium 003",
+          "file": "kenney/kenney-footsteps-impacts-impacttin-medium-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.215,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impacttin-medium-004",
+          "name": "Impacttin medium 004",
+          "file": "kenney/kenney-footsteps-impacts-impacttin-medium-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.179,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactwood-heavy-000",
+          "name": "Impactwood heavy 000",
+          "file": "kenney/kenney-footsteps-impacts-impactwood-heavy-000.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.313,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactwood-heavy-001",
+          "name": "Impactwood heavy 001",
+          "file": "kenney/kenney-footsteps-impacts-impactwood-heavy-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.313,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactwood-heavy-002",
+          "name": "Impactwood heavy 002",
+          "file": "kenney/kenney-footsteps-impacts-impactwood-heavy-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.313,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactwood-heavy-003",
+          "name": "Impactwood heavy 003",
+          "file": "kenney/kenney-footsteps-impacts-impactwood-heavy-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.313,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactwood-heavy-004",
+          "name": "Impactwood heavy 004",
+          "file": "kenney/kenney-footsteps-impacts-impactwood-heavy-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.313,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactwood-light-000",
+          "name": "Impactwood light 000",
+          "file": "kenney/kenney-footsteps-impacts-impactwood-light-000.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.266,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactwood-light-001",
+          "name": "Impactwood light 001",
+          "file": "kenney/kenney-footsteps-impacts-impactwood-light-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.266,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactwood-light-002",
+          "name": "Impactwood light 002",
+          "file": "kenney/kenney-footsteps-impacts-impactwood-light-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.266,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactwood-light-003",
+          "name": "Impactwood light 003",
+          "file": "kenney/kenney-footsteps-impacts-impactwood-light-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.266,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactwood-light-004",
+          "name": "Impactwood light 004",
+          "file": "kenney/kenney-footsteps-impacts-impactwood-light-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.266,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactwood-medium-000",
+          "name": "Impactwood medium 000",
+          "file": "kenney/kenney-footsteps-impacts-impactwood-medium-000.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.333,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactwood-medium-001",
+          "name": "Impactwood medium 001",
+          "file": "kenney/kenney-footsteps-impacts-impactwood-medium-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.333,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactwood-medium-002",
+          "name": "Impactwood medium 002",
+          "file": "kenney/kenney-footsteps-impacts-impactwood-medium-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.333,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactwood-medium-003",
+          "name": "Impactwood medium 003",
+          "file": "kenney/kenney-footsteps-impacts-impactwood-medium-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.333,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-footsteps-impacts-impactwood-medium-004",
+          "name": "Impactwood medium 004",
+          "file": "kenney/kenney-footsteps-impacts-impactwood-medium-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.333,
+          "librarySource": "kenney-cc0"
+        }
+      ]
+    },
+    {
+      "id": "interface",
+      "label": "Interface & UI (Kenney CC0)",
+      "sounds": [
+        {
+          "id": "kenney-interface-back-001",
+          "name": "Back 001",
+          "file": "kenney/kenney-interface-back-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.064,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-back-002",
+          "name": "Back 002",
+          "file": "kenney/kenney-interface-back-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.07,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-back-003",
+          "name": "Back 003",
+          "file": "kenney/kenney-interface-back-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.093,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-back-004",
+          "name": "Back 004",
+          "file": "kenney/kenney-interface-back-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.073,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-bong-001",
+          "name": "Bong 001",
+          "file": "kenney/kenney-interface-bong-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.123,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-click-001",
+          "name": "Click 001",
+          "file": "kenney/kenney-interface-click-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.1,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-click-002",
+          "name": "Click 002",
+          "file": "kenney/kenney-interface-click-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.01,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-click-003",
+          "name": "Click 003",
+          "file": "kenney/kenney-interface-click-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.01,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-click-004",
+          "name": "Click 004",
+          "file": "kenney/kenney-interface-click-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.01,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-click-005",
+          "name": "Click 005",
+          "file": "kenney/kenney-interface-click-005.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.01,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-close-001",
+          "name": "Close 001",
+          "file": "kenney/kenney-interface-close-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.148,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-close-002",
+          "name": "Close 002",
+          "file": "kenney/kenney-interface-close-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.314,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-close-003",
+          "name": "Close 003",
+          "file": "kenney/kenney-interface-close-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.314,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-close-004",
+          "name": "Close 004",
+          "file": "kenney/kenney-interface-close-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.323,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-confirmation-001",
+          "name": "Confirmation 001",
+          "file": "kenney/kenney-interface-confirmation-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.29,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-confirmation-002",
+          "name": "Confirmation 002",
+          "file": "kenney/kenney-interface-confirmation-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.539,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-confirmation-003",
+          "name": "Confirmation 003",
+          "file": "kenney/kenney-interface-confirmation-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.322,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-confirmation-004",
+          "name": "Confirmation 004",
+          "file": "kenney/kenney-interface-confirmation-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.49,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-drop-001",
+          "name": "Drop 001",
+          "file": "kenney/kenney-interface-drop-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.11,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-drop-002",
+          "name": "Drop 002",
+          "file": "kenney/kenney-interface-drop-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.191,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-drop-003",
+          "name": "Drop 003",
+          "file": "kenney/kenney-interface-drop-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.191,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-drop-004",
+          "name": "Drop 004",
+          "file": "kenney/kenney-interface-drop-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.287,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-error-001",
+          "name": "Error 001",
+          "file": "kenney/kenney-interface-error-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.165,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-error-002",
+          "name": "Error 002",
+          "file": "kenney/kenney-interface-error-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.165,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-error-003",
+          "name": "Error 003",
+          "file": "kenney/kenney-interface-error-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.533,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-error-004",
+          "name": "Error 004",
+          "file": "kenney/kenney-interface-error-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.103,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-error-005",
+          "name": "Error 005",
+          "file": "kenney/kenney-interface-error-005.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.5,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-error-006",
+          "name": "Error 006",
+          "file": "kenney/kenney-interface-error-006.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.5,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-error-007",
+          "name": "Error 007",
+          "file": "kenney/kenney-interface-error-007.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.192,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-error-008",
+          "name": "Error 008",
+          "file": "kenney/kenney-interface-error-008.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.139,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-glass-001",
+          "name": "Glass 001",
+          "file": "kenney/kenney-interface-glass-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.278,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-glass-002",
+          "name": "Glass 002",
+          "file": "kenney/kenney-interface-glass-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.125,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-glass-003",
+          "name": "Glass 003",
+          "file": "kenney/kenney-interface-glass-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.124,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-glass-004",
+          "name": "Glass 004",
+          "file": "kenney/kenney-interface-glass-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.692,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-glass-005",
+          "name": "Glass 005",
+          "file": "kenney/kenney-interface-glass-005.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.111,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-glass-006",
+          "name": "Glass 006",
+          "file": "kenney/kenney-interface-glass-006.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.111,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-glitch-001",
+          "name": "Glitch 001",
+          "file": "kenney/kenney-interface-glitch-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.02,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-glitch-002",
+          "name": "Glitch 002",
+          "file": "kenney/kenney-interface-glitch-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.03,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-glitch-003",
+          "name": "Glitch 003",
+          "file": "kenney/kenney-interface-glitch-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.01,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-glitch-004",
+          "name": "Glitch 004",
+          "file": "kenney/kenney-interface-glitch-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.023,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-maximize-001",
+          "name": "Maximize 001",
+          "file": "kenney/kenney-interface-maximize-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.258,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-maximize-002",
+          "name": "Maximize 002",
+          "file": "kenney/kenney-interface-maximize-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.258,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-maximize-003",
+          "name": "Maximize 003",
+          "file": "kenney/kenney-interface-maximize-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.212,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-maximize-004",
+          "name": "Maximize 004",
+          "file": "kenney/kenney-interface-maximize-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.418,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-maximize-005",
+          "name": "Maximize 005",
+          "file": "kenney/kenney-interface-maximize-005.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.526,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-maximize-006",
+          "name": "Maximize 006",
+          "file": "kenney/kenney-interface-maximize-006.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.38,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-maximize-007",
+          "name": "Maximize 007",
+          "file": "kenney/kenney-interface-maximize-007.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.186,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-maximize-008",
+          "name": "Maximize 008",
+          "file": "kenney/kenney-interface-maximize-008.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.225,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-maximize-009",
+          "name": "Maximize 009",
+          "file": "kenney/kenney-interface-maximize-009.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.225,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-minimize-001",
+          "name": "Minimize 001",
+          "file": "kenney/kenney-interface-minimize-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.258,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-minimize-002",
+          "name": "Minimize 002",
+          "file": "kenney/kenney-interface-minimize-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.258,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-minimize-003",
+          "name": "Minimize 003",
+          "file": "kenney/kenney-interface-minimize-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.212,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-minimize-004",
+          "name": "Minimize 004",
+          "file": "kenney/kenney-interface-minimize-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.418,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-minimize-005",
+          "name": "Minimize 005",
+          "file": "kenney/kenney-interface-minimize-005.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.526,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-minimize-006",
+          "name": "Minimize 006",
+          "file": "kenney/kenney-interface-minimize-006.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.38,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-minimize-007",
+          "name": "Minimize 007",
+          "file": "kenney/kenney-interface-minimize-007.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.186,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-minimize-008",
+          "name": "Minimize 008",
+          "file": "kenney/kenney-interface-minimize-008.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.225,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-minimize-009",
+          "name": "Minimize 009",
+          "file": "kenney/kenney-interface-minimize-009.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.225,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-open-001",
+          "name": "Open 001",
+          "file": "kenney/kenney-interface-open-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.148,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-open-002",
+          "name": "Open 002",
+          "file": "kenney/kenney-interface-open-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.314,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-open-003",
+          "name": "Open 003",
+          "file": "kenney/kenney-interface-open-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.314,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-open-004",
+          "name": "Open 004",
+          "file": "kenney/kenney-interface-open-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.323,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-pluck-001",
+          "name": "Pluck 001",
+          "file": "kenney/kenney-interface-pluck-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.102,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-pluck-002",
+          "name": "Pluck 002",
+          "file": "kenney/kenney-interface-pluck-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.165,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-question-001",
+          "name": "Question 001",
+          "file": "kenney/kenney-interface-question-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.491,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-question-002",
+          "name": "Question 002",
+          "file": "kenney/kenney-interface-question-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.333,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-question-003",
+          "name": "Question 003",
+          "file": "kenney/kenney-interface-question-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.332,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-question-004",
+          "name": "Question 004",
+          "file": "kenney/kenney-interface-question-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.332,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-scratch-001",
+          "name": "Scratch 001",
+          "file": "kenney/kenney-interface-scratch-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.139,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-scratch-002",
+          "name": "Scratch 002",
+          "file": "kenney/kenney-interface-scratch-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.139,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-scratch-003",
+          "name": "Scratch 003",
+          "file": "kenney/kenney-interface-scratch-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.123,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-scratch-004",
+          "name": "Scratch 004",
+          "file": "kenney/kenney-interface-scratch-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.325,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-scratch-005",
+          "name": "Scratch 005",
+          "file": "kenney/kenney-interface-scratch-005.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.325,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-scroll-001",
+          "name": "Scroll 001",
+          "file": "kenney/kenney-interface-scroll-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 1,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-scroll-002",
+          "name": "Scroll 002",
+          "file": "kenney/kenney-interface-scroll-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 1,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-scroll-003",
+          "name": "Scroll 003",
+          "file": "kenney/kenney-interface-scroll-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 1,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-scroll-004",
+          "name": "Scroll 004",
+          "file": "kenney/kenney-interface-scroll-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 1,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-scroll-005",
+          "name": "Scroll 005",
+          "file": "kenney/kenney-interface-scroll-005.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 1,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-select-001",
+          "name": "Select 001",
+          "file": "kenney/kenney-interface-select-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.043,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-select-002",
+          "name": "Select 002",
+          "file": "kenney/kenney-interface-select-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.043,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-select-003",
+          "name": "Select 003",
+          "file": "kenney/kenney-interface-select-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.383,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-select-004",
+          "name": "Select 004",
+          "file": "kenney/kenney-interface-select-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.383,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-select-005",
+          "name": "Select 005",
+          "file": "kenney/kenney-interface-select-005.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.383,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-select-006",
+          "name": "Select 006",
+          "file": "kenney/kenney-interface-select-006.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 1.944,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-select-007",
+          "name": "Select 007",
+          "file": "kenney/kenney-interface-select-007.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.047,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-select-008",
+          "name": "Select 008",
+          "file": "kenney/kenney-interface-select-008.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.047,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-switch-001",
+          "name": "Switch 001",
+          "file": "kenney/kenney-interface-switch-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.618,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-switch-002",
+          "name": "Switch 002",
+          "file": "kenney/kenney-interface-switch-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.611,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-switch-003",
+          "name": "Switch 003",
+          "file": "kenney/kenney-interface-switch-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.5,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-switch-004",
+          "name": "Switch 004",
+          "file": "kenney/kenney-interface-switch-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.5,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-switch-005",
+          "name": "Switch 005",
+          "file": "kenney/kenney-interface-switch-005.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.612,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-switch-006",
+          "name": "Switch 006",
+          "file": "kenney/kenney-interface-switch-006.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.611,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-switch-007",
+          "name": "Switch 007",
+          "file": "kenney/kenney-interface-switch-007.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.614,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-tick-001",
+          "name": "Tick 001",
+          "file": "kenney/kenney-interface-tick-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.023,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-tick-002",
+          "name": "Tick 002",
+          "file": "kenney/kenney-interface-tick-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.023,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-tick-004",
+          "name": "Tick 004",
+          "file": "kenney/kenney-interface-tick-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.055,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-toggle-001",
+          "name": "Toggle 001",
+          "file": "kenney/kenney-interface-toggle-001.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.139,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-toggle-002",
+          "name": "Toggle 002",
+          "file": "kenney/kenney-interface-toggle-002.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.139,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-toggle-003",
+          "name": "Toggle 003",
+          "file": "kenney/kenney-interface-toggle-003.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.139,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-interface-toggle-004",
+          "name": "Toggle 004",
+          "file": "kenney/kenney-interface-toggle-004.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.066,
+          "librarySource": "kenney-cc0"
+        }
+      ]
+    },
+    {
+      "id": "digital",
+      "label": "Digital & retro (Kenney CC0)",
+      "sounds": [
+        {
+          "id": "kenney-digital-highdown",
+          "name": "Highdown",
+          "file": "kenney/kenney-digital-highdown.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.522,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-highup",
+          "name": "Highup",
+          "file": "kenney/kenney-digital-highup.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.549,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-laser1",
+          "name": "Laser1",
+          "file": "kenney/kenney-digital-laser1.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 1.1,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-laser2",
+          "name": "Laser2",
+          "file": "kenney/kenney-digital-laser2.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 1.091,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-laser3",
+          "name": "Laser3",
+          "file": "kenney/kenney-digital-laser3.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.984,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-laser4",
+          "name": "Laser4",
+          "file": "kenney/kenney-digital-laser4.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 1.132,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-laser5",
+          "name": "Laser5",
+          "file": "kenney/kenney-digital-laser5.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 1.014,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-laser6",
+          "name": "Laser6",
+          "file": "kenney/kenney-digital-laser6.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.971,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-laser7",
+          "name": "Laser7",
+          "file": "kenney/kenney-digital-laser7.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.933,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-laser8",
+          "name": "Laser8",
+          "file": "kenney/kenney-digital-laser8.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.987,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-laser9",
+          "name": "Laser9",
+          "file": "kenney/kenney-digital-laser9.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 1.009,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-lowdown",
+          "name": "Lowdown",
+          "file": "kenney/kenney-digital-lowdown.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.784,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-lowrandom",
+          "name": "Lowrandom",
+          "file": "kenney/kenney-digital-lowrandom.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.549,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-lowthreetone",
+          "name": "Lowthreetone",
+          "file": "kenney/kenney-digital-lowthreetone.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 1.019,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-pepsound1",
+          "name": "Pepsound1",
+          "file": "kenney/kenney-digital-pepsound1.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.522,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-pepsound2",
+          "name": "Pepsound2",
+          "file": "kenney/kenney-digital-pepsound2.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.549,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-pepsound3",
+          "name": "Pepsound3",
+          "file": "kenney/kenney-digital-pepsound3.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.444,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-pepsound4",
+          "name": "Pepsound4",
+          "file": "kenney/kenney-digital-pepsound4.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.627,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-pepsound5",
+          "name": "Pepsound5",
+          "file": "kenney/kenney-digital-pepsound5.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.627,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-phasejump1",
+          "name": "Phasejump1",
+          "file": "kenney/kenney-digital-phasejump1.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.47,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-phasejump2",
+          "name": "Phasejump2",
+          "file": "kenney/kenney-digital-phasejump2.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.392,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-phasejump3",
+          "name": "Phasejump3",
+          "file": "kenney/kenney-digital-phasejump3.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.444,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-phasejump4",
+          "name": "Phasejump4",
+          "file": "kenney/kenney-digital-phasejump4.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.47,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-phasejump5",
+          "name": "Phasejump5",
+          "file": "kenney/kenney-digital-phasejump5.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.418,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-phaserdown1",
+          "name": "Phaserdown1",
+          "file": "kenney/kenney-digital-phaserdown1.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.47,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-phaserdown2",
+          "name": "Phaserdown2",
+          "file": "kenney/kenney-digital-phaserdown2.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.313,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-phaserdown3",
+          "name": "Phaserdown3",
+          "file": "kenney/kenney-digital-phaserdown3.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.496,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-phaserup1",
+          "name": "Phaserup1",
+          "file": "kenney/kenney-digital-phaserup1.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.496,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-phaserup2",
+          "name": "Phaserup2",
+          "file": "kenney/kenney-digital-phaserup2.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.418,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-phaserup3",
+          "name": "Phaserup3",
+          "file": "kenney/kenney-digital-phaserup3.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.522,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-phaserup4",
+          "name": "Phaserup4",
+          "file": "kenney/kenney-digital-phaserup4.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.366,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-phaserup5",
+          "name": "Phaserup5",
+          "file": "kenney/kenney-digital-phaserup5.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.313,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-phaserup6",
+          "name": "Phaserup6",
+          "file": "kenney/kenney-digital-phaserup6.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.34,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-phaserup7",
+          "name": "Phaserup7",
+          "file": "kenney/kenney-digital-phaserup7.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.366,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-powerup1",
+          "name": "Powerup1",
+          "file": "kenney/kenney-digital-powerup1.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 1.202,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-powerup10",
+          "name": "Powerup10",
+          "file": "kenney/kenney-digital-powerup10.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.653,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-powerup11",
+          "name": "Powerup11",
+          "file": "kenney/kenney-digital-powerup11.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.679,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-powerup12",
+          "name": "Powerup12",
+          "file": "kenney/kenney-digital-powerup12.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.862,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-powerup2",
+          "name": "Powerup2",
+          "file": "kenney/kenney-digital-powerup2.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.47,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-powerup3",
+          "name": "Powerup3",
+          "file": "kenney/kenney-digital-powerup3.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 1.149,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-powerup4",
+          "name": "Powerup4",
+          "file": "kenney/kenney-digital-powerup4.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.549,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-powerup5",
+          "name": "Powerup5",
+          "file": "kenney/kenney-digital-powerup5.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.444,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-powerup6",
+          "name": "Powerup6",
+          "file": "kenney/kenney-digital-powerup6.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.444,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-powerup7",
+          "name": "Powerup7",
+          "file": "kenney/kenney-digital-powerup7.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.522,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-powerup8",
+          "name": "Powerup8",
+          "file": "kenney/kenney-digital-powerup8.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.575,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-powerup9",
+          "name": "Powerup9",
+          "file": "kenney/kenney-digital-powerup9.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.549,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-spacetrash1",
+          "name": "Spacetrash1",
+          "file": "kenney/kenney-digital-spacetrash1.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 1.451,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-spacetrash2",
+          "name": "Spacetrash2",
+          "file": "kenney/kenney-digital-spacetrash2.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 1.475,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-spacetrash3",
+          "name": "Spacetrash3",
+          "file": "kenney/kenney-digital-spacetrash3.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 1.535,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-spacetrash4",
+          "name": "Spacetrash4",
+          "file": "kenney/kenney-digital-spacetrash4.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 1.477,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-spacetrash5",
+          "name": "Spacetrash5",
+          "file": "kenney/kenney-digital-spacetrash5.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 1.426,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-threetone1",
+          "name": "Threetone1",
+          "file": "kenney/kenney-digital-threetone1.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.827,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-threetone2",
+          "name": "Threetone2",
+          "file": "kenney/kenney-digital-threetone2.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.866,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-tone1",
+          "name": "Tone1",
+          "file": "kenney/kenney-digital-tone1.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.661,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-twotone1",
+          "name": "Twotone1",
+          "file": "kenney/kenney-digital-twotone1.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.724,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-twotone2",
+          "name": "Twotone2",
+          "file": "kenney/kenney-digital-twotone2.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.731,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-zap1",
+          "name": "Zap1",
+          "file": "kenney/kenney-digital-zap1.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 1.019,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-zap2",
+          "name": "Zap2",
+          "file": "kenney/kenney-digital-zap2.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 1.228,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-zapthreetonedown",
+          "name": "Zapthreetonedown",
+          "file": "kenney/kenney-digital-zapthreetonedown.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 1.332,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-zapthreetoneup",
+          "name": "Zapthreetoneup",
+          "file": "kenney/kenney-digital-zapthreetoneup.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 1.202,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-zaptwotone",
+          "name": "Zaptwotone",
+          "file": "kenney/kenney-digital-zaptwotone.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 1.306,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-zaptwotone2",
+          "name": "Zaptwotone2",
+          "file": "kenney/kenney-digital-zaptwotone2.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 1.202,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-digital-preview",
+          "name": "Preview",
+          "file": "kenney/kenney-digital-preview.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 49.225,
+          "librarySource": "kenney-cc0"
+        }
+      ]
+    },
+    {
+      "id": "rpg",
+      "label": "RPG & fantasy (Kenney CC0)",
+      "sounds": [
+        {
+          "id": "kenney-rpg-belthandle1",
+          "name": "Belthandle1",
+          "file": "kenney/kenney-rpg-belthandle1.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.277,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-belthandle2",
+          "name": "Belthandle2",
+          "file": "kenney/kenney-rpg-belthandle2.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.477,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-bookclose",
+          "name": "Bookclose",
+          "file": "kenney/kenney-rpg-bookclose.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.231,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-bookflip1",
+          "name": "Bookflip1",
+          "file": "kenney/kenney-rpg-bookflip1.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.769,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-bookflip2",
+          "name": "Bookflip2",
+          "file": "kenney/kenney-rpg-bookflip2.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.43,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-bookflip3",
+          "name": "Bookflip3",
+          "file": "kenney/kenney-rpg-bookflip3.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.231,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-bookopen",
+          "name": "Bookopen",
+          "file": "kenney/kenney-rpg-bookopen.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.154,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-bookplace1",
+          "name": "Bookplace1",
+          "file": "kenney/kenney-rpg-bookplace1.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.277,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-bookplace2",
+          "name": "Bookplace2",
+          "file": "kenney/kenney-rpg-bookplace2.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.354,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-bookplace3",
+          "name": "Bookplace3",
+          "file": "kenney/kenney-rpg-bookplace3.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.261,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-chop",
+          "name": "Chop",
+          "file": "kenney/kenney-rpg-chop.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.24,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-cloth1",
+          "name": "Cloth1",
+          "file": "kenney/kenney-rpg-cloth1.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.661,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-cloth2",
+          "name": "Cloth2",
+          "file": "kenney/kenney-rpg-cloth2.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.415,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-cloth3",
+          "name": "Cloth3",
+          "file": "kenney/kenney-rpg-cloth3.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.477,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-cloth4",
+          "name": "Cloth4",
+          "file": "kenney/kenney-rpg-cloth4.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.384,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-clothbelt",
+          "name": "Clothbelt",
+          "file": "kenney/kenney-rpg-clothbelt.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.723,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-clothbelt2",
+          "name": "Clothbelt2",
+          "file": "kenney/kenney-rpg-clothbelt2.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.753,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-creak1",
+          "name": "Creak1",
+          "file": "kenney/kenney-rpg-creak1.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.661,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-creak2",
+          "name": "Creak2",
+          "file": "kenney/kenney-rpg-creak2.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.83,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-creak3",
+          "name": "Creak3",
+          "file": "kenney/kenney-rpg-creak3.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.338,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-doorclose-1",
+          "name": "Doorclose 1",
+          "file": "kenney/kenney-rpg-doorclose-1.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.675,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-doorclose-2",
+          "name": "Doorclose 2",
+          "file": "kenney/kenney-rpg-doorclose-2.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.612,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-doorclose-3",
+          "name": "Doorclose 3",
+          "file": "kenney/kenney-rpg-doorclose-3.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.714,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-doorclose-4",
+          "name": "Doorclose 4",
+          "file": "kenney/kenney-rpg-doorclose-4.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.603,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-dooropen-1",
+          "name": "Dooropen 1",
+          "file": "kenney/kenney-rpg-dooropen-1.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.919,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-dooropen-2",
+          "name": "Dooropen 2",
+          "file": "kenney/kenney-rpg-dooropen-2.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 1.413,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-drawknife1",
+          "name": "Drawknife1",
+          "file": "kenney/kenney-rpg-drawknife1.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.4,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-drawknife2",
+          "name": "Drawknife2",
+          "file": "kenney/kenney-rpg-drawknife2.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.446,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-drawknife3",
+          "name": "Drawknife3",
+          "file": "kenney/kenney-rpg-drawknife3.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.477,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-dropleather",
+          "name": "Dropleather",
+          "file": "kenney/kenney-rpg-dropleather.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.415,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-footstep00",
+          "name": "Footstep00",
+          "file": "kenney/kenney-rpg-footstep00.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.249,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-footstep01",
+          "name": "Footstep01",
+          "file": "kenney/kenney-rpg-footstep01.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.282,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-footstep02",
+          "name": "Footstep02",
+          "file": "kenney/kenney-rpg-footstep02.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.242,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-footstep03",
+          "name": "Footstep03",
+          "file": "kenney/kenney-rpg-footstep03.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.269,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-footstep04",
+          "name": "Footstep04",
+          "file": "kenney/kenney-rpg-footstep04.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.323,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-footstep05",
+          "name": "Footstep05",
+          "file": "kenney/kenney-rpg-footstep05.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.276,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-footstep06",
+          "name": "Footstep06",
+          "file": "kenney/kenney-rpg-footstep06.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.242,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-footstep07",
+          "name": "Footstep07",
+          "file": "kenney/kenney-rpg-footstep07.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.256,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-footstep08",
+          "name": "Footstep08",
+          "file": "kenney/kenney-rpg-footstep08.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.256,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-footstep09",
+          "name": "Footstep09",
+          "file": "kenney/kenney-rpg-footstep09.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.215,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-handlecoins",
+          "name": "Handlecoins",
+          "file": "kenney/kenney-rpg-handlecoins.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.846,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-handlecoins2",
+          "name": "Handlecoins2",
+          "file": "kenney/kenney-rpg-handlecoins2.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.338,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-handlesmallleather",
+          "name": "Handlesmallleather",
+          "file": "kenney/kenney-rpg-handlesmallleather.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.338,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-handlesmallleather2",
+          "name": "Handlesmallleather2",
+          "file": "kenney/kenney-rpg-handlesmallleather2.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.307,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-knifeslice",
+          "name": "Knifeslice",
+          "file": "kenney/kenney-rpg-knifeslice.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.6,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-knifeslice2",
+          "name": "Knifeslice2",
+          "file": "kenney/kenney-rpg-knifeslice2.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.569,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-metalclick",
+          "name": "Metalclick",
+          "file": "kenney/kenney-rpg-metalclick.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.446,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-metallatch",
+          "name": "Metallatch",
+          "file": "kenney/kenney-rpg-metallatch.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.261,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-metalpot1",
+          "name": "Metalpot1",
+          "file": "kenney/kenney-rpg-metalpot1.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 1.46,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-metalpot2",
+          "name": "Metalpot2",
+          "file": "kenney/kenney-rpg-metalpot2.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.938,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-metalpot3",
+          "name": "Metalpot3",
+          "file": "kenney/kenney-rpg-metalpot3.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 0.907,
+          "librarySource": "kenney-cc0"
+        },
+        {
+          "id": "kenney-rpg-preview",
+          "name": "Preview",
+          "file": "kenney/kenney-rpg-preview.ogg",
+          "license": "CC0 (Kenney)",
+          "duration": 26.127,
+          "librarySource": "kenney-cc0"
+        }
+      ]
+    }
+  ]
+}

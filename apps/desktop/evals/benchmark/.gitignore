@@ -1,0 +1,4 @@
+bench.db
+bench.db-wal
+bench.db-shm
+reports/

@@ -1,0 +1,7 @@
+# Synced from src/lib/motion-dsl/ — see scripts/sync-from-source.mjs
+src/
+# Build artifact
+dist/
+# Local
+*.tsbuildinfo
+node_modules/

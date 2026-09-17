@@ -1,0 +1,13 @@
+# App-specific ignores live in apps/desktop/.gitignore.
+node_modules
+dist
+*.tsbuildinfo
+*.log
+.DS_Store
+.env
+.env.*
+!.env.example
+
+# render-server runtime scratch
+packages/render-server/tmp/
+packages/render-server/.bin/

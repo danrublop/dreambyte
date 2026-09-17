@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+# A newer push to the same ref cancels the run it supersedes.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    # Green is ~11 minutes; a hung test should fail fast instead of hitting the 6h cap.
+    timeout-minutes: 25
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: apps/desktop/.nvmrc
+          cache: npm
+
+      # One install for the whole workspace (apps/desktop + packages/*), including
+      # the export stitcher's modules. CI never launches Electron, so skip the
+      # prebuilt binary download.
+      - run: npm ci
+        env:
+          ELECTRON_SKIP_BINARY_DOWNLOAD: '1'
+
+      # FFmpeg for the FFmpeg integration tests (they skip when no FFmpeg is found).
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends ffmpeg
+
+      # The caption burn-in integration test skips when FFmpeg lacks the libass
+      # `subtitles` filter. Ubuntu's ffmpeg links libass; fail here if that ever
+      # changes rather than letting the test skip silently.
+      - name: Check FFmpeg has the subtitles filter
+        run: ffmpeg -hide_banner -filters | grep -wq subtitles
+
+      - name: Lint
+        run: npm run lint -w apps/desktop
+
+      - name: Typecheck
+        run: npm run typecheck -w apps/desktop
+
+      - name: Test
+        run: npm run test:ci -w apps/desktop
+
+      - name: Build
+        working-directory: apps/desktop
+        run: npm run build:renderer && npm run build:electron && npm run build:player

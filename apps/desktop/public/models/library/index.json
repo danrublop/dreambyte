@@ -1,0 +1,268 @@
+{
+  "version": 1,
+  "description": "Curated CC0 3D model library for Dreambyte explainer videos",
+  "sources": [
+    { "name": "Kenney", "url": "https://kenney.nl", "license": "CC0" },
+    { "name": "Quaternius", "url": "https://quaternius.com", "license": "CC0" }
+  ],
+  "categories": {
+    "tech": "Technology devices, screens, keyboards",
+    "business": "Office furniture, finance, presentations",
+    "abstract": "Geometric shapes, icons, symbols",
+    "people": "Character models, figures",
+    "transport": "Vehicles",
+    "environment": "Buildings, nature, infrastructure"
+  },
+  "models": [
+    {
+      "id": "laptop",
+      "name": "Laptop",
+      "category": "tech",
+      "file": "tech/laptop.glb",
+      "tags": ["computer", "device", "screen", "work", "technology"],
+      "source": "Kenney",
+      "scale": 1.0,
+      "description": "Open laptop computer, low-poly style"
+    },
+    {
+      "id": "monitor",
+      "name": "Desktop Monitor",
+      "category": "tech",
+      "file": "tech/monitor.glb",
+      "tags": ["screen", "display", "computer", "desktop"],
+      "source": "Kenney",
+      "scale": 1.0,
+      "description": "Desktop computer screen"
+    },
+    {
+      "id": "tablet",
+      "name": "Tablet / Screen",
+      "category": "tech",
+      "file": "tech/tablet.glb",
+      "tags": ["screen", "display", "television", "modern", "flat"],
+      "source": "Kenney",
+      "scale": 1.0,
+      "description": "Modern flat screen / tablet"
+    },
+    {
+      "id": "keyboard",
+      "name": "Keyboard",
+      "category": "tech",
+      "file": "tech/keyboard.glb",
+      "tags": ["input", "typing", "computer", "device"],
+      "source": "Kenney",
+      "scale": 1.0,
+      "description": "Computer keyboard"
+    },
+    {
+      "id": "desk",
+      "name": "Office Desk",
+      "category": "business",
+      "file": "business/desk.glb",
+      "tags": ["furniture", "office", "work", "table", "workspace"],
+      "source": "Kenney",
+      "scale": 1.0,
+      "description": "Simple office desk"
+    },
+    {
+      "id": "office-chair",
+      "name": "Office Chair",
+      "category": "business",
+      "file": "business/office-chair.glb",
+      "tags": ["furniture", "seating", "office", "workspace"],
+      "source": "Kenney",
+      "scale": 1.0,
+      "description": "Desk chair"
+    },
+    {
+      "id": "whiteboard",
+      "name": "Whiteboard / Display",
+      "category": "business",
+      "file": "business/whiteboard.glb",
+      "tags": ["presentation", "meeting", "planning", "board", "display"],
+      "source": "Kenney",
+      "scale": 1.0,
+      "description": "Standing display / presentation board"
+    },
+    {
+      "id": "briefcase",
+      "name": "Briefcase / Box",
+      "category": "business",
+      "file": "business/briefcase.glb",
+      "tags": ["business", "professional", "package", "box", "delivery"],
+      "source": "Kenney",
+      "scale": 1.0,
+      "description": "Closed box / briefcase"
+    },
+    {
+      "id": "book",
+      "name": "Books",
+      "category": "business",
+      "file": "business/book.glb",
+      "tags": ["reading", "education", "knowledge", "learning", "library"],
+      "source": "Kenney",
+      "scale": 1.0,
+      "description": "Stack of books"
+    },
+    {
+      "id": "coin-stack",
+      "name": "Coin",
+      "category": "business",
+      "file": "business/coin-stack.glb",
+      "tags": ["money", "finance", "investment", "profit", "growth", "currency"],
+      "source": "Kenney",
+      "scale": 1.0,
+      "description": "Coin / token"
+    },
+    {
+      "id": "cube-platform",
+      "name": "Rounded Cube",
+      "category": "abstract",
+      "file": "abstract/cube-platform.glb",
+      "tags": ["platform", "stage", "base", "pedestal", "block", "cube"],
+      "source": "Kenney",
+      "scale": 1.0,
+      "description": "Rounded cube — use as platform, building block, or abstract element"
+    },
+    {
+      "id": "sphere",
+      "name": "Cylinder / Pillar",
+      "category": "abstract",
+      "file": "abstract/sphere.glb",
+      "tags": ["cylinder", "pillar", "column", "round", "pipe"],
+      "source": "Kenney",
+      "scale": 1.0,
+      "description": "Clean cylinder shape"
+    },
+    {
+      "id": "arrow-3d",
+      "name": "3D Arrow",
+      "category": "abstract",
+      "file": "abstract/arrow-3d.glb",
+      "tags": ["direction", "growth", "pointer", "flow", "up", "indicator"],
+      "source": "Kenney",
+      "scale": 1.0,
+      "description": "Directional arrow indicator"
+    },
+    {
+      "id": "gear",
+      "name": "Lever / Mechanism",
+      "category": "abstract",
+      "file": "abstract/gear.glb",
+      "tags": ["mechanism", "settings", "process", "engineering", "lever", "control"],
+      "source": "Kenney",
+      "scale": 1.0,
+      "description": "Mechanical lever / control"
+    },
+    {
+      "id": "chain-link",
+      "name": "Hexagonal Block",
+      "category": "abstract",
+      "file": "abstract/chain-link.glb",
+      "tags": ["hexagon", "block", "blockchain", "modular", "connection", "node"],
+      "source": "Kenney",
+      "scale": 1.0,
+      "description": "Hexagonal block — good for blockchain, modular, or network diagrams"
+    },
+    {
+      "id": "shield",
+      "name": "Shield",
+      "category": "abstract",
+      "file": "abstract/shield.glb",
+      "tags": ["security", "protection", "defense", "safety", "firewall"],
+      "source": "Kenney",
+      "scale": 1.0,
+      "description": "Defensive shield shape"
+    },
+    {
+      "id": "target",
+      "name": "Target / Bullseye",
+      "category": "abstract",
+      "file": "abstract/target.glb",
+      "tags": ["goal", "target", "aim", "objective", "focus", "kpi"],
+      "source": "Kenney",
+      "scale": 1.0,
+      "description": "Round target"
+    },
+    {
+      "id": "light-bulb",
+      "name": "Lamp",
+      "category": "abstract",
+      "file": "abstract/light-bulb.glb",
+      "tags": ["idea", "innovation", "creative", "light", "lamp", "insight"],
+      "source": "Kenney",
+      "scale": 1.0,
+      "description": "Table lamp — use for 'idea' or 'insight' metaphors"
+    },
+    {
+      "id": "person-standing",
+      "name": "Person / Figure",
+      "category": "people",
+      "file": "people/person-standing.glb",
+      "tags": ["human", "character", "user", "person", "figure", "player"],
+      "source": "Kenney",
+      "scale": 1.0,
+      "description": "Low-poly person figure in standing pose"
+    },
+    {
+      "id": "car",
+      "name": "Sedan Car",
+      "category": "transport",
+      "file": "transport/car.glb",
+      "tags": ["vehicle", "automobile", "driving", "transport", "commute"],
+      "source": "Kenney",
+      "scale": 1.0,
+      "description": "Low-poly sedan car"
+    },
+    {
+      "id": "delivery-truck",
+      "name": "Truck",
+      "category": "transport",
+      "file": "transport/delivery-truck.glb",
+      "tags": ["shipping", "logistics", "delivery", "ecommerce", "supply-chain", "truck"],
+      "source": "Kenney",
+      "scale": 1.0,
+      "description": "Delivery truck"
+    },
+    {
+      "id": "building-office",
+      "name": "Office Building",
+      "category": "environment",
+      "file": "environment/building-office.glb",
+      "tags": ["building", "office", "company", "corporate", "headquarters"],
+      "source": "Kenney",
+      "scale": 1.0,
+      "description": "Commercial office building"
+    },
+    {
+      "id": "building-skyscraper",
+      "name": "Skyscraper",
+      "category": "environment",
+      "file": "environment/building-skyscraper.glb",
+      "tags": ["building", "tower", "skyscraper", "corporate", "city", "tall"],
+      "source": "Kenney",
+      "scale": 1.0,
+      "description": "Tall skyscraper building"
+    },
+    {
+      "id": "building-house",
+      "name": "House",
+      "category": "environment",
+      "file": "environment/building-house.glb",
+      "tags": ["home", "residential", "house", "property", "building"],
+      "source": "Kenney",
+      "scale": 1.0,
+      "description": "Residential building"
+    },
+    {
+      "id": "tree",
+      "name": "Potted Plant",
+      "category": "environment",
+      "file": "environment/tree.glb",
+      "tags": ["nature", "green", "environment", "plant", "growth", "sustainability"],
+      "source": "Kenney",
+      "scale": 1.0,
+      "description": "Potted plant — use for nature, growth, or sustainability themes"
+    }
+  ]
+}

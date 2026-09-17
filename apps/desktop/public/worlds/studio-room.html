@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1920" />
+<title>Studio Room</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #1a1a2e; }
+  /* Fixed 1920×1080 stage scaled to fit iframe (matches meadow / void-space; avoids fighting Three.js setSize inline styles). */
+  #world-viewport {
+    width: 1920px;
+    height: 1080px;
+    transform-origin: top left;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  canvas { display: block; }
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.183.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.183.0/examples/jsm/",
+    "animejs": "https://cdn.jsdelivr.net/npm/animejs@4.5.0/dist/bundles/anime.esm.min.js"
+  }
+}
+</script>
+</head>
+<body>
+<div id="world-viewport"></div>
+<script>
+(function () {
+  var W = 1920, H = 1080
+  window.__worldStageW = W
+  window.__worldStageH = H
+  window.__fitWorldViewport = function fitToViewport() {
+    var el = document.getElementById('world-viewport')
+    if (!el) return
+    var s = Math.min(window.innerWidth / W, window.innerHeight / H)
+    el.style.transform = 'scale(' + s + ')'
+  }
+  window.addEventListener('resize', window.__fitWorldViewport)
+  document.addEventListener('DOMContentLoaded', window.__fitWorldViewport)
+  if (document.readyState !== 'loading') window.__fitWorldViewport()
+})()
+</script>
+<script type="module">
+import * as THREE from 'three'
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
+import * as anime from 'animejs'
+
+// ── Config ──────────────────────────────────────────────────────────────────
+const cfg = window.__worldConfig || {}
+const roomStyle = cfg.roomStyle || 'classroom'
+const objectsCfg = cfg.objects || []
+const panelsCfg = cfg.panels || []
+const avatarsCfg = cfg.avatars || []
+const cameraPathCfg = cfg.cameraPath || []
+
+// ── Room style presets ──────────────────────────────────────────────────────
+const ROOM_STYLES = {
+  classroom: {
+    wall: 0xe8e4df,
+    ambientIntensity: 0.55,
+    pointColor: 0xfff5e6,
+    pointIntensity: 1.2,
+  },
+  office: {
+    wall: 0xd4d8dc,
+    ambientIntensity: 0.5,
+    pointColor: 0xffffff,
+    pointIntensity: 1.0,
+  },
+  studio: {
+    wall: 0x2a2a3e,
+    ambientIntensity: 0.35,
+    pointColor: 0xffe8cc,
+    pointIntensity: 1.6,
+  },
+}
+const style = ROOM_STYLES[roomStyle] || ROOM_STYLES.classroom
+
+// ── WVC bridge setup ────────────────────────────────────────────────────────
+window.__sceneReady = new Promise(resolve => { window.__resolveReady = resolve })
+window.__sceneTime = 0
+
+// ── Renderer ────────────────────────────────────────────────────────────────
+const renderer = new THREE.WebGLRenderer({ antialias: true })
+renderer.setSize(1920, 1080)
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+renderer.toneMapping = THREE.ACESFilmicToneMapping
+renderer.toneMappingExposure = 1.0
+renderer.shadowMap.enabled = true
+renderer.shadowMap.type = THREE.PCFSoftShadowMap
+renderer.setClearColor(0x1a1a2e)
+const worldViewport = document.getElementById('world-viewport') || document.body
+worldViewport.appendChild(renderer.domElement)
+requestAnimationFrame(() => {
+  if (typeof window.__fitWorldViewport === 'function') window.__fitWorldViewport()
+})
+
+// ── Scene & Camera ──────────────────────────────────────────────────────────
+const scene = new THREE.Scene()
+scene.background = new THREE.Color(0x1a1a2e)
+
+const camera = new THREE.PerspectiveCamera(50, 1920 / 1080, 0.1, 100)
+camera.position.set(0, 1.6, 2.5)
+camera.lookAt(0, 1.4, -4)
+
+// ── Room dimensions ─────────────────────────────────────────────────────────
+const W = 10, D = 8, H = 3.5
+
+// ── Materials ───────────────────────────────────────────────────────────────
+const wallMat = new THREE.MeshLambertMaterial({ color: style.wall })
+const ceilingMat = new THREE.MeshLambertMaterial({ color: 0xe0e0e0 })
+
+// Procedural wood floor shader
+const woodMat = new THREE.ShaderMaterial({
+  lights: false,
+  uniforms: {
+    uTime: { value: 0 },
+  },
+  vertexShader: /* glsl */`
+    varying vec2 vUv;
+    varying vec3 vWorldPos;
+    void main() {
+      vUv = uv;
+      vWorldPos = (modelMatrix * vec4(position, 1.0)).xyz;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `,
+  fragmentShader: /* glsl */`
+    varying vec2 vUv;
+    varying vec3 vWorldPos;
+
+    // simplex-like hash
+    vec2 hash(vec2 p) {
+      p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));
+      return -1.0 + 2.0 * fract(sin(p) * 43758.5453123);
+    }
+
+    float noise(vec2 p) {
+      vec2 i = floor(p);
+      vec2 f = fract(p);
+      vec2 u = f * f * (3.0 - 2.0 * f);
+      return mix(
+        mix(dot(hash(i + vec2(0,0)), f - vec2(0,0)),
+            dot(hash(i + vec2(1,0)), f - vec2(1,0)), u.x),
+        mix(dot(hash(i + vec2(0,1)), f - vec2(0,1)),
+            dot(hash(i + vec2(1,1)), f - vec2(1,1)), u.x),
+        u.y
+      );
+    }
+
+    void main() {
+      vec2 wp = vWorldPos.xz;
+
+      // Plank pattern
+      float plankWidth = 0.3;
+      float plankLength = 2.0;
+      float row = floor(wp.y / plankWidth);
+      float offset = mod(row, 2.0) * plankLength * 0.5;
+      vec2 plankUV = vec2(wp.x + offset, wp.y);
+
+      // Wood grain — stretching along x
+      float grain = noise(vec2(wp.x * 1.5, wp.y * 12.0)) * 0.5 + 0.5;
+      float fineGrain = noise(vec2(wp.x * 4.0, wp.y * 30.0)) * 0.15;
+
+      // Ring pattern
+      float ring = sin((wp.x * 3.0 + noise(wp * 2.0) * 0.8) * 12.0) * 0.5 + 0.5;
+
+      // Plank edge darkening
+      float edgeY = abs(fract(wp.y / plankWidth) - 0.5) * 2.0;
+      float edgeX = abs(fract(plankUV.x / plankLength) - 0.5) * 2.0;
+      float edge = smoothstep(0.95, 1.0, edgeY) + smoothstep(0.98, 1.0, edgeX);
+
+      // Color mixing
+      vec3 darkWood = vec3(0.545, 0.412, 0.078);   // #8B6914
+      vec3 lightWood = vec3(0.627, 0.510, 0.290);   // #A0824A
+      vec3 col = mix(darkWood, lightWood, grain * 0.7 + ring * 0.3);
+      col += fineGrain;
+      col -= edge * 0.12;
+
+      // Subtle variation per plank
+      float plankId = row + floor(plankUV.x / plankLength);
+      float variation = fract(sin(plankId * 91.3458) * 43758.5453) * 0.1 - 0.05;
+      col += variation;
+
+      gl_FragColor = vec4(col, 1.0);
+    }
+  `,
+})
+
+// ── Build room geometry ─────────────────────────────────────────────────────
+function buildRoom() {
+  // Floor
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(W, D), woodMat)
+  floor.rotation.x = -Math.PI / 2
+  floor.position.set(0, 0, 0)
+  floor.receiveShadow = true
+  scene.add(floor)
+
+  // Ceiling
+  const ceiling = new THREE.Mesh(new THREE.PlaneGeometry(W, D), ceilingMat)
+  ceiling.rotation.x = Math.PI / 2
+  ceiling.position.set(0, H, 0)
+  scene.add(ceiling)
+
+  // Back wall (faces +Z)
+  const backWall = new THREE.Mesh(new THREE.PlaneGeometry(W, H), wallMat)
+  backWall.position.set(0, H / 2, -D / 2)
+  backWall.receiveShadow = true
+  scene.add(backWall)
+
+  // Front wall (faces -Z)
+  const frontWall = new THREE.Mesh(new THREE.PlaneGeometry(W, H), wallMat)
+  frontWall.rotation.y = Math.PI
+  frontWall.position.set(0, H / 2, D / 2)
+  scene.add(frontWall)
+
+  // Left wall (faces +X)
+  const leftWall = new THREE.Mesh(new THREE.PlaneGeometry(D, H), wallMat)
+  leftWall.rotation.y = Math.PI / 2
+  leftWall.position.set(-W / 2, H / 2, 0)
+  leftWall.receiveShadow = true
+  scene.add(leftWall)
+
+  // Right wall (faces -X)
+  const rightWall = new THREE.Mesh(new THREE.PlaneGeometry(D, H), wallMat)
+  rightWall.rotation.y = -Math.PI / 2
+  rightWall.position.set(W / 2, H / 2, 0)
+  rightWall.receiveShadow = true
+  scene.add(rightWall)
+
+  // Whiteboard on back wall
+  const wbGeo = new THREE.PlaneGeometry(4, 2.4)
+  const wbMat = new THREE.MeshLambertMaterial({ color: 0xffffff })
+  const whiteboard = new THREE.Mesh(wbGeo, wbMat)
+  whiteboard.position.set(0, 1.5, -D / 2 + 0.05)
+  scene.add(whiteboard)
+
+  // Thin dark border for whiteboard
+  const borderMat = new THREE.MeshLambertMaterial({ color: 0x444444 })
+  const bw = 4.1, bh = 2.5, bt = 0.05
+  const border = new THREE.Mesh(new THREE.PlaneGeometry(bw, bh), borderMat)
+  border.position.set(0, 1.5, -D / 2 + 0.04)
+  scene.add(border)
+}
+
+// ── Lighting ────────────────────────────────────────────────────────────────
+function setupLighting() {
+  const ambient = new THREE.AmbientLight(0xffffff, style.ambientIntensity)
+  scene.add(ambient)
+
+  const p1 = new THREE.PointLight(style.pointColor, style.pointIntensity, 20)
+  p1.position.set(-2, 3, 0)
+  p1.castShadow = true
+  p1.shadow.mapSize.set(1024, 1024)
+  p1.shadow.radius = 4
+  scene.add(p1)
+
+  const p2 = new THREE.PointLight(style.pointColor, style.pointIntensity * 0.8, 20)
+  p2.position.set(2, 3, -2)
+  p2.castShadow = true
+  p2.shadow.mapSize.set(1024, 1024)
+  p2.shadow.radius = 4
+  scene.add(p2)
+}
+
+// ── Asset loading ───────────────────────────────────────────────────────────
+const gltfLoader = new GLTFLoader()
+const mixers = []
+const loadedObjects = {}
+const loadedAvatars = {}
+let assetIndex = null
+
+async function fetchAssetIndex() {
+  try {
+    const res = await fetch('/models/library/index.json')
+    if (res.ok) {
+      const data = await res.json()
+      assetIndex = Array.isArray(data.models) ? data.models : []
+    }
+  } catch { /* index not available */ }
+}
+
+function setObjectPosition(model, position) {
+  const pos = position ?? [0, 0, 0]
+  if (Array.isArray(pos)) model.position.set(pos[0] ?? 0, pos[1] ?? 0, pos[2] ?? 0)
+  else model.position.set(pos.x ?? 0, pos.y ?? 0, pos.z ?? 0)
+}
+
+function setObjectRotationRad(model, rotation) {
+  const rot = rotation ?? [0, 0, 0]
+  if (Array.isArray(rot)) model.rotation.set(rot[0] ?? 0, rot[1] ?? 0, rot[2] ?? 0)
+  else model.rotation.set(rot.x ?? 0, rot.y ?? 0, rot.z ?? 0)
+}
+
+function addPlaceholderStudio(assetId, position, rotation, scale) {
+  const g = new THREE.BoxGeometry(0.7, 0.7, 0.7)
+  const m = new THREE.MeshLambertMaterial({ color: 0x6a7a9a })
+  const mesh = new THREE.Mesh(g, m)
+  mesh.name = `placeholder:${assetId}`
+  setObjectPosition(mesh, position)
+  setObjectRotationRad(mesh, rotation)
+  mesh.scale.setScalar(typeof scale === 'number' ? scale : 1)
+  mesh.traverse(c => {
+    if (c.isMesh) { c.castShadow = true; c.receiveShadow = true }
+  })
+  scene.add(mesh)
+  loadedObjects[assetId] = mesh
+  return mesh
+}
+
+async function loadAsset(assetId, position = [0, 0, 0], rotation = [0, 0, 0], scale = 1, animations = []) {
+  if (!assetIndex || !assetIndex.length) return null
+
+  const entry = assetIndex.find(m => m.id === assetId)
+  if (!entry) { console.warn(`Asset not found: ${assetId}`); return null }
+
+  const path = `/models/library/${entry.file || assetId + '.glb'}`
+  return new Promise((resolve) => {
+    gltfLoader.load(path, (gltf) => {
+      const model = gltf.scene
+      setObjectPosition(model, position)
+      setObjectRotationRad(model, rotation)
+      model.scale.setScalar(scale)
+      model.traverse(c => {
+        if (c.isMesh) {
+          c.castShadow = true
+          c.receiveShadow = true
+        }
+      })
+      scene.add(model)
+
+      // Animation support
+      if (gltf.animations && gltf.animations.length > 0) {
+        const mixer = new THREE.AnimationMixer(model)
+        mixers.push(mixer)
+        const names = animations.length ? animations : gltf.animations.map(a => a.name)
+        for (const name of names) {
+          const clip = gltf.animations.find(a => a.name === name)
+          if (clip) mixer.clipAction(clip).play()
+        }
+      }
+
+      loadedObjects[assetId] = model
+      resolve(model)
+    }, undefined, (err) => {
+      console.warn(`Failed to load asset ${assetId}:`, err)
+      resolve(addPlaceholderStudio(assetId, position, rotation, scale))
+    })
+  })
+}
+
+// ── Panels (HTML → Canvas texture) ──────────────────────────────────────────
+const panels = []
+
+function addPanel(html, position, rotation, widthM = 3.6, heightM = 2.2) {
+  // Default to whiteboard position
+  const pos = position || [0, 1.5, -3.9]
+  const rot = rotation || [0, 0, 0]
+
+  const pxW = Math.round(widthM * 512)
+  const pxH = Math.round(heightM * 512)
+
+  const canvas = document.createElement('canvas')
+  canvas.width = pxW
+  canvas.height = pxH
+  const ctx = canvas.getContext('2d')
+
+  // Render HTML via SVG foreignObject
+  const svgStr = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="${pxW}" height="${pxH}">
+      <foreignObject width="100%" height="100%">
+        <div xmlns="http://www.w3.org/1999/xhtml"
+             style="width:${pxW}px;height:${pxH}px;background:#fff;overflow:hidden;font-family:sans-serif;padding:24px;box-sizing:border-box;">
+          ${html}
+        </div>
+      </foreignObject>
+    </svg>
+  `
+  const img = new Image()
+  const blob = new Blob([svgStr], { type: 'image/svg+xml;charset=utf-8' })
+  const url = URL.createObjectURL(blob)
+
+  const texture = new THREE.CanvasTexture(canvas)
+  texture.colorSpace = THREE.SRGBColorSpace
+
+  const geo = new THREE.PlaneGeometry(widthM, heightM)
+  const mat = new THREE.MeshLambertMaterial({ map: texture, transparent: true })
+  const mesh = new THREE.Mesh(geo, mat)
+  mesh.position.set(...pos)
+  mesh.rotation.set(...rot)
+  scene.add(mesh)
+
+  img.onload = () => {
+    ctx.drawImage(img, 0, 0)
+    texture.needsUpdate = true
+    URL.revokeObjectURL(url)
+  }
+  img.src = url
+
+  const panelObj = { mesh, canvas, ctx, texture, update: updatePanel }
+  panels.push(panelObj)
+  return panelObj
+
+  function updatePanel(newHtml) {
+    const newSvg = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="${pxW}" height="${pxH}">
+        <foreignObject width="100%" height="100%">
+          <div xmlns="http://www.w3.org/1999/xhtml"
+               style="width:${pxW}px;height:${pxH}px;background:#fff;overflow:hidden;font-family:sans-serif;padding:24px;box-sizing:border-box;">
+            ${newHtml}
+          </div>
+        </foreignObject>
+      </svg>
+    `
+    const newImg = new Image()
+    const newBlob = new Blob([newSvg], { type: 'image/svg+xml;charset=utf-8' })
+    const newUrl = URL.createObjectURL(newBlob)
+    newImg.onload = () => {
+      ctx.clearRect(0, 0, pxW, pxH)
+      ctx.drawImage(newImg, 0, 0)
+      texture.needsUpdate = true
+      URL.revokeObjectURL(newUrl)
+    }
+    newImg.src = newUrl
+  }
+}
+
+window.__addPanel = addPanel
+
+// ── Camera path interpolation ───────────────────────────────────────────────
+const sceneDurDefault = typeof window.DURATION === 'number' && window.DURATION > 0 ? window.DURATION : 10
+const defaultCameraPath = [
+  { t: 0, pos: [0, 1.6, 2.5], lookAt: [0, 1.4, -4] },
+  { t: sceneDurDefault, pos: [0, 1.55, 1.8], lookAt: [0, 1.35, -4] },
+]
+
+function camVec3Studio(p, fallback = [0, 0, 0]) {
+  if (p == null) return [...fallback]
+  if (Array.isArray(p)) return [p[0] ?? fallback[0], p[1] ?? fallback[1], p[2] ?? fallback[2]]
+  return [p.x ?? fallback[0], p.y ?? fallback[1], p.z ?? fallback[2]]
+}
+
+function normalizeStudioCameraPath(raw) {
+  return raw
+    .map((k) => {
+      const tk = k.t !== undefined ? k.t : (k.time !== undefined ? k.time : 0)
+      const pos = camVec3Studio(k.pos !== undefined ? k.pos : k.position, [0, 1.6, 2.5])
+      const lookAt = camVec3Studio(k.lookAt, [0, 1.4, -4])
+      return { t: tk, pos, lookAt }
+    })
+    .sort((a, b) => a.t - b.t)
+}
+
+function applyCameraPath(t) {
+  const raw = cameraPathCfg.length >= 2 ? cameraPathCfg : defaultCameraPath
+  const path = normalizeStudioCameraPath(raw)
+  if (path.length < 2) return
+
+  const tMin = path[0].t
+  const tMax = path[path.length - 1].t
+  const ct = Math.max(tMin, Math.min(tMax, t))
+
+  let a = path[0]
+  let b = path[path.length - 1]
+  for (let i = 0; i < path.length - 1; i++) {
+    if (ct >= path[i].t && ct <= path[i + 1].t) {
+      a = path[i]
+      b = path[i + 1]
+      break
+    }
+  }
+
+  const range = b.t - a.t
+  const frac = range > 0 ? (ct - a.t) / range : 0
+  const s = smoothstep(frac)
+
+  camera.position.set(
+    lerp(a.pos[0], b.pos[0], s),
+    lerp(a.pos[1], b.pos[1], s),
+    lerp(a.pos[2], b.pos[2], s),
+  )
+  camera.lookAt(
+    lerp(a.lookAt[0], b.lookAt[0], s),
+    lerp(a.lookAt[1], b.lookAt[1], s),
+    lerp(a.lookAt[2], b.lookAt[2], s),
+  )
+}
+
+function lerp(a, b, t) { return a + (b - a) * t }
+function smoothstep(t) { return t * t * (3 - 2 * t) }
+
+// ── Uniforms update ─────────────────────────────────────────────────────────
+function updateUniforms(t) {
+  woodMat.uniforms.uTime.value = t
+}
+
+// ── anime.js timeline (seconds; seeked by __updateScene) ──────────────────────
+anime.engine.timeUnit = 's'
+window.anime = anime
+const tl = anime.createTimeline({ autoplay: false })
+window.__tl = tl
+
+// ── WVC update function ─────────────────────────────────────────────────────
+const clock = new THREE.Clock()
+
+window.__updateScene = (t) => {
+  window.__sceneTime = t
+  updateUniforms(t)
+  if (window.__tl) window.__tl.seek(t)
+  const dt = clock.getDelta()
+  for (const mixer of mixers) mixer.update(dt)
+  applyCameraPath(t)
+  renderer.render(scene, camera)
+}
+
+// ── Initialization ──────────────────────────────────────────────────────────
+async function init() {
+  buildRoom()
+  setupLighting()
+
+  // Load assets and panels in parallel
+  await fetchAssetIndex()
+
+  const assetPromises = objectsCfg.map(obj =>
+    loadAsset(
+      obj.assetId,
+      obj.position,
+      obj.rotation || [0, 0, 0],
+      obj.scale || 1,
+      obj.animations || []
+    )
+  )
+
+  const panelPromises = panelsCfg.map(p =>
+    Promise.resolve(addPanel(p.html, p.position, p.rotation, p.width || 3.6, p.height || 2.2))
+  )
+
+  // Legacy avatar entries render as placeholders. See public/worlds/world-avatar-overlay.js.
+  const { createWorldAvatar } = await import('/worlds/world-avatar-overlay.js')
+  const avatarPromises = avatarsCfg.map((av, i) =>
+    createWorldAvatar(document.body, av, tl, {
+      ttsEndpoint: cfg.ttsEndpoint || null,
+      duration: window.DURATION || 10,
+      index: i,
+    }).then((handle) => {
+      if (handle) loadedAvatars[`avatar-${i}`] = handle
+      return handle
+    }),
+  )
+
+  await Promise.all([...assetPromises, ...panelPromises, ...avatarPromises])
+
+  // Call worldSetup callback if defined
+  if (typeof window.__worldSetup === 'function') {
+    window.__worldSetup(tl, loadedObjects, loadedAvatars)
+  }
+
+  // Initial render
+  applyCameraPath(0)
+  renderer.render(scene, camera)
+
+  // Resolve scene ready
+  window.__resolveReady()
+}
+
+// ── Preview RAF loop ────────────────────────────────────────────────────────
+let rafId = null
+function raf() {
+  rafId = requestAnimationFrame(raf)
+  const dt = clock.getDelta()
+  for (const mixer of mixers) mixer.update(dt)
+  renderer.render(scene, camera)
+}
+
+init().then(() => {
+  if (!window.__wvc_render) raf()
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+{
+  "name": "dreambyte-monorepo",
+  "private": true,
+  "description": "Dreambyte: AI video editor (desktop app) and its packages.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danrublop/dreambyte.git"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "prepare": "husky apps/desktop/.husky",
+    "dev": "npm run dev:desktop -w apps/desktop",
+    "build": "npm run build:renderer -w apps/desktop && npm run build:electron -w apps/desktop && npm run build:player -w apps/desktop",
+    "dist": "npm run dist -w apps/desktop",
+    "dist:dir": "npm run dist:dir -w apps/desktop",
+    "lint": "npm run lint -w apps/desktop",
+    "typecheck": "npm run typecheck -w apps/desktop",
+    "test": "npm run test:ci -w apps/desktop"
+  }
+}

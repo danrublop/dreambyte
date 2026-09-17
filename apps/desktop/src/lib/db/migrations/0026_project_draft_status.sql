@@ -1,0 +1,13 @@
+-- 0026: project draft lifecycle (T2 / D7 + D17).
+--
+-- Hand-trimmed additive delta (matching the 0011-0023 convention): the
+-- drizzle/sqlite meta snapshot is stale, so `db:generate` would emit a full
+-- "create everything" baseline that fails on a populated DB.
+--
+-- Drafts now get a REAL row at creation with status='draft' instead of the
+-- lazy in-memory persist whack-a-mole. The startup sweep SOFT-hides provably
+-- untouched empty drafts (status -> 'hidden', stamping hidden_at) and only
+-- hard-purges rows hidden for >7 days. The `status` enum is widened in the
+-- Drizzle type ('ready'|'forking'|'draft'|'hidden') — SQLite stores it as
+-- plain text so no column rewrite is needed; only the timestamp is new.
+ALTER TABLE `projects` ADD COLUMN `hidden_at` integer;

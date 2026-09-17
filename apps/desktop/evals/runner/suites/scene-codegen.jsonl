@@ -1,0 +1,8 @@
+{"id":"svg-001","prompt":"Animated bar chart with 4 bars growing from the bottom over 2 seconds","sceneType":"svg","tags":["chart","data-viz"]}
+{"id":"svg-002","prompt":"A circle that morphs into a square then back, repeating","sceneType":"svg","tags":["shape","transform"]}
+{"id":"react-001","prompt":"Three step cards arranged in a row with the title 'How it works' above","sceneType":"react","tags":["layout","explainer"]}
+{"id":"react-002","prompt":"A countdown timer from 10 to 0 with each number sliding in from the right","sceneType":"react","tags":["animation","number"]}
+{"id":"canvas2d-001","prompt":"A particle field of 200 dots drifting with subtle parallax","sceneType":"canvas2d","tags":["particles","motion"]}
+{"id":"motion-001","prompt":"Logo reveal: a circle scales in then a wordmark fades up below","sceneType":"motion","tags":["logo","intro"]}
+{"id":"d3-001","prompt":"Bar chart of monthly sales for Q1: Jan 120, Feb 140, Mar 180","sceneType":"d3","tags":["chart","data"]}
+{"id":"three-001","prompt":"A gold sphere rotating slowly with soft studio lighting","sceneType":"three","tags":["3d","material"]}

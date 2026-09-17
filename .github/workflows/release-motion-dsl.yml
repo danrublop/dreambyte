@@ -1,0 +1,83 @@
+name: Release @dreambyte/motion-dsl
+
+# Publishes packages/motion-dsl/ to npm on tag push. Tag format:
+# `motion-dsl-v<semver>` (e.g. motion-dsl-v0.1.0). The workflow re-runs
+# the sync-from-source script so the published artifact always matches
+# the canonical source in apps/desktop/src/lib/motion-dsl/, then builds + smoke-tests
+# the dist/ tree before npm publishes.
+#
+# Setup once per repo: add an `NPM_TOKEN` secret (publish-scoped) under
+# Settings → Secrets and variables → Actions.
+
+on:
+  push:
+    tags:
+      - 'motion-dsl-v*'
+  # Manual trigger for dry-runs and re-publishing patched builds.
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Pack only — skip npm publish'
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    # This job holds `id-token: write` and publishes to npm. A hang in `smoke`
+    # would sit on those credentials for GitHub's 6h default cap.
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: apps/desktop/.nvmrc
+          registry-url: https://registry.npmjs.org
+          cache: npm
+
+      - name: Install root deps
+        run: npm ci
+        env:
+          ELECTRON_SKIP_BINARY_DOWNLOAD: '1'
+
+      - name: Verify tag matches package.json version
+        if: github.event_name == 'push'
+        working-directory: packages/motion-dsl
+        env:
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          PKG_VERSION=$(node -p "require('./package.json').version")
+          TAG_VERSION="${REF_NAME#motion-dsl-v}"
+          if [ "$PKG_VERSION" != "$TAG_VERSION" ]; then
+            echo "Tag $REF_NAME ($TAG_VERSION) does not match package.json version $PKG_VERSION"
+            exit 1
+          fi
+
+      - name: Sync source from apps/desktop/src/lib/motion-dsl
+        working-directory: packages/motion-dsl
+        run: npm run sync
+
+      - name: Build dist
+        working-directory: packages/motion-dsl
+        run: npx tsc -p tsconfig.json
+
+      - name: Smoke test built bundle
+        working-directory: packages/motion-dsl
+        run: npm run smoke
+
+      - name: Pack (preview)
+        working-directory: packages/motion-dsl
+        run: npm pack --dry-run
+
+      - name: Publish to npm
+        if: github.event_name == 'push' || github.event.inputs.dry_run == 'false'
+        working-directory: packages/motion-dsl
+        run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

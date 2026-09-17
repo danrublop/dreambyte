@@ -1,0 +1,53 @@
+{
+  "name": "@dreambyte/motion-dsl",
+  "version": "0.1.0",
+  "description": "Dreambyte motion DSL — 56-preset catalog, a React style compiler, and a flat operator-tagged choreography vocabulary distilled from animate.css, motion-canvas, react-spring, and mojs.",
+  "license": "MIT",
+  "author": "Dreambyte",
+  "homepage": "https://dreambyte.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/danrublop/dreambyte.git",
+    "directory": "packages/motion-dsl"
+  },
+  "keywords": [
+    "animation",
+    "motion",
+    "video",
+    "ai",
+    "agent",
+    "react",
+    "remotion"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./compiler/react": {
+      "types": "./dist/compiler/react.d.ts",
+      "import": "./dist/compiler/react.js"
+    }
+  },
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "sync": "node scripts/sync-from-source.mjs",
+    "build": "npm run sync && tsc -p tsconfig.json",
+    "clean": "rm -rf dist src",
+    "smoke": "node scripts/smoke-test.mjs"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

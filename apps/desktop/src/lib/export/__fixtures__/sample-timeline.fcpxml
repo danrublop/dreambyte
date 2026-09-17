@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE fcpxml>
+<fcpxml version="1.9">
+    <resources>
+        <format id="r1" name="FFVideoFormat1080p30" frameDuration="1/30s" width="1920" height="1080" colorSpace="1-1-1 (Rec. 709)"/>
+        <asset id="r2" name="Intro" start="0s" duration="5/2s" hasVideo="1" hasAudio="1" format="r1" videoSources="1" audioSources="1" audioChannels="2" audioRate="48000">
+            <media-rep kind="original-media" src="file:///media/a.mp4"/>
+        </asset>
+        <asset id="r3" name="Body" start="0s" duration="3s" hasVideo="1" hasAudio="1" format="r1" videoSources="1" audioSources="1" audioChannels="2" audioRate="48000">
+            <media-rep kind="original-media" src="file:///media/b.mp4"/>
+        </asset>
+        <asset id="r4" name="Overlay" start="0s" duration="3s" hasVideo="1" hasAudio="0" format="r1" videoSources="1">
+            <media-rep kind="original-media" src="file:///media/logo.png"/>
+        </asset>
+        <asset id="r5" name="Music" start="0s" duration="8s" hasVideo="0" hasAudio="1" format="r1" audioSources="1" audioChannels="2" audioRate="48000">
+            <media-rep kind="original-media" src="file:///media/music.mp3"/>
+        </asset>
+        <asset id="r6" name="VO" start="0s" duration="4s" hasVideo="0" hasAudio="1" format="r1" audioSources="1" audioChannels="2" audioRate="48000">
+            <media-rep kind="original-media" src="file:///media/vo.mp3"/>
+        </asset>
+    </resources>
+    <library>
+        <event name="Dreambyte Sample">
+            <project name="Dreambyte Sample">
+                <sequence format="r1" duration="8s" tcStart="0s" tcFormat="NDF" audioLayout="stereo" audioRate="48k">
+                    <spine>
+                        <gap name="Gap" offset="0s" duration="1s"/>
+                        <asset-clip ref="r2" name="Intro" offset="1s" duration="2s" start="1/2s"/>
+                        <gap name="Gap" offset="3s" duration="2s"/>
+                        <asset-clip ref="r3" name="Body" offset="5s" duration="3s" start="0s"/>
+                        <video lane="1" ref="r4" name="Overlay" offset="2s" duration="3s">
+                            <adjust-transform position="200 -100" scale="0.5 0.5" rotation="10"/>
+                            <adjust-blend amount="0.8"/>
+                        </video>
+                        <asset-clip lane="-1" ref="r5" name="Music" offset="0s" duration="8s" start="0s">
+                            <adjust-volume amount="-6.0206dB"/>
+                        </asset-clip>
+                        <asset-clip lane="-2" ref="r6" name="VO" offset="1s" duration="4s" start="0s">
+                            <adjust-volume amount="3.5218dB"/>
+                        </asset-clip>
+                    </spine>
+                </sequence>
+            </project>
+        </event>
+    </library>
+</fcpxml>

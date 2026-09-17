@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>dreambyte — Editor Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600&display=swap" rel="stylesheet" />
+<style>
+/* ══════════════════════════════════════════════════════════════
+   Tokens — mirror docs/EDITOR-DESIGN.md Appendix A.
+   Default (no class) = DARK. .light-theme on <html> = LIGHT.
+   ══════════════════════════════════════════════════════════════ */
+:root{
+  --font-ui:"Inter","Inter Variable",system-ui,-apple-system,sans-serif;
+
+  --bg:#121212; --panel:#1a1a1a; --panel-2:#0f0f0f;
+  --card:#232323; --card-hover:#2c2c2c; --input-bg:#0c0c0c;
+  --surface-cool:#1d1d1d; --scrim:rgba(0,0,0,.62);
+
+  --hairline:rgba(255,255,255,.08); --hairline-strong:rgba(255,255,255,.14);
+  --border-input:rgba(255,255,255,.12);
+
+  --ink:#f4f4f4; --ink-soft:#d6d6d6; --graphite:#b0b0b0; --slate:#8a8a8a;
+  --mute:#6e6e6e; --stone:#585858; --ash:#404040;
+
+  --action:#f4f4f4; --on-action:#121212;
+  --accent:#4a9eff; --accent-soft:rgba(74,158,255,.22); --accent-strong:#2f86f0;
+  --switch-off:#3a3a3a; --switch-off-hover:#4a4a4a;
+  --danger:#f87171; --warn:#fbbf24; --success:#34d399;
+
+  --chart-1:#4c9be8; --chart-2:#e86b4c; --chart-3:#4ce8a0; --chart-4:#e8c84c; --chart-5:#9b4ce8;
+
+  --tl-bg:#0d0d0d; --tl-track:#1a1a1a; --tl-track-alt:#1f1f1f; --tl-header:#202020;
+  --tl-border:#2b2b2b; --tl-ruler-tick:#6e6e6e; --tl-ruler-tick-minor:#3a3a3a;
+  --tl-clip-video:#3d7a8c; --tl-clip-audio:#3d6e8c; --tl-clip-image:#8c7a3d; --tl-clip-title:#8c3d6e;
+  --tl-snap:#22d3ee; --tl-waveform:#5a9ec4;
+
+  --radius-xs:4px; --radius-sm:6px; --radius-md:8px; --radius-lg:16px; --radius-pill:9999px;
+  --ease-swift:cubic-bezier(.22,1,.36,1);
+  --dur-fast:150ms; --dur-base:200ms; --dur-slow:300ms;
+
+  --shadow-sm:0 1px 2px rgba(0,0,0,.4);
+  --shadow-md:0 16px 40px -16px rgba(0,0,0,.6);
+  --shadow-lg:0 28px 64px -22px rgba(0,0,0,.7);
+
+  --max-shell:1180px;
+}
+:root.light-theme{
+  --bg:#ffffff; --panel:#ffffff; --panel-2:#fafaf8;
+  --card:#f5f5f5; --card-hover:#eeeeee; --input-bg:#f4f4f6;
+  --surface-cool:#eef1f4; --scrim:rgba(15,17,21,.45);
+
+  --hairline:#ededed; --hairline-strong:#e4e4e2; --border-input:#dcdce0;
+
+  --ink:#111111; --ink-soft:#2a2a2a; --graphite:#4d4d4d; --slate:#5b6472;
+  --mute:#8a8a8a; --stone:#9a9a9a; --ash:#b6b6b6;
+
+  --action:#111111; --on-action:#ffffff;
+  --accent:#2563eb; --accent-soft:rgba(37,99,235,.14); --accent-strong:#1d4ed8;
+  --switch-off:#dfe1e4; --switch-off-hover:#c9cbcd;
+  --danger:#dc2626; --warn:#d97706; --success:#059669;
+
+  --chart-1:#2563eb; --chart-2:#e11d48; --chart-3:#16a34a; --chart-4:#ca8a04; --chart-5:#7c3aed;
+
+  --tl-bg:#ffffff; --tl-track:#ffffff; --tl-track-alt:#f7f7f9; --tl-header:#f5f5f7;
+  --tl-border:#e4e4ea; --tl-ruler-tick:#999999; --tl-ruler-tick-minor:#cccccc;
+  --tl-clip-video:#6ab0b0; --tl-clip-audio:#5a9ec4; --tl-clip-image:#c4a85a; --tl-clip-title:#c46a94;
+  --tl-snap:#0ea5e9; --tl-waveform:#2563eb;
+
+  --shadow-sm:0 1px 2px rgba(0,0,0,.06);
+  --shadow-md:0 12px 36px -14px rgba(0,0,0,.22);
+  --shadow-lg:0 24px 60px -20px rgba(0,0,0,.28);
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;}
+body{
+  background:var(--bg); color:var(--ink); font-family:var(--font-ui);
+  font-feature-settings:"cv05" 1,"ss01" 1; -webkit-font-smoothing:antialiased;
+  font-size:14px; line-height:1.5;
+  transition:background var(--dur-base) var(--ease-swift), color var(--dur-base) var(--ease-swift);
+}
+.shell{max-width:var(--max-shell); margin:0 auto; padding:0 24px 120px;}
+
+/* Top bar */
+.topbar{
+  position:sticky; top:0; z-index:20; background:var(--panel);
+  border-bottom:1px solid var(--hairline);
+  transition:background var(--dur-base) var(--ease-swift), border-color var(--dur-base);
+}
+.topbar-inner{max-width:var(--max-shell); margin:0 auto; padding:0 24px;
+  height:56px; display:flex; align-items:center; justify-content:space-between;}
+.brand{display:flex; align-items:baseline; gap:10px;}
+.brand b{font-weight:600; letter-spacing:-.2px; font-size:15px;}
+.brand span{color:var(--slate); font-size:12px; letter-spacing:.2px; text-transform:uppercase;}
+
+/* Theme toggle */
+.toggle{display:flex; align-items:center; gap:10px;}
+.toggle-label{font-size:12px; color:var(--graphite);}
+.switch{position:relative; width:30px; height:20px; border-radius:72px; flex-shrink:0;
+  background:var(--switch-off); border:none; cursor:pointer; padding:0; transition:all 100ms ease-out;}
+.switch:hover{background:var(--switch-off-hover);}
+.switch .knob{position:absolute; top:3px; left:3px; width:14px; height:14px; border-radius:50%;
+  background:#fff; transition:all 100ms ease-out;}
+:root.light-theme .switch{background:var(--accent);}
+:root.light-theme .switch:hover{background:var(--accent-strong);}
+:root.light-theme .switch .knob{transform:translateX(10px);}
+
+/* Reusable Figma-style switch (independent on/off) */
+.fig-switch{appearance:none; -webkit-appearance:none; margin:0; width:30px; height:20px; flex-shrink:0;
+  border-radius:72px; background:var(--switch-off); position:relative; cursor:pointer; transition:all 100ms ease-out;}
+.fig-switch::after{content:""; position:absolute; top:3px; left:3px; width:14px; height:14px; border-radius:50%;
+  background:#fff; transition:all 100ms ease-out;}
+.fig-switch:hover{background:var(--switch-off-hover);}
+.fig-switch:checked{background:var(--accent);}
+.fig-switch:checked::after{left:13px;}
+.fig-switch:checked:hover{background:var(--accent-strong);}
+.fig-switch:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+.switch-row{display:flex; align-items:center; gap:10px; font-size:13px; color:var(--ink-soft);}
+
+/* Layout helpers */
+section{padding-top:56px;}
+.sec-head{display:flex; align-items:baseline; gap:12px; margin-bottom:20px;
+  border-bottom:1px solid var(--hairline); padding-bottom:12px;}
+.eyebrow{font-size:13px; font-weight:500; letter-spacing:.35px; text-transform:uppercase; color:var(--slate);}
+h2{font-size:24px; font-weight:600; letter-spacing:-.3px; margin:0;}
+.sec-note{color:var(--graphite); font-size:13px; margin:0 0 24px;}
+.grid{display:grid; gap:14px;}
+.g-swatch{grid-template-columns:repeat(auto-fill,minmax(190px,1fr));}
+.g-2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr));}
+
+/* Swatch card */
+.swatch{background:var(--card); border:1px solid var(--hairline); border-radius:var(--radius-md);
+  overflow:hidden;}
+.swatch .chip{height:64px; border-bottom:1px solid var(--hairline);}
+.swatch .meta{padding:10px 12px;}
+.swatch .name{font-size:13px; font-weight:500; color:var(--ink);}
+.swatch .role{font-size:11px; color:var(--slate); margin-top:2px; line-height:1.35;}
+.swatch .val{font-size:11px; color:var(--mute); font-family:ui-monospace,SFMono-Regular,Menlo,monospace; margin-top:6px;}
+
+/* Text ladder */
+.ladder div{padding:6px 0; border-bottom:1px solid var(--hairline); display:flex; align-items:baseline; gap:14px;}
+.ladder .lab{font-family:ui-monospace,Menlo,monospace; font-size:11px; color:var(--mute); width:130px;}
+
+/* Type scale */
+.type-row{display:flex; align-items:baseline; gap:18px; padding:10px 0; border-bottom:1px solid var(--hairline);}
+.type-row .tk{font-family:ui-monospace,Menlo,monospace; font-size:11px; color:var(--mute); width:96px; flex:none;}
+.type-row .sp{color:var(--slate); font-size:11px; font-family:ui-monospace,Menlo,monospace; margin-left:auto; flex:none;}
+
+/* Buttons */
+.row{display:flex; flex-wrap:wrap; gap:12px; align-items:center;}
+/* Default = compact Figma rounded-rectangle. .pill = hero CTA opt-in. .dense = toolbar size. */
+.btn{font-family:inherit; font-weight:500; font-size:13px; letter-spacing:-.1px; cursor:pointer;
+  display:inline-flex; align-items:center; justify-content:center; gap:6px;
+  height:32px; padding:0 14px; border-radius:var(--radius-md); border:1px solid transparent;
+  transition:opacity var(--dur-fast) var(--ease-swift),background var(--dur-fast) var(--ease-swift),color var(--dur-fast) var(--ease-swift),border-color var(--dur-fast) var(--ease-swift);}
+.btn-primary{background:var(--action); color:var(--on-action);}
+.btn-primary:hover{opacity:.9;} .btn-primary:active{opacity:.82;}
+.btn-ghost{background:transparent; color:var(--ink); border-color:var(--hairline-strong);}
+.btn-ghost:hover{background:var(--card-hover); border-color:var(--graphite);}
+.btn-quiet{background:transparent; color:var(--graphite);}
+.btn-quiet:hover{color:var(--ink); background:var(--card);}
+.btn-danger{background:transparent; color:var(--danger); border-color:var(--hairline-strong);}
+.btn-danger:hover{background:var(--danger); color:#fff; border-color:var(--danger);}
+.btn[disabled]{background:var(--card); color:var(--stone); cursor:not-allowed; opacity:1; border-color:transparent;}
+.btn:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+.btn.pill{height:40px; padding:0 24px; border-radius:var(--radius-pill); font-weight:600;}
+.btn.dense{height:28px; padding:0 12px; font-size:12px;}
+.icon-btn{width:30px; height:30px; display:grid; place-items:center; border-radius:var(--radius-sm);
+  color:var(--graphite); cursor:pointer; transition:color var(--dur-fast),background var(--dur-fast);}
+.icon-btn:hover{color:var(--ink); background:var(--card);}
+
+/* Inputs */
+.field{display:flex; flex-direction:column; gap:6px; max-width:320px;}
+.field label{font-size:12px; font-weight:500; color:var(--ink-soft);}
+.field input,.field select{font-family:inherit; font-size:13px; color:var(--ink);
+  background:var(--input-bg); border:1px solid var(--border-input); border-radius:var(--radius-md);
+  height:36px; padding:0 12px; outline:none; transition:border-color var(--dur-fast),box-shadow var(--dur-fast);}
+.field input::placeholder{color:var(--mute);}
+.field input:focus,.field select:focus{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft);}
+.field.err input{border-color:var(--danger);}
+.field .help{font-size:11px; color:var(--mute);}
+.field.err .help{color:var(--danger);}
+.search{position:relative;}
+.search svg{position:absolute; left:11px; top:50%; transform:translateY(-50%); color:var(--mute);}
+.search input{padding-left:32px;}
+
+/* Cards & rows */
+.card{background:var(--card); border:1px solid var(--hairline); border-radius:var(--radius-md);
+  padding:14px 16px; transition:background var(--dur-fast);}
+.card:hover{background:var(--card-hover);}
+.card h4{margin:0 0 4px; font-size:18px; font-weight:600; letter-spacing:-.2px;}
+.card p{margin:0; color:var(--slate); font-size:13px;}
+.rows{border:1px solid var(--hairline); border-radius:var(--radius-md); overflow:hidden; background:var(--panel);}
+.rows .r{display:flex; align-items:center; gap:12px; padding:10px 14px; border-bottom:1px solid var(--hairline);
+  font-size:13px; cursor:default; transition:background var(--dur-fast);}
+.rows .r:last-child{border-bottom:none;}
+.rows .r:hover{background:var(--card-hover);}
+.rows .r .dot{width:8px; height:8px; border-radius:50%; flex:none;}
+.rows .r .grow{flex:1; color:var(--ink-soft);}
+.rows .r .m{color:var(--slate); font-size:12px;}
+.rows .r.sel{background:var(--accent-soft); box-shadow:inset 2px 0 0 var(--accent);}
+
+/* Tabs */
+.tabs{display:flex; gap:24px; border-bottom:1px solid var(--hairline);}
+.tab{padding:10px 0; font-size:13px; color:var(--graphite); cursor:pointer; position:relative;
+  background:none; border:none; font-family:inherit; transition:color var(--dur-fast);}
+.tab:hover{color:var(--ink);}
+.tab.active{color:var(--ink);}
+.tab.active::after{content:""; position:absolute; left:0; right:0; bottom:-1px; height:2px; background:var(--accent);}
+
+/* Menu */
+.menu{width:230px; background:var(--card); border:1px solid var(--hairline-strong);
+  border-radius:var(--radius-lg); box-shadow:var(--shadow-md); padding:6px;}
+.menu .mi{display:flex; align-items:center; justify-content:space-between; padding:8px 12px;
+  font-size:13px; color:var(--ink-soft); border-radius:var(--radius-sm); cursor:default;}
+.menu .mi:hover{background:var(--card-hover);}
+.menu .mi .hint{font-size:11px; color:var(--ash);}
+.menu .mi .hint.it{font-style:italic;}
+.menu .sep{height:1px; background:var(--hairline); margin:6px 4px;}
+
+/* Badges */
+.badge{display:inline-flex; align-items:center; gap:5px; height:22px; padding:0 10px;
+  border-radius:var(--radius-pill); font-size:11px; font-weight:450; letter-spacing:.2px; text-transform:uppercase;}
+.badge.neutral{background:var(--card); color:var(--slate);}
+.badge.live{background:var(--accent-soft); color:var(--accent);}
+.badge.danger{background:color-mix(in srgb,var(--danger) 16%,transparent); color:var(--danger);}
+.badge.warn{background:color-mix(in srgb,var(--warn) 18%,transparent); color:var(--warn);}
+.badge.success{background:color-mix(in srgb,var(--success) 18%,transparent); color:var(--success);}
+
+/* Tooltip (inverted surface) */
+.tip{display:inline-block; background:var(--ink); color:var(--bg); font-size:12px;
+  padding:6px 8px; border-radius:var(--radius-sm); box-shadow:var(--shadow-sm);}
+
+/* Timeline mockup */
+.tl{background:var(--tl-bg); border:1px solid var(--tl-border); border-radius:var(--radius-md); overflow:hidden; position:relative;}
+.tl .ruler{height:26px; background:var(--tl-header); border-bottom:1px solid var(--tl-border);
+  position:relative; display:flex; align-items:flex-end;}
+.tl .ruler .tick{width:1px; height:8px; background:var(--tl-ruler-tick); margin-right:23px;}
+.tl .lane{display:flex; align-items:center; height:46px; border-bottom:1px solid var(--tl-border); position:relative; padding:6px;}
+.tl .lane:nth-child(odd){background:var(--tl-track-alt);}
+.tl .lane:nth-child(even){background:var(--tl-track);}
+.tl .clip{height:34px; border-radius:var(--radius-sm); display:flex; align-items:center; padding:0 10px;
+  font-size:11px; color:rgba(255,255,255,.92); white-space:nowrap; box-shadow:var(--shadow-sm); position:absolute;}
+.tl .clip.sel{outline:2px solid var(--accent); outline-offset:1px;}
+.tl .playhead{position:absolute; top:0; bottom:0; width:2px; background:var(--accent); z-index:5;}
+.tl .playhead::before{content:""; position:absolute; top:0; left:-5px; border-left:6px solid transparent;
+  border-right:6px solid transparent; border-top:7px solid var(--accent);}
+
+/* Editor shell mockup */
+.appshell{border:1px solid var(--hairline); border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-md); background:var(--bg);}
+.appshell .hdr{height:48px; background:var(--panel); border-bottom:1px solid var(--hairline);
+  display:flex; align-items:center; gap:14px; padding:0 16px;}
+.appshell .hdr .pname{font-size:13px; color:var(--ink-soft);}
+.appshell .hdr .sp{flex:1;}
+.appshell .body{display:grid; grid-template-columns:200px 1fr 240px; min-height:240px;}
+.appshell .side{background:var(--panel); padding:14px;}
+.appshell .side.r{border-left:1px solid var(--hairline);} .appshell .side.l{border-right:1px solid var(--hairline);}
+.appshell .canvas{background:var(--bg); display:grid; place-items:center; padding:20px;}
+.appshell .stage{width:100%; aspect-ratio:16/9; background:var(--surface-cool);
+  border:1px solid var(--hairline); border-radius:var(--radius-md); display:grid; place-items:center; color:var(--mute); font-size:12px;}
+.appshell .ftr{height:28px; background:var(--panel); border-top:1px solid var(--hairline);
+  display:flex; align-items:center; padding:0 16px; gap:8px; font-size:12px; color:var(--slate);}
+.appshell .glabel{font-size:13px; font-weight:500; letter-spacing:.35px; text-transform:uppercase; color:var(--slate); margin-bottom:10px;}
+
+.callout{background:var(--card); border:1px solid var(--hairline); border-left:none; border-radius:var(--radius-md);
+  padding:14px 16px; font-size:13px; color:var(--graphite); margin-bottom:24px;}
+.callout b{color:var(--ink);}
+.mono{font-family:ui-monospace,Menlo,monospace; font-size:12px; color:var(--ink-soft);
+  background:var(--input-bg); padding:1px 6px; border-radius:var(--radius-xs);}
+footer{margin-top:80px; padding-top:24px; border-top:1px solid var(--hairline); color:var(--slate); font-size:12px;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand"><b>dreambyte</b><span>Editor Design System</span></div>
+    <div class="toggle">
+      <span class="toggle-label" id="modeLabel">Dark</span>
+      <button class="switch" id="themeToggle" aria-label="Toggle dark / light theme"><span class="knob"></span></button>
+    </div>
+  </div>
+</div>
+
+<div class="shell">
+
+  <section style="padding-top:40px;">
+    <div class="callout">
+      <b>Monochrome editorial, one signal.</b> Surfaces are neutral; the only chromatic color is
+      <b>Signal Blue</b> (<span class="mono">--accent</span>), reserved for playhead, selection,
+      active tab, and focus. Actions are black/white and invert per theme. Flip the toggle (top right)
+      to review the dark and light states. Full spec in <span class="mono">docs/EDITOR-DESIGN.md</span>.
+    </div>
+  </section>
+
+  <!-- COLOR -->
+  <section id="color">
+    <div class="sec-head"><span class="eyebrow">01</span><h2>Color &amp; Roles</h2></div>
+
+    <p class="sec-note">Surfaces — inverted elevation on dark (panels lift lighter), shadow depth on light.</p>
+    <div class="grid g-swatch" id="sw-surface"></div>
+
+    <p class="sec-note" style="margin-top:32px;">Text ladder — ink to ash. Body never goes below <span class="mono">--mute</span>.</p>
+    <div class="ladder" id="ladder"></div>
+
+    <p class="sec-note" style="margin-top:32px;">Action language &amp; the one functional accent.</p>
+    <div class="grid g-swatch" id="sw-action"></div>
+
+    <p class="sec-note" style="margin-top:32px;">Status (semantic, sparing) &amp; chart palette (data viz only).</p>
+    <div class="grid g-swatch" id="sw-status"></div>
+  </section>
+
+  <!-- TYPE -->
+  <section id="type">
+    <div class="sec-head"><span class="eyebrow">02</span><h2>Typography</h2></div>
+    <p class="sec-note">Inter Variable. UI default 13px, body 14px. Headings 600. Uppercase only for eyebrow / micro-caps.</p>
+    <div id="typescale"></div>
+  </section>
+
+  <!-- BUTTONS -->
+  <section id="buttons">
+    <div class="sec-head"><span class="eyebrow">03</span><h2>Buttons &amp; Controls</h2></div>
+    <p class="sec-note">Compact rounded-rectangles (<span class="mono">--radius-md</span>) are the default — clean and Figma-like. Pills are opt-in for hero CTAs only (welcome / onboarding). No colored buttons; the only blue is focus and the switch "on" state.</p>
+    <div class="glabel">Default controls — <span class="mono" style="text-transform:none;">--radius-md</span></div>
+    <div class="row" style="margin-bottom:22px;">
+      <button class="btn btn-primary">Export video</button>
+      <button class="btn btn-ghost">Cancel</button>
+      <button class="btn btn-quiet">Learn more</button>
+      <button class="btn btn-primary" disabled>Disabled</button>
+    </div>
+    <div class="glabel">Hero CTA — <span class="mono" style="text-transform:none;">.pill</span> (welcome / onboarding only)</div>
+    <div class="row" style="margin-bottom:22px;">
+      <button class="btn btn-primary pill">Get started</button>
+      <button class="btn btn-ghost pill">Watch demo</button>
+    </div>
+    <div class="glabel">Switches</div>
+    <div class="row" style="margin-bottom:22px; gap:28px;">
+      <label class="switch-row"><input type="checkbox" class="fig-switch" checked /> Auto-save</label>
+      <label class="switch-row"><input type="checkbox" class="fig-switch" /> Snap to grid</label>
+      <label class="switch-row"><input type="checkbox" class="fig-switch" checked /> Show captions</label>
+    </div>
+    <div class="row" style="margin-bottom:18px;">
+      <button class="btn btn-primary dense">New scene</button>
+      <button class="btn btn-ghost dense">Duplicate</button>
+      <button class="btn btn-danger">Delete scene</button>
+      <span class="icon-btn" title="Settings" aria-label="Settings">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      </span>
+      <span class="tip">Tooltip — inverts the surface</span>
+    </div>
+    <div class="row">
+      <span class="badge neutral">Draft</span>
+      <span class="badge live">Recording</span>
+      <span class="badge success">Saved</span>
+      <span class="badge warn">Unsynced</span>
+      <span class="badge danger">Error</span>
+    </div>
+  </section>
+
+  <!-- INPUTS -->
+  <section id="inputs">
+    <div class="sec-head"><span class="eyebrow">04</span><h2>Inputs &amp; Fields</h2></div>
+    <p class="sec-note">Label always visible above the field. Focus = accent border + soft halo. Placeholder is never the only label.</p>
+    <div class="grid g-2">
+      <div class="field">
+        <label for="f1">Project name</label>
+        <input id="f1" type="text" value="Quarterly product update" />
+        <span class="help">Shown in the header and exports.</span>
+      </div>
+      <div class="field">
+        <label for="f2">Resolution</label>
+        <select id="f2"><option>1920 × 1080 (16:9)</option><option>1080 × 1920 (9:16)</option><option>1080 × 1080 (1:1)</option></select>
+        <span class="help">Drives every scene's WIDTH / HEIGHT.</span>
+      </div>
+      <div class="field search">
+        <label for="f3">Search assets</label>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="f3" type="text" placeholder="Find footage, audio, images…" />
+        <span class="help">Magnifying glass is the convention — kept.</span>
+      </div>
+      <div class="field err">
+        <label for="f4">Duration (seconds)</label>
+        <input id="f4" type="text" value="-3" />
+        <span class="help">Duration must be at least 6 seconds.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- LISTS / TABS / MENU -->
+  <section id="surfaces">
+    <div class="sec-head"><span class="eyebrow">05</span><h2>Lists, Tabs &amp; Menus</h2></div>
+    <p class="sec-note">Plain lists are hairline-divided rows, not card grids. Selection uses the accent fill + inset bar. Active tab is the only colored tab.</p>
+    <div class="grid g-2">
+      <div>
+        <div class="glabel">Layers</div>
+        <div class="rows">
+          <div class="r"><span class="dot" style="background:var(--tl-clip-title)"></span><span class="grow">Title — "Q3 results"</span><span class="m">0:00–0:04</span></div>
+          <div class="r sel"><span class="dot" style="background:var(--tl-clip-video)"></span><span class="grow">Video — intro.mp4</span><span class="m">0:04–0:12</span></div>
+          <div class="r"><span class="dot" style="background:var(--tl-clip-audio)"></span><span class="grow">Audio — narration</span><span class="m">0:00–0:30</span></div>
+          <div class="r"><span class="dot" style="background:var(--tl-clip-image)"></span><span class="grow">Image — chart.png</span><span class="m">0:12–0:18</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="glabel">Tabs &amp; menu</div>
+        <div class="tabs" style="margin-bottom:16px;">
+          <button class="tab active">Layers</button>
+          <button class="tab">Settings</button>
+          <button class="tab">Agents</button>
+        </div>
+        <div class="menu">
+          <div class="mi">Add scene <span class="hint">N</span></div>
+          <div class="mi">Duplicate scene <span class="hint">D</span></div>
+          <div class="mi">Connect scenes</div>
+          <div class="sep"></div>
+          <div class="mi">Publish embed <span class="hint it">Coming soon</span></div>
+          <div class="mi" style="color:var(--danger)">Delete scene</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:28px;">
+      <div class="glabel">Cards (only when content warrants — not for plain lists)</div>
+      <div class="grid g-2">
+        <div class="card"><h4>React scene</h4><p>Compose JSX with Three / Canvas / D3 / SVG bridges in one scene.</p></div>
+        <div class="card"><h4>Headless export</h4><p>Render MP4 via Pixi + FFmpeg over IPC. Status shows in the footer.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section id="timeline">
+    <div class="sec-head"><span class="eyebrow">06</span><h2>Timeline</h2></div>
+    <p class="sec-note">The densest surface. Clip hues are muted so the playhead and selection (Signal Blue) always win attention.</p>
+    <div class="tl">
+      <div class="ruler" id="ruler"></div>
+      <div class="lane"><div class="clip" style="left:6px; width:130px; background:var(--tl-clip-title)">Title</div></div>
+      <div class="lane"><div class="clip sel" style="left:140px; width:230px; background:var(--tl-clip-video)">intro.mp4 — selected</div></div>
+      <div class="lane"><div class="clip" style="left:6px; width:420px; background:var(--tl-clip-audio)">narration.wav</div></div>
+      <div class="lane"><div class="clip" style="left:300px; width:150px; background:var(--tl-clip-image)">chart.png</div></div>
+      <div class="playhead" style="left:200px;"></div>
+    </div>
+  </section>
+
+  <!-- SHELL -->
+  <section id="shell">
+    <div class="sec-head"><span class="eyebrow">07</span><h2>Editor shell</h2></div>
+    <p class="sec-note">Three-region shell: side panels + fluid canvas, timeline docked below. Save state lives in the footer status bar.</p>
+    <div class="appshell">
+      <div class="hdr">
+        <b style="font-size:14px;">dreambyte</b>
+        <span class="pname">Quarterly product update</span>
+        <span class="sp"></span>
+        <button class="btn btn-ghost dense">Preview</button>
+        <button class="btn btn-primary dense">Export</button>
+      </div>
+      <div class="body">
+        <div class="side l">
+          <div class="glabel">Scenes</div>
+          <div class="rows">
+            <div class="r sel"><span class="grow">1 · Intro</span></div>
+            <div class="r"><span class="grow">2 · Metrics</span></div>
+            <div class="r"><span class="grow">3 · Outro</span></div>
+          </div>
+        </div>
+        <div class="canvas"><div class="stage">1920 × 1080 preview</div></div>
+        <div class="side r">
+          <div class="glabel">Layers</div>
+          <div class="field" style="max-width:none; margin-bottom:12px;">
+            <label>Background</label>
+            <input type="text" value="#0d0f13" />
+          </div>
+          <button class="btn btn-ghost dense" style="width:100%; justify-content:center;">Add layer</button>
+        </div>
+      </div>
+      <div class="ftr">
+        <span style="width:6px; height:6px; border-radius:50%; background:var(--success);"></span>
+        <span>Saved</span>
+        <span style="margin-left:auto; color:var(--mute);">React renderer · 30 fps · 1080p</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Generated from the Dreambyte website (monochrome editorial brand) +
+    <span class="mono">apps/desktop/src/app/globals.css</span> (existing editor themes). Canonical spec:
+    <span class="mono">docs/EDITOR-DESIGN.md</span>. Distinct from the scene <span class="mono">docs/DESIGN.md</span>.
+  </footer>
+</div>
+
+<script>
+/* Theme toggle + persistence */
+const root=document.documentElement, label=document.getElementById('modeLabel');
+const saved=localStorage.getItem('dreambyte-preview-theme');
+if(saved==='light') root.classList.add('light-theme');
+function sync(){ label.textContent=root.classList.contains('light-theme')?'Light':'Dark'; }
+sync();
+document.getElementById('themeToggle').addEventListener('click',()=>{
+  root.classList.toggle('light-theme');
+  localStorage.setItem('dreambyte-preview-theme', root.classList.contains('light-theme')?'light':'dark');
+  sync();
+});
+
+/* Data-driven swatches so dark/light values are both visible as labels */
+const SURF=[
+  ['--bg','App canvas','#121212','#ffffff'],
+  ['--panel','Panels / header / footer','#1a1a1a','#ffffff'],
+  ['--panel-2','Sunken region','#0f0f0f','#fafaf8'],
+  ['--card','Cards / rows / menus','#232323','#f5f5f5'],
+  ['--card-hover','Row hover','#2c2c2c','#eeeeee'],
+  ['--input-bg','Input fill','#0c0c0c','#f4f4f6'],
+  ['--surface-cool','Media placeholder','#1d1d1d','#eef1f4'],
+  ['--hairline','1px divider','rgba(255,255,255,.08)','#ededed'],
+  ['--hairline-strong','Control border','rgba(255,255,255,.14)','#e4e4e2'],
+];
+const TEXT=[
+  ['--ink','Primary text / headings'],['--ink-soft','Strong body / labels'],
+  ['--graphite','Secondary text'],['--slate','Tertiary / metadata'],
+  ['--mute','Muted / placeholder'],['--stone','Disabled'],['--ash','Faintest hint'],
+];
+const ACTION=[
+  ['--action','Primary button fill','#f4f4f4','#111111'],
+  ['--on-action','Text on primary','#121212','#ffffff'],
+  ['--accent','Signal Blue — playhead / selection / focus','#4a9eff','#2563eb'],
+  ['--accent-soft','Selection fill / focus halo','rgba(74,158,255,.22)','rgba(37,99,235,.14)'],
+];
+const STATUS=[
+  ['--danger','Errors / destructive','#f87171','#dc2626'],
+  ['--warn','Warnings','#fbbf24','#d97706'],
+  ['--success','Success / saved','#34d399','#059669'],
+  ['--chart-1','Chart 1','#4c9be8','#2563eb'],['--chart-2','Chart 2','#e86b4c','#e11d48'],
+  ['--chart-3','Chart 3','#4ce8a0','#16a34a'],['--chart-4','Chart 4','#e8c84c','#ca8a04'],
+  ['--chart-5','Chart 5','#9b4ce8','#7c3aed'],
+];
+const TYPE=[
+  ['display','49 / 1.0 / -1.4','600','Display'],
+  ['heading-lg','37 / 1.0 / -1.0','600','Heading LG'],
+  ['heading-md','24 / 1.05 / -0.3','600','Heading MD'],
+  ['heading-sm','18 / 1.1 / -0.2','600','Heading SM'],
+  ['subtitle','16 / 1.3 / -0.16','500','Subtitle'],
+  ['body','14 / 1.5','400','Body — the default reading size for descriptions.'],
+  ['ui','13 / 1.3','450','UI default — controls, menus, rows.'],
+  ['label','12 / 1.3','500','LABEL'],
+  ['meta','12 / 1.3','400','Meta — timestamps, hints'],
+  ['eyebrow','13 / 1.4 / +0.35','500','EYEBROW'],
+  ['micro-caps','11 / 1.3 / +0.2','450','MICRO-CAPS'],
+];
+const SIZE={display:49,'heading-lg':37,'heading-md':24,'heading-sm':18,subtitle:16,body:14,ui:13,label:12,meta:12,eyebrow:13,'micro-caps':11};
+
+function swatch(tok,role,d,l){
+  return `<div class="swatch"><div class="chip" style="background:var(${tok})"></div>
+    <div class="meta"><div class="name">${tok}</div><div class="role">${role}</div>
+    <div class="val">D ${d}<br>L ${l}</div></div></div>`;
+}
+document.getElementById('sw-surface').innerHTML=SURF.map(s=>swatch(...s)).join('');
+document.getElementById('sw-action').innerHTML=ACTION.map(s=>swatch(...s)).join('');
+document.getElementById('sw-status').innerHTML=STATUS.map(s=>swatch(...s)).join('');
+
+document.getElementById('ladder').innerHTML=TEXT.map(([t,r])=>
+  `<div><span class="lab">${t}</span><span style="color:var(${t})">The quick brown fox — ${r}</span></div>`).join('');
+
+document.getElementById('typescale').innerHTML=TYPE.map(([tok,spec,w,sample])=>{
+  const up=(tok==='eyebrow'||tok==='micro-caps'||tok==='label');
+  const tr=tok.startsWith('display')||tok.startsWith('heading')?'-0.3px':(tok==='eyebrow'?'.35px':(tok==='micro-caps'?'.2px':'0'));
+  return `<div class="type-row"><span class="tk">${tok}</span>
+    <span style="font-size:${SIZE[tok]}px; font-weight:${w}; letter-spacing:${tr}; ${up?'text-transform:uppercase;':''} color:var(--ink); line-height:1.1;">${sample}</span>
+    <span class="sp">${spec} · ${w}</span></div>`;
+}).join('');
+
+/* ruler ticks */
+let ticks=''; for(let i=0;i<22;i++) ticks+='<div class="tick"></div>';
+document.getElementById('ruler').innerHTML=ticks;
+</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+name: Bug report
+description: Something in Dreambyte is broken or behaves unexpectedly.
+labels: [bug]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Create a project…
+        2. Ask the agent to…
+        3. See error…
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Dreambyte version or commit
+      placeholder: 0.7.28.0, or a commit SHA if running from source
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - macOS (Apple silicon)
+        - macOS (Intel)
+        - Windows
+        - Linux
+    validations:
+      required: true
+  - type: input
+    id: provider
+    attributes:
+      label: Model / media provider involved (if any)
+      placeholder: e.g. Anthropic, fal, ElevenLabs
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or screenshots
+      description: Remove API keys and anything private before pasting.
+      render: shell

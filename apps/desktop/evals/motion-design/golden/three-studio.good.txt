@@ -1,0 +1,23 @@
+export default function Scene() {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const t = frame / fps;
+  return (
+    <AbsoluteFill style={{ background: '#06070a', fontFamily: 'Inter' }}>
+      <ThreeJSLayer
+        setup={(THREE, scene, camera, renderer) => {
+          buildInfiniteStudio(THREE, scene, camera, renderer, { color: 'midnight' });
+        }}
+        update={(scene, camera, frame) => {
+          const tt = frame / 30;
+          camera.position.z = 14 - Math.min(tt, 4) * 2;
+          camera.position.y = 4 - Math.min(tt, 4) * 0.5;
+          camera.lookAt(0, 0, 0);
+        }}
+      />
+      <div style={{ position: 'absolute', left: 120, top: 120, fontSize: 110, fontWeight: 800, color: '#fff' }}>
+        Inside the model
+      </div>
+    </AbsoluteFill>
+  );
+}

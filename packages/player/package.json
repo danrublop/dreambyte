@@ -1,0 +1,18 @@
+{
+  "name": "@dreambyte/player",
+  "private": true,
+  "version": "0.1.0",
+  "license": "MIT",
+  "description": "Dreambyte interactive player runtime",
+  "main": "dist/dreambyte-player.iife.js",
+  "module": "dist/dreambyte-player.mjs",
+  "types": "src/index.ts",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "vite": "^8.0.8"
+  }
+}

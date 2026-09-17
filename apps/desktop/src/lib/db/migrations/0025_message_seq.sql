@@ -1,0 +1,12 @@
+-- 0025: messages.seq — monotonic sequence number for the in-flight incremental
+-- chat persist (T1 / D5).
+--
+-- Hand-trimmed additive delta (matching the 0011-0022 convention): the
+-- drizzle/sqlite meta snapshot is stale, so `db:generate` would emit a full
+-- "create everything" baseline that fails on a populated DB.
+--
+-- The streaming upsert carries (runId, seq); the persist layer rejects a write
+-- whose seq is older than the row's current seq so a late/out-of-order partial
+-- can never clobber newer streamed content. Nullable: legacy rows and the final
+-- (supersedes-partials) persist leave it NULL. ADD COLUMN is allowed by SQLite.
+ALTER TABLE `messages` ADD COLUMN `seq` integer;

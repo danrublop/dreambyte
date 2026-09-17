@@ -1,0 +1,23 @@
+<!doctype html>
+<!--
+  MediaPipe detector page.
+
+  Loaded by `src/electron/mediapipe-detector-host.ts` inside a hidden
+  offscreen BrowserWindow. Real implementation (v0.3.3+) is bundled at
+  `mediapipe-detector-bundle.js` by `scripts/build/build-electron.mjs` and exposes
+  `window.__dreambyteDetect(request)` returning a real MediaPipeDetectResponse.
+
+  Implementation source: src/electron/mediapipe-detector-page.ts.
+  WASM artifacts: dist-electron/mediapipe-wasm/ (copied at build time).
+  Model: MediaPipe CDN (cached after first run; offline-bundle is the
+  documented v0.4.x follow-up).
+-->
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>dreambyte mediapipe detector</title>
+</head>
+<body>
+  <script src="./mediapipe-detector-bundle.js"></script>
+</body>
+</html>

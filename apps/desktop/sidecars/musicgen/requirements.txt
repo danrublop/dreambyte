@@ -1,0 +1,6 @@
+# MusicGen sidecar deps. Installed into a local venv by setup.sh — NOT bundled into
+# the Electron app. Weights are fetched at runtime (cached to ~/.cache/huggingface).
+torch
+transformers
+scipy
+numpy

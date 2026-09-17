@@ -1,0 +1,13 @@
+-- 0032: project_brief (OKF Layer 0 — project intent / the compass).
+--
+-- Hand-trimmed additive delta (matching the 0011-0031 convention): the
+-- drizzle/sqlite meta snapshot is stale (stops at 0016), so `db:generate` would
+-- emit a full "create everything" baseline that fails on a populated DB.
+--
+-- Add a nullable JSON column holding the ProjectBrief (format, video type, log
+-- line, voice driver, media strategy) — see docs/OKF_INTENT_ARCHITECTURE_PLAN.md
+-- and lib/types/project.ts. JSON is stored as text (the project's other JSON
+-- columns use the same `text({ mode: 'json' })` convention). NULL until the
+-- brief is extracted from the first prompt. Advisory-only in Phase A (persisted
+-- + injected every turn, no routing/behavior change yet).
+ALTER TABLE `projects` ADD COLUMN `project_brief` text;

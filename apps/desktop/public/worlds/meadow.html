@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.183.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.183.0/examples/jsm/",
+      "animejs": "https://cdn.jsdelivr.net/npm/animejs@4.5.0/dist/bundles/anime.esm.min.js"
+    }
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1920px; height: 1080px; overflow: hidden; background: #87ceeb;
+      transform-origin: top left;
+    }
+    canvas { display: block; }
+  </style>
+  <script>
+    // Scale 1920x1080 body to fit the actual viewport
+    function fitToViewport() {
+      var s = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+      document.body.style.transform = 'scale(' + s + ')';
+    }
+    window.addEventListener('resize', fitToViewport);
+    document.addEventListener('DOMContentLoaded', fitToViewport);
+
+    window.WIDTH = 1920;
+    window.HEIGHT = 1080;
+  </script>
+</head>
+<body>
+  <script type="module">
+    import * as THREE from 'three';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import * as anime from 'animejs';
+
+    // ── WVC bridge ──────────────────────────────────────────────────────────────
+    window.__sceneReady = new Promise(resolve => { window.__resolveReady = resolve; });
+
+    // ── Config ──────────────────────────────────────────────────────────────────
+    const worldConfig = window.__worldConfig || {};
+    const timeOfDay = worldConfig.timeOfDay || 'afternoon';
+    const windStrength = worldConfig.windStrength ?? 1.0;
+    const grassDensity = worldConfig.grassDensity ?? 50000;
+    const cameraPath = worldConfig.cameraPath || null;
+    const configObjects = worldConfig.objects || [];
+    const configPanels = worldConfig.panels || [];
+    const configAvatars = worldConfig.avatars || [];
+
+    // ── Sky color presets ───────────────────────────────────────────────────────
+    const SKY_PRESETS = {
+      morning:   { top: new THREE.Color(0xffd89b), bottom: new THREE.Color(0xffe8c9), fog: 0xffe0b0, ambient: 0xfff0d0 },
+      afternoon: { top: new THREE.Color(0x4a90d9), bottom: new THREE.Color(0x87ceeb), fog: 0xa0c8e8, ambient: 0xe8f0ff },
+      sunset:    { top: new THREE.Color(0x2b1055), bottom: new THREE.Color(0xff6b35), fog: 0xd4724e, ambient: 0xffc8a0 },
+      night:     { top: new THREE.Color(0x0a0a2e), bottom: new THREE.Color(0x1a1a4e), fog: 0x0e0e30, ambient: 0x4060a0 },
+    };
+    const sky = SKY_PRESETS[timeOfDay] || SKY_PRESETS.afternoon;
+
+    // ── Scene setup ─────────────────────────────────────────────────────────────
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.Fog(sky.fog, 30, 120);
+
+    const camera = new THREE.PerspectiveCamera(50, 1920 / 1080, 0.1, 500);
+    camera.position.set(0, 4, 20);
+    camera.lookAt(0, 1, 0);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(1920, 1080);
+    renderer.setPixelRatio(1);
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.2;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    document.body.appendChild(renderer.domElement);
+
+    // ── Sky dome ────────────────────────────────────────────────────────────────
+    const skyGeo = new THREE.SphereGeometry(200, 32, 16);
+    const skyMat = new THREE.ShaderMaterial({
+      side: THREE.BackSide,
+      depthWrite: false,
+      uniforms: {
+        topColor:    { value: sky.top },
+        bottomColor: { value: sky.bottom },
+      },
+      vertexShader: `
+        varying vec3 vWorldPos;
+        void main() {
+          vec4 wp = modelMatrix * vec4(position, 1.0);
+          vWorldPos = wp.xyz;
+          gl_Position = projectionMatrix * viewMatrix * wp;
+        }
+      `,
+      fragmentShader: `
+        uniform vec3 topColor;
+        uniform vec3 bottomColor;
+        varying vec3 vWorldPos;
+        void main() {
+          float h = normalize(vWorldPos).y * 0.5 + 0.5;
+          gl_FragColor = vec4(mix(bottomColor, topColor, h), 1.0);
+        }
+      `,
+    });
+    scene.add(new THREE.Mesh(skyGeo, skyMat));
+
+    // ── Ground ──────────────────────────────────────────────────────────────────
+    const groundGeo = new THREE.PlaneGeometry(200, 200);
+    const groundMat = new THREE.MeshLambertMaterial({ color: 0x4a8c3f });
+    const ground = new THREE.Mesh(groundGeo, groundMat);
+    ground.rotation.x = -Math.PI / 2;
+    ground.receiveShadow = true;
+    scene.add(ground);
+
+    // ── Grass shader ────────────────────────────────────────────────────────────
+    const BLADE_COUNT = grassDensity;
+    const SPREAD = 80;
+
+    const bladeGeo = new THREE.PlaneGeometry(0.08, 0.5, 1, 4);
+    bladeGeo.translate(0, 0.25, 0); // pivot at base
+
+    const grassUniforms = {
+      uTime: { value: 0 },
+      uWindStrength: { value: windStrength },
+    };
+
+    const grassMat = new THREE.ShaderMaterial({
+      uniforms: grassUniforms,
+      side: THREE.DoubleSide,
+      vertexShader: `
+        uniform float uTime;
+        uniform float uWindStrength;
+        attribute vec3 aOffset;
+        attribute float aPhase;
+        varying float vHeight;
+        varying vec2 vUv;
+
+        void main() {
+          vUv = uv;
+          vec3 pos = position;
+          // height factor: how far up the blade (0 at base, 1 at tip)
+          float hFactor = pos.y / 0.5;
+          vHeight = hFactor;
+          // Wind sway — weighted by height squared
+          float sway = sin(uTime * 2.0 + aOffset.x * 0.5 + aOffset.z * 0.3 + aPhase) * 0.12 * uWindStrength;
+          sway += sin(uTime * 1.3 + aOffset.x * 0.2 - aOffset.z * 0.4 + aPhase * 0.7) * 0.06 * uWindStrength;
+          pos.x += sway * hFactor * hFactor;
+          pos.z += sway * 0.3 * hFactor * hFactor;
+          // Apply instance offset
+          pos += aOffset;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+        }
+      `,
+      fragmentShader: `
+        varying float vHeight;
+        varying vec2 vUv;
+
+        void main() {
+          // Base-to-tip gradient: dark green at base, bright green at tip
+          vec3 baseColor = vec3(0.15, 0.35, 0.08);
+          vec3 tipColor = vec3(0.35, 0.65, 0.15);
+          vec3 col = mix(baseColor, tipColor, vHeight);
+          // Fake AO at base
+          float ao = smoothstep(0.0, 0.15, vHeight);
+          col *= mix(0.5, 1.0, ao);
+          gl_FragColor = vec4(col, 1.0);
+        }
+      `,
+    });
+
+    // Build instanced attributes
+    const grassMesh = new THREE.InstancedBufferGeometry();
+    grassMesh.index = bladeGeo.index;
+    grassMesh.attributes.position = bladeGeo.attributes.position;
+    grassMesh.attributes.uv = bladeGeo.attributes.uv;
+
+    const offsets = new Float32Array(BLADE_COUNT * 3);
+    const phases = new Float32Array(BLADE_COUNT);
+    // Seeded random for deterministic placement
+    let seed = 12345;
+    function seededRandom() {
+      seed = (seed * 16807 + 0) % 2147483647;
+      return (seed - 1) / 2147483646;
+    }
+    for (let i = 0; i < BLADE_COUNT; i++) {
+      offsets[i * 3]     = (seededRandom() - 0.5) * SPREAD;
+      offsets[i * 3 + 1] = 0;
+      offsets[i * 3 + 2] = (seededRandom() - 0.5) * SPREAD;
+      phases[i] = seededRandom() * Math.PI * 2;
+    }
+    grassMesh.setAttribute('aOffset', new THREE.InstancedBufferAttribute(offsets, 3));
+    grassMesh.setAttribute('aPhase', new THREE.InstancedBufferAttribute(phases, 1));
+    grassMesh.instanceCount = BLADE_COUNT;
+
+    const grassObj = new THREE.Mesh(grassMesh, grassMat);
+    grassObj.frustumCulled = false;
+    scene.add(grassObj);
+
+    // ── Lighting ────────────────────────────────────────────────────────────────
+    const ambient = new THREE.AmbientLight(0xffffff, 0.6);
+    scene.add(ambient);
+
+    const dirLight = new THREE.DirectionalLight(0xfff4e0, 1.8);
+    dirLight.position.set(50, 80, 30);
+    dirLight.castShadow = true;
+    dirLight.shadow.mapSize.width = 2048;
+    dirLight.shadow.mapSize.height = 2048;
+    dirLight.shadow.camera.near = 0.5;
+    dirLight.shadow.camera.far = 200;
+    dirLight.shadow.camera.left = -50;
+    dirLight.shadow.camera.right = 50;
+    dirLight.shadow.camera.top = 50;
+    dirLight.shadow.camera.bottom = -50;
+    scene.add(dirLight);
+
+    // ── Asset loading ───────────────────────────────────────────────────────────
+    const gltfLoader = new GLTFLoader();
+    let modelIndex = null;
+    const mixers = [];
+    const loadedObjects = {};
+    const loadedAvatars = {};
+
+    async function fetchModelIndex() {
+      if (modelIndex) return modelIndex;
+      const res = await fetch('/models/library/index.json');
+      modelIndex = await res.json();
+      return modelIndex;
+    }
+
+    function setVec3FromPosOrArray(obj, position) {
+      if (!position) return;
+      if (Array.isArray(position)) obj.position.set(position[0] ?? 0, position[1] ?? 0, position[2] ?? 0);
+      else obj.position.set(position.x ?? 0, position.y ?? 0, position.z ?? 0);
+    }
+
+    function setRotationMeadow(model, rotation) {
+      if (!rotation) return;
+      const r = Array.isArray(rotation) ? rotation : [rotation.x, rotation.y, rotation.z];
+      const maxAbs = Math.max(Math.abs(r[0] ?? 0), Math.abs(r[1] ?? 0), Math.abs(r[2] ?? 0));
+      const asRad = maxAbs <= Math.PI * 2 + 0.02;
+      model.rotation.set(
+        asRad ? (r[0] ?? 0) : (r[0] ?? 0) * Math.PI / 180,
+        asRad ? (r[1] ?? 0) : (r[1] ?? 0) * Math.PI / 180,
+        asRad ? (r[2] ?? 0) : (r[2] ?? 0) * Math.PI / 180
+      );
+    }
+
+    function addPlaceholderModel(assetId, position, rotation, scale) {
+      const g = new THREE.BoxGeometry(0.9, 0.9, 0.9);
+      const m = new THREE.MeshStandardMaterial({ color: 0x5a7a9a, metalness: 0.15, roughness: 0.65 });
+      const mesh = new THREE.Mesh(g, m);
+      mesh.name = `placeholder:${assetId}`;
+      setVec3FromPosOrArray(mesh, position);
+      setRotationMeadow(mesh, rotation);
+      if (scale) {
+        if (typeof scale === 'number') mesh.scale.setScalar(scale);
+        else mesh.scale.set(scale[0] ?? 1, scale[1] ?? 1, scale[2] ?? 1);
+      }
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+      scene.add(mesh);
+      return mesh;
+    }
+
+    async function loadAsset(assetId, position, rotation, scale, animations) {
+      const index = await fetchModelIndex();
+      const entry = index.models.find(m => m.id === assetId);
+      if (!entry) { console.warn(`Model not found: ${assetId}`); return null; }
+
+      let gltf;
+      try {
+        gltf = await new Promise((resolve, reject) => {
+          gltfLoader.load(`/models/library/${entry.file}`, resolve, undefined, reject);
+        });
+      } catch (e) {
+        console.warn(`Failed to load GLB ${assetId}:`, e);
+        return addPlaceholderModel(assetId, position, rotation, scale);
+      }
+
+      const model = gltf.scene;
+
+      setVec3FromPosOrArray(model, position);
+      setRotationMeadow(model, rotation);
+
+      // Scale — auto-scale from bounding box if not given
+      if (scale) {
+        if (typeof scale === 'number') model.scale.setScalar(scale);
+        else model.scale.set(scale[0] ?? 1, scale[1] ?? 1, scale[2] ?? 1);
+      } else {
+        const box = new THREE.Box3().setFromObject(model);
+        const size = new THREE.Vector3();
+        box.getSize(size);
+        const maxDim = Math.max(size.x, size.y, size.z);
+        if (maxDim > 0) {
+          const targetSize = 2; // default 2 units
+          const s = targetSize / maxDim;
+          model.scale.setScalar(s);
+        }
+      }
+
+      // Shadows
+      model.traverse(child => {
+        if (child.isMesh) {
+          child.castShadow = true;
+          child.receiveShadow = true;
+        }
+      });
+
+      scene.add(model);
+
+      // Animations
+      if (animations && gltf.animations && gltf.animations.length > 0) {
+        const mixer = new THREE.AnimationMixer(model);
+        for (const animName of (Array.isArray(animations) ? animations : [animations])) {
+          const clip = animName === true
+            ? gltf.animations[0]
+            : gltf.animations.find(a => a.name === animName) || gltf.animations[0];
+          if (clip) mixer.clipAction(clip).play();
+        }
+        mixers.push(mixer);
+      }
+
+      return model;
+    }
+
+    // ── Panels (HTML to 3D texture) ─────────────────────────────────────────────
+    function addPanel(html, position, rotation, widthM, heightM) {
+      widthM = widthM || 3;
+      heightM = heightM || 2;
+      const pxPerMeter = 512;
+      const cw = widthM * pxPerMeter;
+      const ch = heightM * pxPerMeter;
+
+      const canvas = document.createElement('canvas');
+      canvas.width = cw;
+      canvas.height = ch;
+      const ctx = canvas.getContext('2d');
+
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${cw}" height="${ch}">
+        <foreignObject width="100%" height="100%">
+          <div xmlns="http://www.w3.org/1999/xhtml" style="width:${cw}px;height:${ch}px;font-family:sans-serif;color:#222;padding:24px;box-sizing:border-box;background:#fff;border-radius:16px;">
+            ${html}
+          </div>
+        </foreignObject>
+      </svg>`;
+
+      const img = new Image();
+      const blob = new Blob([svg], { type: 'image/svg+xml;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+
+      return new Promise(resolve => {
+        img.onload = () => {
+          ctx.drawImage(img, 0, 0);
+          URL.revokeObjectURL(url);
+
+          const texture = new THREE.CanvasTexture(canvas);
+          texture.colorSpace = THREE.SRGBColorSpace;
+          const mat = new THREE.MeshBasicMaterial({ map: texture, transparent: true, side: THREE.DoubleSide });
+          const geo = new THREE.PlaneGeometry(widthM, heightM);
+          const mesh = new THREE.Mesh(geo, mat);
+
+          if (position) mesh.position.set(position[0] ?? 0, position[1] ?? 0, position[2] ?? 0);
+          if (rotation) {
+            mesh.rotation.set(
+              (rotation[0] ?? 0) * Math.PI / 180,
+              (rotation[1] ?? 0) * Math.PI / 180,
+              (rotation[2] ?? 0) * Math.PI / 180
+            );
+          }
+
+          scene.add(mesh);
+          resolve(mesh);
+        };
+        img.onerror = () => {
+          URL.revokeObjectURL(url);
+          resolve(null);
+        };
+        img.src = url;
+      });
+    }
+    window.__addPanel = addPanel;
+
+    // ── Camera path (supports { time, position, lookAt } or { t, pos, lookAt }) ─
+    function camVec3(p) {
+      if (!p) return [0, 0, -5];
+      if (Array.isArray(p)) return [p[0] ?? 0, p[1] ?? 0, p[2] ?? 0];
+      return [p.x ?? 0, p.y ?? 0, p.z ?? 0];
+    }
+
+    function normalizeCameraKeyframes(raw) {
+      return raw
+        .map((k) => {
+          const time = k.time !== undefined ? k.time : (k.t !== undefined ? k.t : 0);
+          const posSrc = k.position !== undefined ? k.position : k.pos;
+          const pos = camVec3(posSrc);
+          const la = k.lookAt !== undefined ? camVec3(k.lookAt) : [pos[0], pos[1], pos[2] - 1];
+          return { time, position: pos, lookAt: la };
+        })
+        .sort((a, b) => a.time - b.time);
+    }
+
+    function applyCameraPath(t) {
+      if (!cameraPath || cameraPath.length === 0) return;
+      const path = normalizeCameraKeyframes(cameraPath);
+      if (path.length === 1) {
+        const kf = path[0];
+        camera.position.set(kf.position[0], kf.position[1], kf.position[2]);
+        camera.lookAt(kf.lookAt[0], kf.lookAt[1], kf.lookAt[2]);
+        return;
+      }
+
+      const first = path[0];
+      const last = path[path.length - 1];
+      if (t <= first.time) {
+        camera.position.set(first.position[0], first.position[1], first.position[2]);
+        camera.lookAt(first.lookAt[0], first.lookAt[1], first.lookAt[2]);
+        return;
+      }
+      if (t >= last.time) {
+        camera.position.set(last.position[0], last.position[1], last.position[2]);
+        camera.lookAt(last.lookAt[0], last.lookAt[1], last.lookAt[2]);
+        return;
+      }
+
+      let a = first;
+      let b = path[1];
+      for (let i = 0; i < path.length - 1; i++) {
+        if (t >= path[i].time && t <= path[i + 1].time) {
+          a = path[i];
+          b = path[i + 1];
+          break;
+        }
+      }
+
+      const denom = b.time - a.time;
+      const alpha = denom > 0 ? (t - a.time) / denom : 0;
+      camera.position.set(
+        a.position[0] + (b.position[0] - a.position[0]) * alpha,
+        a.position[1] + (b.position[1] - a.position[1]) * alpha,
+        a.position[2] + (b.position[2] - a.position[2]) * alpha
+      );
+      const lx = a.lookAt[0] + (b.lookAt[0] - a.lookAt[0]) * alpha;
+      const ly = a.lookAt[1] + (b.lookAt[1] - a.lookAt[1]) * alpha;
+      const lz = a.lookAt[2] + (b.lookAt[2] - a.lookAt[2]) * alpha;
+      camera.lookAt(lx, ly, lz);
+    }
+
+    // ── Update helpers ──────────────────────────────────────────────────────────
+    const clock = new THREE.Clock();
+
+    function updateUniforms(t) {
+      grassUniforms.uTime.value = t;
+    }
+
+    function updateMixers(dt) {
+      for (const mixer of mixers) mixer.update(dt);
+    }
+
+    // ── anime.js timeline (seconds; seeked by __updateScene) ──────────────────────
+    anime.engine.timeUnit = 's';
+    window.anime = anime;
+    const tl = anime.createTimeline({ autoplay: false });
+    window.__tl = tl;
+
+    // ── Load sequence ───────────────────────────────────────────────────────────
+    async function init() {
+      const loadPromises = [];
+
+      // Load objects
+      for (const obj of configObjects) {
+        const p = loadAsset(obj.assetId, obj.position, obj.rotation, obj.scale, obj.animations)
+          .then(model => { if (model) loadedObjects[obj.id || obj.assetId] = model; })
+          .catch(err => console.warn(`Failed to load object ${obj.assetId}:`, err));
+        loadPromises.push(p);
+      }
+
+      // Legacy avatar entries render as placeholders. See
+      // public/worlds/world-avatar-overlay.js.
+      const { createWorldAvatar } = await import('/worlds/world-avatar-overlay.js');
+      configAvatars.forEach((avatar, i) => {
+        loadPromises.push(
+          createWorldAvatar(document.body, avatar, tl, {
+            ttsEndpoint: worldConfig.ttsEndpoint || null,
+            duration: window.DURATION || 10,
+            index: i,
+          }).then((handle) => {
+            if (handle) loadedAvatars[avatar.id || `avatar-${i}`] = handle;
+          }),
+        );
+      });
+
+      // Load panels
+      for (const panel of configPanels) {
+        const p = addPanel(panel.html, panel.position, panel.rotation, panel.width, panel.height)
+          .catch(err => console.warn('Failed to load panel:', err));
+        loadPromises.push(p);
+      }
+
+      await Promise.all(loadPromises);
+
+      // Call world setup if defined
+      if (typeof window.__worldSetup === 'function') {
+        await window.__worldSetup(tl, loadedObjects, loadedAvatars);
+      }
+
+      // Signal ready
+      window.__resolveReady();
+    }
+
+    // ── Render loops ────────────────────────────────────────────────────────────
+
+    // Preview mode: normal RAF
+    let lastTime = 0;
+    function raf(now) {
+      const t = now / 1000;
+      const dt = t - lastTime;
+      lastTime = t;
+
+      window.__sceneTime = t;
+      updateUniforms(t);
+      updateMixers(dt);
+      applyCameraPath(t);
+      renderer.render(scene, camera);
+      requestAnimationFrame(raf);
+    }
+
+    // WVC capture mode: called per-frame by render server
+    window.__updateScene = (t) => {
+      window.__sceneTime = t;
+      updateUniforms(t);
+      // Advance mixers by a fixed frame step (assuming 30fps for capture)
+      updateMixers(1 / 30);
+      applyCameraPath(t);
+      if (window.__tl) window.__tl.seek(t);
+      renderer.render(scene, camera);
+    };
+
+    // Start
+    init().then(() => {
+      if (!window.__wvc_render) requestAnimationFrame(raf);
+    });
+  </script>
+</body>
+</html>

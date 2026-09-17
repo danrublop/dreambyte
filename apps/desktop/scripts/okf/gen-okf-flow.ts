@@ -1,0 +1,178 @@
+/**
+ * gen-okf-flow — interactive "how a PROMPT flows through OKF" visualizer.
+ *
+ * Renders docs/okf-flow.html: type a prompt (or pick an example) and watch the
+ * pipeline run — prompt → inferred Brief → router tags → which craft packs light
+ * up → pacing profile → injection. The routing JS mirrors src/lib/agents/okf/
+ * intent-router.ts (source of truth); the brief inference is a keyword HEURISTIC
+ * standing in for the real LLM extractProjectBrief (labeled as such in the UI).
+ *
+ * Run: npx tsx scripts/okf/gen-okf-flow.ts
+ */
+import fs from 'fs'
+import path from 'path'
+import { walkOkfBundle, canonicalBundleRoots } from '../../src/lib/agents/okf/bundle'
+
+const CWD = process.cwd()
+const ROUTING_TAGS = new Set(['core', 'lane:media', 'lane:avatar'])
+
+// Pull the real craft packs (id/title/description/tags) so the viz stays in sync.
+const bundle = walkOkfBundle(canonicalBundleRoots(CWD))
+const CRAFT = bundle.nodes
+  .filter((n) => n.group === 'rules' && n.tags.some((t) => ROUTING_TAGS.has(t)))
+  .map((n) => ({ id: n.id.replace(/^rules\//, ''), title: n.title, description: n.description, tags: n.tags }))
+  .sort((a, b) => a.id.localeCompare(b.id))
+
+const EXAMPLES = [
+  'make a 30-second vertical TikTok explaining how photosynthesis works',
+  'a 60-second product marketing video with our uploaded demo footage and brand kit',
+  'a longform documentary film about deep-sea creatures, cinematic, stock + AI-generated b-roll',
+  'an educational tutorial explaining fractions to kids',
+  'repurpose our 2-hour podcast recording into highlights',
+  'a professional explainer with an avatar presenter and captions',
+]
+
+const html = `<!doctype html>
+<html><head><meta charset="utf-8"><title>OKF — Prompt Flow</title>
+<style>
+  :root{--bg:#0f1115;--card:#171a21;--line:#2a2f3a;--ink:#e6e6e6;--mut:#8b95a7;
+    --core:#4ea1ff;--footage:#e8a420;--media:#7bd88f;--branding:#c084fc;--grade:#f87171;--format:#45b8e8;--dim:#3a3f4a;}
+  *{box-sizing:border-box} body{margin:0;font:14px/1.5 system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+  header{padding:14px 22px;border-bottom:1px solid var(--line)} header b{font-size:16px} header span{color:var(--mut)}
+  .wrap{max-width:1100px;margin:0 auto;padding:20px}
+  textarea{width:100%;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font:15px/1.4 system-ui;resize:vertical;min-height:54px}
+  .chips{margin:10px 0 4px;display:flex;flex-wrap:wrap;gap:8px}
+  .chip{background:var(--card);border:1px solid var(--line);color:var(--mut);border-radius:18px;padding:5px 12px;font-size:12px;cursor:pointer}
+  .chip:hover{color:var(--ink);border-color:var(--core)}
+  .stage{margin:18px 0;position:relative}
+  .stage .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);margin-bottom:8px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .arrow{height:22px;display:flex;align-items:center;justify-content:center;color:var(--dim);font-size:18px}
+  .kv{display:grid;grid-template-columns:max-content 1fr;gap:4px 14px}
+  .kv .k{color:var(--mut)} .kv .v{color:var(--ink)}
+  .tagrow{display:flex;flex-wrap:wrap;gap:8px}
+  .tag{border-radius:14px;padding:3px 11px;font-size:12px;font-weight:600;color:#0f1115}
+  .tag.core{background:var(--core)} .tag.l-footage{background:var(--footage)} .tag.l-media{background:var(--media)}
+  .tag.l-branding{background:var(--branding)} .tag.l-grade{background:var(--grade)} .tag.f-shortform{background:var(--format)}
+  .packs{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+  .pack{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#12141a;opacity:.4;transition:.15s}
+  .pack.on{opacity:1;border-color:var(--core);box-shadow:0 0 0 1px var(--core) inset}
+  .pack .t{font-weight:600} .pack .d{color:var(--mut);font-size:12px;margin-top:3px}
+  .pack .badge{float:right;font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--mut)}
+  .pack.on .badge{color:var(--core)}
+  .pace b{color:#fff} .muted{color:var(--mut)}
+  .note{color:var(--mut);font-size:12px;margin-top:6px}
+</style></head><body>
+<header><b>OKF — how a prompt becomes a film</b> &nbsp;<span>type a prompt and watch it route through the intent system</span></header>
+<div class="wrap">
+  <textarea id="prompt" rows="2">make a 30-second vertical TikTok explaining how photosynthesis works</textarea>
+  <div class="chips" id="chips"></div>
+
+  <div class="stage"><div class="lbl">1 · user prompt</div><div class="card" id="s-prompt"></div></div>
+  <div class="arrow">▼ extractProjectBrief (LLM — heuristic here)</div>
+  <div class="stage"><div class="lbl">2 · project brief (the compass)</div><div class="card"><div class="kv" id="s-brief"></div></div></div>
+  <div class="arrow">▼ routeOKF → required tags</div>
+  <div class="stage"><div class="lbl">3 · intent → routing tags</div><div class="card"><div class="tagrow" id="s-tags"></div></div></div>
+  <div class="arrow">▼ select craft by tag intersection</div>
+  <div class="stage"><div class="lbl">4 · craft packs (lit = injected)</div><div class="card"><div class="packs" id="s-packs"></div>
+    <div class="pace" id="s-pace" style="margin-top:12px"></div></div></div>
+  <div class="arrow">▼ inject into the agent's context (MANDATORY)</div>
+  <div class="stage"><div class="lbl">5 · build</div><div class="card" id="s-build"></div></div>
+</div>
+<script>
+const CRAFT = ${JSON.stringify(CRAFT)};
+const EXAMPLES = ${JSON.stringify(EXAMPLES)};
+const TAG_PRIORITY = ['core','lane:media','lane:avatar'];
+
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];});}
+
+// ── Brief inference: keyword HEURISTIC standing in for the LLM extractor ──
+function inferBrief(p){
+  var s=p.toLowerCase();
+  var vertical=/tiktok|reel|\\bshort(s|form)?\\b|vertical|9:?16|story|stories/.test(s);
+  var rt=null; var m=s.match(/(\\d+)\\s*(s|sec|second|seconds)\\b/); if(m)rt=+m[1];
+  var hourly=/\\b(\\d+)\\s*(hour|hr)/.test(s);
+  var videoType='other';
+  if(/podcast/.test(s))videoType='podcast';
+  else if(/tutorial|teach|lesson|course|educational|explain .* to (kids|children|students)/.test(s))videoType='educational';
+  else if(/market|product|promo|\\bad\\b|launch|sell|demo/.test(s))videoType='marketing';
+  else if(/document|film|cinematic|movie/.test(s))videoType='film';
+  else if(/talking[- ]head|presenter|webinar|professional|corporate/.test(s))videoType='professional';
+  else if(/explain|how .* works|explainer|infographic/.test(s))videoType='explainer';
+  else if(vertical)videoType='shortform';
+  var lengthClass=(vertical||(rt!=null&&rt<=60&&!hourly))?'shortform':'longform';
+  var aspectRatio=vertical?'9:16':'16:9';
+  var hasFootage=/footage|clip|upload|recorded|interview|b-?roll|our video/.test(s);
+  var footageSpeech=hasFootage&&/talk|speak|interview|narrat|say|said|podcast|recording/.test(s);
+  var avatar=/avatar|spokesperson|presenter|character|host/.test(s);
+  var voice= /dialogue|interview|conversation/.test(s)?'dialogue-led' : /no narrat|silent|visual only|music only/.test(s)?'visual-led':'narration-led';
+  var media={research:/research|fact|accurate/.test(s),stock:/stock|getty|pexels|archival/.test(s),generate:/generate|\\bai\\b|midjourney|dall|diffusion|generated/.test(s),userAssets:hasFootage,branding:/brand|logo|brand kit/.test(s),overlays:{captions:/caption|subtitle/.test(s),stickers:/sticker/.test(s),svgs:/svg|icon/.test(s),lowerThirds:/lower.?third|name tag/.test(s)}};
+  return {prompt:p,videoType:videoType,aspectRatio:aspectRatio,lengthClass:lengthClass,runtimeTargetSec:rt,voiceDriver:voice,hasFootage:hasFootage,footageSpeech:footageSpeech,avatar:avatar,media:media};
+}
+
+// ── routeOKF (mirrors src/lib/agents/okf/intent-router.ts) ──
+function overlaysAny(b){var o=b.media.overlays;return o.captions||o.stickers||o.svgs||o.lowerThirds;}
+function requiredTags(b){
+  var t=['core'];
+  if(b.media.research||b.media.stock||b.media.generate)t.push('lane:media');
+  if(b.isAvatarCentric)t.push('lane:avatar');
+  return t;
+}
+function rank(tags){var best=TAG_PRIORITY.length;tags.forEach(function(t){var i=TAG_PRIORITY.indexOf(t);if(i>=0&&i<best)best=i;});return best;}
+function selectPacks(req){
+  var R={};req.forEach(function(t){R[t]=1;});
+  return CRAFT.filter(function(c){return c.tags.some(function(t){return R[t];});})
+    .slice().sort(function(a,b){return rank(a.tags)-rank(b.tags)||a.id.localeCompare(b.id);});
+}
+function defaultRuntime(b){if(b.lengthClass==='shortform')return 30;if(b.videoType==='explainer'||b.videoType==='educational')return 90;if(b.videoType==='marketing')return 60;if(b.videoType==='professional'||b.videoType==='podcast'||b.videoType==='film')return 120;return 60;}
+function pacing(b){
+  var total=(b.runtimeTargetSec&&b.runtimeTargetSec>0)?b.runtimeTargetSec:defaultRuntime(b);
+  if(b.lengthClass==='shortform')return{shape:'single-act-fast',total:total,hook:2,acts:[],density:'tight'};
+  var impact=Math.max(5,Math.min(7,Math.round(total*0.1)));
+  var persuade=Math.max(5,Math.round(total*0.2));
+  var communicate=Math.max(5,total-impact-persuade);
+  var density=(b.videoType==='podcast'||b.videoType==='film')?'relaxed':'standard';
+  return{shape:'3-act',total:total,hook:Math.min(30,impact+3),acts:[['impact',impact],['communicate',communicate],['persuade',persuade]],density:density};
+}
+
+function tagClass(t){return t==='core'?'core':'l-'+t.replace('lane:','');}
+
+function render(){
+  var p=document.getElementById('prompt').value;
+  var b=inferBrief(p);
+  var req=requiredTags(b);
+  var picked=selectPacks(req);
+  var pickedIds={};picked.forEach(function(c){pickedIds[c.id]=1;});
+  var pace=pacing(b);
+
+  document.getElementById('s-prompt').textContent=p;
+
+  var brief=[['video type',b.videoType],['format',b.aspectRatio+' · '+b.lengthClass+(b.runtimeTargetSec?' · ~'+b.runtimeTargetSec+'s':'')],
+    ['voice',b.voiceDriver],['uploaded footage',b.hasFootage?(b.footageSpeech?'yes, with speech':'yes'):'no'],
+    ['avatar-centric',b.avatar?'yes':'no'],
+    ['media',[b.media.research&&'research',b.media.stock&&'stock',b.media.generate&&'generate',b.media.userAssets&&'user assets',b.media.branding&&'branding',overlaysAny(b)&&'overlays'].filter(Boolean).join(', ')||'—']];
+  document.getElementById('s-brief').innerHTML=brief.map(function(r){return '<div class="k">'+esc(r[0])+'</div><div class="v">'+esc(r[1])+'</div>';}).join('');
+
+  document.getElementById('s-tags').innerHTML=req.map(function(t){return '<span class="tag '+tagClass(t)+'">'+esc(t)+'</span>';}).join('');
+
+  document.getElementById('s-packs').innerHTML=CRAFT.map(function(c){
+    var on=pickedIds[c.id];
+    return '<div class="pack'+(on?' on':'')+'"><span class="badge">'+(on?'injected':'skipped')+'</span><div class="t">'+esc(c.title)+'</div><div class="d">'+esc(c.description)+'</div></div>';
+  }).join('');
+
+  var actsTxt=pace.acts.length?pace.acts.map(function(a){return a[0]+' ~'+a[1]+'s';}).join(' · '):'one fast act';
+  document.getElementById('s-pace').innerHTML='<b>Pacing</b> · '+esc(pace.shape)+' · target ~'+pace.total+'s · hook within '+pace.hook+'s · '+esc(actsTxt)+' · '+esc(pace.density)+' density';
+
+  document.getElementById('s-build').innerHTML='The '+picked.length+' lit pack'+(picked.length===1?'':'s')+' ('+picked.map(function(c){return esc(c.id);}).join(', ')+') are what <b>get_routed_craft</b> returns for this intent, alongside the pacing profile. <div class="note">This is the ESCAPE HATCH, not the main road: a scene builder&rsquo;s own renderer craft is injected from PLAN STATE before it gets a turn (focusedSceneType for the fan-out, renderDirectorSkillGuides for the director). Reach for a pack here only for a topic state cannot see.</div>';
+}
+
+var chips=document.getElementById('chips');
+EXAMPLES.forEach(function(ex){var c=document.createElement('div');c.className='chip';c.textContent=ex;c.onclick=function(){document.getElementById('prompt').value=ex;render();};chips.appendChild(c);});
+document.getElementById('prompt').addEventListener('input',render);
+render();
+</script></body></html>
+`
+
+const out = path.join(CWD, 'docs', 'okf-flow.html')
+fs.writeFileSync(out, html)
+console.log(`[gen-okf-flow] ${CRAFT.length} craft packs, ${EXAMPLES.length} examples → ${path.relative(CWD, out)}`)

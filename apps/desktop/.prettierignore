@@ -1,0 +1,36 @@
+node_modules
+.next
+dist
+dist-electron
+public/scenes
+public/uploads
+reference
+src/lib/db/migrations
+*.min.js
+*.min.css
+# Generated bundles — match eslint.config.mjs ignores
+out
+# Excluded from eslint too; mirror here so format:check stays consistent.
+scripts
+# Previously under scripts/ (eval runner, sidecars); same exemption.
+evals/runner
+sidecars
+src/electron
+public/vendor
+public/sdk
+public/sfx-library
+# Deterministic codegen — formatter would drift the file vs. --check
+src/lib/motion-dsl/presets.generated.ts
+
+# Generated OKF rule packs + mirror (produced by `npm run gen:okf` / gen:okf-mirror).
+# Prettier must NOT reformat them — it drifts them from the generator output and
+# trips the gen-okf-index stale-gate (a CI test). The generator is the source of truth.
+.claude/skills/dreambyte/rules/
+.agents/skills/dreambyte/rules/
+src/lib/skills/library/index.md
+# Prompt-shipped markdown. loadAgentPromptDocs reads docs/agent/*.md straight into
+# the parent's system prompt, and prettier pads markdown TABLE cells to align —
+# +1,483 bytes of whitespace on every parent turn, for zero reader benefit.
+docs/agent
+# Generated notices (scripts/release/gen-third-party-notices.mjs)
+THIRD_PARTY_NOTICES.md

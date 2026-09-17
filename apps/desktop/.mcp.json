@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "dreambyte": {
+      "command": "node",
+      "args": ["scripts/mcp/mcp-connect.js"]
+    }
+  }
+}

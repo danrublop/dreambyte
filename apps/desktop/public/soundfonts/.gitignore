@@ -1,0 +1,3 @@
+*.sf3
+*.sf2
+!.gitignore

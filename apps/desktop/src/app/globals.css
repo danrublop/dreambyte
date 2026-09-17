@@ -1,0 +1,1125 @@
+@import '@fontsource-variable/inter';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ──────────────────────────────────────────────────────────────────────────
+ * Z-INDEX SCALE (de-facto, reference only; do not renumber existing use)
+ *
+ * Stacking layers observed across the renderer. New overlays should slot into
+ * the nearest band rather than inventing a higher number. Bands ascend:
+ *
+ *   z-1  .. z-5      in-flow decoration / playheads / timeline bits
+ *   z-30             click-away dismiss scrims (e.g. HomeSidebar workspace switcher)
+ *   z-40             popovers anchored to the shell (sidebar peek, dropdown bodies)
+ *   z-50             standard dialogs / menus
+ *   z-[60]           workspace picker overlay (ModelsAndApiPanel)
+ *   z-[90]..z-[121]  editor in-canvas overlays / floating panels
+ *   z-[100]/[101]    chat + editor inline cards (GenerationConfirmCard, etc.)
+ *   z-[200]          context menus / color popovers / rewind confirm
+ *   z-[400]..z-[500] publish + editor full-bleed panels
+ *   z-[1000]         conversation context menu, track-row menus, gallery
+ *   z-[9000]/[9001]  editor top-most floating affordances
+ *   z-[9998]/[9999]  app-modal scrims + Command Palette (NewProjectModal,
+ *                    ExportModal, CommandPalette, Editor modals)
+ *   z-[10000]        top-most modals over the palette (ProjectPanel,
+ *                    ShortcutsHelpModal, CommandPalette inner layer)
+ * ────────────────────────────────────────────────────────────────────────── */
+
+@font-face {
+  font-family: 'Saira Stencil';
+  src: url('/fonts/SairaStencil-Variable.ttf') format('truetype-variations');
+  font-weight: 100 900;
+  font-stretch: 50% 200%;
+}
+
+@layer base {
+  .kbd {
+    color: var(--kbd-text);
+  }
+}
+
+:root {
+  /* Default: Dark Theme (Inverted Elevation).
+     Legacy --color-* tokens are aliased to the docs/EDITOR-DESIGN.md ladder in the
+     "Legacy --color-* aliased" block below — that single block re-themes the app.
+     Only the legacy tokens with NO later alias (accent/border/hairline) live here;
+     the rest (bg, panel, text-*, input-bg, card, timeline-bg, agent-chat-user-surface)
+     are defined once, below, as ladder aliases. */
+  --color-accent: var(--accent);
+  /* Editor dividers track the content-area outline (--hairline). */
+  --color-border: var(--hairline);
+  --color-hairline: rgba(255, 255, 255, 0.09);
+
+  /* Global Keyboard Style Variables (Dark) */
+  --kbd-bg: #151515;
+  /* Interactive Buttons */
+  --kbd-border: #444;
+  --kbd-shadow: #000;
+  --kbd-text: #ffffff;
+
+  /* Scene graph minimap (React Flow) */
+  --minimap-node-fill: #3f3f48;
+  --minimap-node-stroke: rgba(107, 107, 122, 0.55);
+  --minimap-mask: rgba(0, 0, 0, 0.52);
+
+  /* shadcn/ui chart palette (Recharts) — see tailwind `chart.*` */
+  --color-card-token: #1a1a1f;
+  --chart-1: #4c9be8;
+  --chart-2: #e86b4c;
+  --chart-3: #4ce8a0;
+  --chart-4: #e8c84c;
+  --chart-5: #9b4ce8;
+
+  /* Timeline */
+  --tl-bg: #111111;
+  --tl-track-bg: #151515;
+  --tl-track-alt: #191919;
+  --tl-header-bg: #1a1a1a;
+  --tl-border: #252525;
+  --tl-ruler-bg: #111111;
+  --tl-ruler-tick: #6b6b7a;
+  --tl-ruler-tick-minor: #3a3a44;
+  --tl-ruler-label: #7a7a8a;
+  --tl-ruler-bar: #e8c84a;
+  --tl-playhead: #2563eb;
+  --tl-clip-video: #4a8c8c;
+  --tl-clip-audio: #2f6e78;
+  --tl-clip-image: #8c7a4a;
+  --tl-clip-title: #8c4a6e;
+  --tl-clip-border: rgba(255, 255, 255, 0.08);
+  --tl-clip-label: rgba(255, 255, 255, 0.9);
+  --tl-clip-fx: rgba(255, 255, 255, 0.35);
+  --tl-waveform: #9fe3e9;
+  --tl-badge-bg: #c43030;
+  --tl-toolbar-active: #c43030;
+  --tl-toolbar-text: #888;
+  --tl-ctrl-dim: #666;
+  --tl-ctrl-text: #ccc;
+  --tl-scrollbar-bg: #161619;
+  --tl-scrollbar-thumb: rgba(255, 255, 255, 0.18);
+  --tl-snap: #22d3ee;
+  --tl-ghost: rgba(37, 99, 235, 0.25);
+  --tl-ghost-border: rgba(37, 99, 235, 0.5);
+
+  /* App chrome — Inter is the facelift face; Geist/system are fallback only. */
+  --font-ui:
+    'Inter Variable', 'Inter', var(--font-geist-sans), Geist, ui-sans-serif, system-ui, -apple-system, sans-serif;
+  font-feature-settings:
+    'cv05' 1,
+    'ss01' 1;
+
+  /* ── Facelift design system (docs/EDITOR-DESIGN.md) — neutral-grey dark ───── */
+  --ink: #f4f4f4;
+  --ink-soft: #d6d6d6;
+  --graphite: #b0b0b0;
+  --slate: #8a8a8a;
+  --mute: #6e6e6e;
+  --stone: #585858;
+  --ash: #404040;
+  --bg: #121212;
+  --panel: #1a1a1a;
+  --card: #232323;
+  --card-hover: #2c2c2c;
+  --input-bg: #0c0c0c;
+  --hairline: rgba(255, 255, 255, 0.08);
+  --accent: #4a9eff;
+  --success: #34d399;
+  --danger: #f87171;
+  --warn: #fbbf24;
+  --panel-2: #0f0f0f;
+  --surface-cool: #1d1d1d;
+  --hairline-strong: rgba(255, 255, 255, 0.14);
+  --border-input: rgba(255, 255, 255, 0.12);
+  --action: #f4f4f4;
+  --on-action: #121212;
+  --accent-soft: rgba(74, 158, 255, 0.22);
+  --accent-strong: #2f86f0;
+  /* Foreground for content sitting ON the accent fill. --accent is a mid blue
+     (#4a9eff dark / #2563eb light) in BOTH themes, so white is the legible
+     contrast in both — this var documents that intent instead of a raw white. */
+  --accent-contrast: #ffffff;
+  --switch-off: #3a3a3a;
+  --switch-off-hover: #4a4a4a;
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-pill: 9999px;
+  --ease-swift: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 150ms;
+  --dur-base: 200ms;
+  --dur-slow: 300ms;
+
+  /* Legacy --color-* aliased onto the ladder (single source of truth, no drift) */
+  --color-bg: var(--bg);
+  --color-panel: var(--panel);
+  --color-input-bg: var(--input-bg);
+  --color-timeline-bg: var(--bg);
+  --color-text-primary: var(--ink);
+  --color-text-muted: var(--slate);
+  --color-card: var(--card);
+  --color-card-hover: var(--card-hover);
+  --agent-chat-user-surface: var(--card);
+
+  /* HeyGen brand chip: deep navy circle + cyan mark on dark theme. */
+  --heygen-chip: #0b1220;
+  --heygen-mark: #22d3ee;
+}
+
+:root.light-theme {
+  /* ── Facelift design system — light ──────────────────────────────────── */
+  --ink: #111111;
+  --ink-soft: #2a2a2a;
+  --graphite: #4d4d4d;
+  --slate: #5b6472;
+  --mute: #8a8a8a;
+  --stone: #9a9a9a;
+  --ash: #b6b6b6;
+  /* Outer shell area (sidebar + around the content card) in light mode is the
+     same soft grey the preview viewport used to be, so the white content card
+     and the now-white preview canvas read as elevated against it. */
+  --bg: #f4f4f6;
+  --panel: #ffffff;
+  --card: #f5f5f5;
+  --card-hover: #eeeeee;
+  --input-bg: #f4f4f6;
+  --hairline: #ededed;
+  --accent: #2563eb;
+  --success: #059669;
+  --danger: #dc2626;
+  --warn: #d97706;
+  --panel-2: #fafaf8;
+  --surface-cool: #eef1f4;
+  --hairline-strong: #e4e4e2;
+  --border-input: #dcdce0;
+  --action: #111111;
+  --on-action: #ffffff;
+  --accent-soft: rgba(37, 99, 235, 0.14);
+  --accent-strong: #1d4ed8;
+  --switch-off: #dfe1e4;
+  --switch-off-hover: #c9cbcd;
+  --color-text-primary: var(--ink);
+  --color-text-muted: var(--slate);
+  --color-bg: #ffffff;
+  --color-panel: #ffffff;
+  --color-accent: var(--accent);
+  --color-card: #f0f0f0;
+  --color-border: var(--hairline);
+  --color-hairline: #e0e0e0;
+  /* text-primary/-muted aliased to the ladder above (var(--ink)/var(--slate)) —
+     removed the hardcoded #1a1a1e/#666666 duplicates that overrode them. */
+  --color-input-bg: #f4f4f6;
+
+  /* Agent chat: readable on white canvas, distinct from panel */
+  --agent-chat-user-surface: #ebebef;
+  --color-card: #f5f5f5;
+  --color-card-hover: #eeeeee;
+
+  /* HeyGen brand chip: light card circle (not black) + a readable cyan mark. */
+  --heygen-chip: var(--card);
+  --heygen-mark: #0891b2;
+
+  /* Global Keyboard Style Variables (Light - Ghost Style) */
+  --kbd-bg: #ffffff;
+  --kbd-border: #c8c8d0;
+  --kbd-shadow: rgba(0, 0, 0, 0.06);
+  --kbd-text: #666675;
+
+  --minimap-node-fill: #c8c8d4;
+  --minimap-node-stroke: rgba(80, 80, 100, 0.45);
+  --minimap-mask: rgba(255, 255, 255, 0.58);
+
+  --color-card-token: #f0f0f0;
+  --chart-1: #2563eb;
+  --chart-2: #e11d48;
+  --chart-3: #16a34a;
+  --chart-4: #ca8a04;
+  --chart-5: #7c3aed;
+
+  /* Timeline */
+  --tl-bg: #ffffff;
+  --tl-track-bg: #ffffff;
+  --tl-track-alt: #f7f7f9;
+  --tl-header-bg: #f5f5f7;
+  --tl-border: #e4e4ea;
+  --tl-ruler-bg: #ffffff;
+  --tl-ruler-tick: #999;
+  --tl-ruler-tick-minor: #ccc;
+  --tl-ruler-label: #777;
+  --tl-ruler-bar: #d4a017;
+  --tl-playhead: #2563eb;
+  --tl-clip-video: #6ab0b0;
+  --tl-clip-audio: #5f9caa;
+  --tl-clip-image: #c4a85a;
+  --tl-clip-title: #c46a94;
+  --tl-clip-border: rgba(0, 0, 0, 0.12);
+  --tl-clip-label: rgba(255, 255, 255, 0.95);
+  --tl-clip-fx: rgba(255, 255, 255, 0.5);
+  --tl-waveform: #0e7490;
+  --tl-badge-bg: #2563eb;
+  --tl-toolbar-active: #2563eb;
+  --tl-toolbar-text: #666;
+  --tl-ctrl-dim: #999;
+  --tl-ctrl-text: #444;
+  --tl-scrollbar-bg: #e0e0e4;
+  --tl-scrollbar-thumb: rgba(0, 0, 0, 0.15);
+  --tl-snap: #0ea5e9;
+  --tl-ghost: rgba(37, 99, 235, 0.2);
+  --tl-ghost-border: rgba(37, 99, 235, 0.5);
+}
+
+:root.blue-theme {
+  --color-bg: #16181e;
+  --color-panel: #16181e;
+  --color-accent: #4a9eff;
+  --color-border: rgba(0, 0, 0, 0.35);
+  --color-hairline: rgba(0, 0, 0, 0.25);
+  --color-text-primary: #d4dae8;
+  --color-text-muted: #6b7894;
+  --color-input-bg: #12141a;
+
+  --agent-chat-user-surface: #1e2028;
+  --color-card: #1e2028;
+  --color-card-hover: #262a35;
+
+  --kbd-bg: #16181e;
+  --kbd-border: #2a2c34;
+  --kbd-shadow: #0a0b0e;
+  --kbd-text: #d4dae8;
+
+  --minimap-node-fill: #2a2c34;
+  --minimap-node-stroke: rgba(74, 158, 255, 0.35);
+  --minimap-mask: rgba(12, 13, 16, 0.55);
+
+  --color-timeline-bg: #1b1d23;
+  --color-card-token: #1e2028;
+  --chart-1: #4a9eff;
+  --chart-2: #ff6b6b;
+  --chart-3: #4ecdc4;
+  --chart-4: #ffd93d;
+  --chart-5: #a855f7;
+
+  /* Timeline */
+  --tl-bg: #1b1d23;
+  --tl-track-bg: #1e2028;
+  --tl-track-alt: #22252e;
+  --tl-header-bg: #242730;
+  --tl-border: #2a2c36;
+  --tl-ruler-bg: #1e2028;
+  --tl-ruler-tick: #6b7894;
+  --tl-ruler-tick-minor: #363a48;
+  --tl-ruler-label: #6b7894;
+  --tl-ruler-bar: #4a9eff;
+  --tl-playhead: #4a9eff;
+  --tl-clip-video: #3d7a8c;
+  --tl-clip-audio: #356b75;
+  --tl-clip-image: #8c7a3d;
+  --tl-clip-title: #8c3d6e;
+  --tl-clip-border: rgba(255, 255, 255, 0.06);
+  --tl-clip-label: rgba(255, 255, 255, 0.88);
+  --tl-clip-fx: rgba(255, 255, 255, 0.3);
+  --tl-waveform: #7fd4de;
+  --tl-badge-bg: #3366cc;
+  --tl-toolbar-active: #3366cc;
+  --tl-toolbar-text: #6b7894;
+  --tl-ctrl-dim: #4a5568;
+  --tl-ctrl-text: #d4dae8;
+  --tl-scrollbar-bg: #161820;
+  --tl-scrollbar-thumb: rgba(255, 255, 255, 0.12);
+  --tl-snap: #22d3ee;
+  --tl-ghost: rgba(74, 158, 255, 0.25);
+  --tl-ghost-border: rgba(74, 158, 255, 0.5);
+}
+
+.settings-list {
+  display: flex;
+  flex-direction: column;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family:
+    var(--font-ui),
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+}
+
+/* Chrome-style buttons: opt in with class `kbd` only (plain buttons stay unstyled for Tailwind) */
+.kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: var(--kbd-bg);
+  border-radius: 10px;
+  border: 1.5px solid var(--kbd-border);
+  box-shadow: 0 0 0 2px var(--kbd-shadow);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  line-height: 1;
+  overflow: visible;
+}
+
+.kbd:active {
+  transform: translateY(1.5px);
+  box-shadow: 0 0 0 1px var(--kbd-shadow);
+  filter: brightness(0.9);
+}
+
+.kbd:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ScenePlan “Create” — constant subtle outer halo; inner glow only “beats” */
+@keyframes create-btn-inner-beat {
+  0%,
+  100% {
+    box-shadow:
+      inset 0 0 10px 0 rgba(255, 255, 255, 0.08),
+      0 0 10px 1px rgba(150, 182, 210, 0.12);
+  }
+
+  12% {
+    box-shadow:
+      inset 0 0 22px 4px rgba(255, 255, 255, 0.32),
+      0 0 10px 1px rgba(150, 182, 210, 0.12);
+  }
+
+  22% {
+    box-shadow:
+      inset 0 0 10px 0 rgba(255, 255, 255, 0.08),
+      0 0 10px 1px rgba(150, 182, 210, 0.12);
+  }
+
+  34% {
+    box-shadow:
+      inset 0 0 20px 3px rgba(255, 255, 255, 0.26),
+      0 0 10px 1px rgba(150, 182, 210, 0.12);
+  }
+
+  48% {
+    box-shadow:
+      inset 0 0 10px 0 rgba(255, 255, 255, 0.08),
+      0 0 10px 1px rgba(150, 182, 210, 0.12);
+  }
+}
+
+.create-btn-glow {
+  animation: create-btn-inner-beat 2.2s ease-in-out infinite;
+}
+
+.create-btn-glow:disabled {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .create-btn-glow {
+    animation: none;
+  }
+}
+
+/* Animated draw-on checkbox (structural-cuts card). Adapted from
+ * checkbox-wrapper-32: a square outline with an X that strokes itself in on
+ * check. Themed for the dark editor (currentColor-ish tokens, not #000) and
+ * sized to a fixed box with no text label — the row content sits beside it. */
+.cut-checkbox {
+  --size: 16px;
+  --border-size: 2px;
+  position: relative;
+  display: inline-block;
+  width: var(--size);
+  height: var(--size);
+  flex-shrink: 0;
+}
+.cut-checkbox *,
+.cut-checkbox *::after,
+.cut-checkbox *::before {
+  box-sizing: border-box;
+}
+.cut-checkbox input[type='checkbox'] {
+  width: var(--size);
+  height: var(--size);
+  margin: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+.cut-checkbox label {
+  display: block;
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+}
+.cut-checkbox label::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: var(--border-size) solid var(--color-text-muted);
+  border-radius: 4px;
+  opacity: 0.6;
+  transition:
+    opacity 0.3s,
+    border-color 0.3s;
+}
+.cut-checkbox input[type='checkbox']:checked + label::before {
+  opacity: 1;
+  border-color: var(--color-text-primary);
+}
+.cut-checkbox svg {
+  position: absolute;
+  top: var(--border-size);
+  left: var(--border-size);
+  width: calc(var(--size) - (var(--border-size) * 2));
+  height: calc(var(--size) - (var(--border-size) * 2));
+  pointer-events: none;
+}
+.cut-checkbox svg path {
+  stroke: var(--color-text-primary);
+  stroke-width: 0;
+  fill: none;
+  transition: stroke-dashoffset 0.2s ease-in 0s;
+}
+.cut-checkbox svg path + path {
+  transition: stroke-dashoffset 0.2s ease-out 0.2s;
+}
+.cut-checkbox input[type='checkbox']:checked ~ svg path {
+  stroke-dashoffset: 0;
+  stroke-width: calc(var(--size) / 1.25);
+}
+@media (prefers-reduced-motion: reduce) {
+  .cut-checkbox svg path {
+    transition: none;
+  }
+}
+
+/* Custom Premium Tooltip System — sharp corners + pointer tip */
+[data-tooltip] {
+  position: relative !important;
+}
+
+[data-tooltip]::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px) scale(0.96);
+  padding: 2px 6px;
+  /* Floating-panel look, matching the agent-chat model picker modal:
+     panel surface, hairline border, rounded corners, soft elevation. */
+  background: var(--color-panel) !important;
+  border: 1px solid var(--color-border) !important;
+  color: var(--color-text-primary) !important;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0.01em;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition:
+    transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    opacity 0.12s ease;
+  z-index: 2147483647 !important;
+  box-shadow:
+    0 6px 18px -6px rgba(0, 0, 0, 0.45),
+    0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Model-picker style is a clean floating panel — no pointer arrow. */
+[data-tooltip]::after {
+  display: none !important;
+}
+
+/* Pointer: tooltip below trigger — tip points up */
+[data-tooltip]:not([data-tooltip-pos])::after,
+[data-tooltip][data-tooltip-pos='bottom']::after {
+  content: '';
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%) translateY(5px);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #000000;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 2147483646 !important;
+  transition:
+    transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    opacity 0.12s ease;
+}
+
+.light-theme [data-tooltip]:not([data-tooltip-pos])::after,
+.light-theme [data-tooltip][data-tooltip-pos='bottom']::after {
+  border-bottom-color: #ffffff;
+  filter: drop-shadow(0 -1px 0 rgba(0, 0, 0, 0.12));
+}
+
+/* Tooltip surface now uses theme-aware CSS vars (--color-panel / --color-border /
+   --color-text-primary), so it adapts to light mode without an override. */
+
+[data-tooltip]:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+
+[data-tooltip]:not([data-tooltip-pos]):hover::after,
+[data-tooltip][data-tooltip-pos='bottom']:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+[data-tooltip-pos='top']::before {
+  top: auto;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(5px) scale(0.9);
+}
+
+[data-tooltip-pos='top']:hover::before {
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+
+[data-tooltip-pos='top-left']::before {
+  top: auto;
+  bottom: calc(100% + 10px);
+  right: 0;
+  left: auto;
+  transform: translateY(5px) scale(0.9);
+}
+
+[data-tooltip-pos='top-left']:hover::before {
+  transform: translateY(0) scale(1);
+}
+
+[data-tooltip-pos='right']::before {
+  top: 50%;
+  left: calc(100% + 12px);
+  bottom: auto;
+  transform: translateX(10px) translateY(-50%) scale(0.9);
+}
+
+[data-tooltip-pos='right']:hover::before {
+  transform: translateX(0) translateY(-50%) scale(1);
+}
+
+/* Left-positioned Tooltip Option */
+[data-tooltip-pos='left']::before {
+  top: 50%;
+  right: calc(100% + 12px);
+  left: auto;
+  bottom: auto;
+  transform: translateX(10px) translateY(-50%) scale(0.9);
+}
+
+[data-tooltip-pos='left']:hover::before {
+  transform: translateX(0) translateY(-50%) scale(1);
+}
+
+/* Bottom-left Shifted Tooltip (Below, but right-aligned to parent) */
+[data-tooltip-pos='bottom-left']::before {
+  top: calc(100% + 8px);
+  right: 0;
+  left: auto;
+  transform: translateY(5px) scale(0.9);
+}
+
+[data-tooltip-pos='bottom-left']:hover::before {
+  transform: translateY(0) scale(1);
+}
+
+/* Bottom-right Shifted Tooltip (Below, but left-aligned to parent) */
+[data-tooltip-pos='bottom-right']::before {
+  top: calc(100% + 8px);
+  left: 0;
+  right: auto;
+  transform: translateY(5px) scale(0.9);
+}
+
+[data-tooltip-pos='bottom-right']:hover::before {
+  transform: translateY(0) scale(1);
+}
+
+/* Pointer: tooltip above — tip points down */
+[data-tooltip-pos='top']::after {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-5px);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #000000;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 2147483646 !important;
+  transition:
+    transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    opacity 0.12s ease;
+}
+
+[data-tooltip-pos='top']:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+[data-tooltip-pos='top-left']::after {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 4px);
+  right: 12px;
+  transform: translateY(-5px);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #000000;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 2147483646 !important;
+  transition:
+    transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    opacity 0.12s ease;
+}
+
+[data-tooltip-pos='top-left']:hover::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Pointer: tooltip to the right — tip points left */
+[data-tooltip-pos='right']::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 4px);
+  transform: translateY(-50%) translateX(5px);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 5px solid #000000;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 2147483646 !important;
+  transition:
+    transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    opacity 0.12s ease;
+}
+
+[data-tooltip-pos='right']:hover::after {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Pointer: tooltip to the left — tip points right */
+[data-tooltip-pos='left']::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 4px);
+  transform: translateY(-50%) translateX(-5px);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid #000000;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 2147483646 !important;
+  transition:
+    transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    opacity 0.12s ease;
+}
+
+[data-tooltip-pos='left']:hover::after {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Pointer: bottom-aligned variants — tip near corner */
+[data-tooltip-pos='bottom-left']::after {
+  content: '';
+  position: absolute;
+  top: calc(100% + 2px);
+  right: 14px;
+  left: auto;
+  transform: translateY(5px);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #000000;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 2147483646 !important;
+  transition:
+    transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    opacity 0.12s ease;
+}
+
+[data-tooltip-pos='bottom-left']:hover::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-tooltip-pos='bottom-right']::after {
+  content: '';
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 14px;
+  right: auto;
+  transform: translateY(5px);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #000000;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 2147483646 !important;
+  transition:
+    transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    opacity 0.12s ease;
+}
+
+[data-tooltip-pos='bottom-right']:hover::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.light-theme [data-tooltip-pos='top']::after,
+.light-theme [data-tooltip-pos='top-left']::after {
+  border-top-color: #ffffff;
+  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.08));
+}
+
+.light-theme [data-tooltip-pos='right']::after {
+  border-right-color: #ffffff;
+  filter: drop-shadow(-1px 0 0 rgba(0, 0, 0, 0.08));
+}
+
+.light-theme [data-tooltip-pos='left']::after {
+  border-left-color: #ffffff;
+  filter: drop-shadow(1px 0 0 rgba(0, 0, 0, 0.08));
+}
+
+.light-theme [data-tooltip-pos='bottom-left']::after,
+.light-theme [data-tooltip-pos='bottom-right']::after {
+  border-bottom-color: #ffffff;
+  filter: drop-shadow(0 -1px 0 rgba(0, 0, 0, 0.08));
+}
+
+/* Small tooltip variant */
+[data-tooltip-size='sm']::before {
+  font-size: 8px;
+  padding: 3px 6px;
+  border-radius: 0;
+}
+
+/* Disable tooltip pointer tip globally */
+[data-tooltip]::after {
+  display: none !important;
+}
+
+/* Icon sizing inside `.kbd` chrome only */
+.kbd svg {
+  width: 15px !important;
+  height: 15px !important;
+  stroke-width: 2.5 !important;
+  pointer-events: none;
+  display: block;
+  flex-shrink: 0;
+}
+
+.no-style {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+/* Preview frame should be true full-bleed in dark mode */
+.preview-frame {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Keep subtle framing only in light theme (square corners to match dark) */
+.light-theme .preview-frame {
+  border-radius: 0 !important;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px !important;
+}
+
+.light-theme .preview-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+  border-radius: inherit;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+}
+
+/* Chat shimmer animation */
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes cursorPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* Chat tab close button — overlays on right edge of tab text */
+.chat-tab-x {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px 0 12px;
+  background: linear-gradient(90deg, transparent, var(--tab-bg) 40%);
+  cursor: pointer;
+}
+
+.chat-tab:hover .chat-tab-x {
+  display: flex;
+}
+
+/* Build panel animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Custom range slider */
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+  background: var(--color-border);
+  height: 4px;
+  border-radius: 2px;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  margin-top: -5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+input[type='range']::-webkit-slider-thumb:hover {
+  background: var(--color-text-primary);
+  transform: scale(1.1);
+}
+
+input[type='range']:focus {
+  outline: none;
+}
+
+/* Smooth iframe transition */
+.scene-iframe {
+  border: none;
+  transition: opacity 0.2s ease;
+}
+
+/* Context menu */
+.context-menu {
+  position: fixed;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 2px 0;
+  z-index: 9999;
+  min-width: 130px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.light-theme .context-menu {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 8px 24px 0px !important;
+  background: white !important;
+  border-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+.context-menu-item {
+  padding: 8px 14px;
+  font-size: 12px;
+  cursor: pointer;
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.1s ease;
+  width: 100%;
+}
+
+.context-menu-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+}
+
+.light-theme .context-menu-item:hover {
+  background: #f0f0f5;
+  color: #000;
+}
+
+/* Scene Card High-Fidelity Shadow / Border Styling */
+.scene-card-container {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1.5px solid transparent;
+}
+
+.light-theme .scene-card-container {
+  border-color: transparent !important;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 4px 12px 0px;
+  background: white !important;
+}
+
+.light-theme .scene-card-container.selected {
+  box-shadow: rgba(99, 99, 99, 0.3) 0px 8px 24px 0px;
+  background: white !important;
+  border-color: var(--color-border) !important;
+  border-width: 2px;
+}
+
+/* Electron-only titlebar icon styling */
+.electron-app .electron-titlebar-icon {
+  color: var(--color-text-muted);
+}
+
+.electron-app .electron-titlebar-icon:hover {
+  background: var(--agent-chat-user-surface);
+}
+
+.electron-app .electron-titlebar-icon.electron-titlebar-icon-active {
+  background: var(--agent-chat-user-surface);
+}
+
+.electron-app.light-theme .electron-titlebar-icon {
+  color: var(--color-text-muted);
+}
+
+.electron-app.light-theme .electron-titlebar-icon:hover {
+  background: var(--agent-chat-user-surface);
+}
+
+.electron-app.light-theme .electron-titlebar-icon.electron-titlebar-icon-active {
+  background: var(--agent-chat-user-surface);
+}
+
+/* Agent chat — voice input meter (animated waveform bars) */
+@keyframes dreambyteVoiceWave {
+  0%,
+  100% {
+    transform: scaleY(0.14);
+  }
+
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+.dreambyte-voice-wave-bar {
+  display: block;
+  width: 3px;
+  height: 22px;
+  border-radius: 9999px;
+  transform-origin: bottom center;
+  will-change: transform;
+}
+
+.dreambyte-voice-wave--active > .dreambyte-voice-wave-bar {
+  background: var(--color-accent);
+  animation: dreambyteVoiceWave var(--dreambyte-voice-dur, 0.42s) ease-in-out infinite alternate;
+}
+
+.dreambyte-voice-wave--idle > .dreambyte-voice-wave-bar {
+  background: var(--color-text-muted);
+  opacity: 0.75;
+  animation: dreambyteVoiceWave var(--dreambyte-voice-dur, 1.05s) ease-in-out infinite alternate;
+}
+
+/* Live mic levels — inline transform; disable CSS fake wave */
+.dreambyte-voice-wave--active > .dreambyte-voice-wave-bar--metered {
+  animation: none;
+  background: var(--color-accent);
+  opacity: 0.95;
+}
